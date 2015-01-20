@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{B62BE273-6693-EA3C-FB98-30BD0D4D5A8C}</ProjectGuid>
+	<ProjectGuid>{901C97D4-DDEF-6048-B29B-C2F67DEB68D0}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,15 +46,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Boss_Health.cs" />
+     <Compile Include="Assets\Scripts\Controls.cs" />
+     <Compile Include="Assets\Scripts\anybuttons.cs" />
      <Compile Include="Assets\Scripts\button_light.cs" />
      <Compile Include="Assets\Scripts\button_test.cs" />
+     <Compile Include="Assets\Scripts\healthbars.cs" />
      <Compile Include="Assets\Scripts\loader.cs" />
      <Compile Include="Assets\Scripts\main_menu_script.cs" />
      <Compile Include="Assets\Scripts\menutemplate.cs" />
      <Compile Include="Assets\Scripts\player_controls.cs" />
      <Compile Include="Assets\Scripts\soundeffect.cs" />
      <Compile Include="Assets\Scripts\splash_script.cs" />
-     <Compile Include="Assets\anybuttons.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
