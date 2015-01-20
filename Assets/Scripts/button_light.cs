@@ -11,6 +11,14 @@ public class button_light : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		mats = new Material[4];
+		mats [0] = (Material) Resources.Load ("White");
+		
+		mats [1] = (Material) Resources.Load ("Red");
+		
+		mats [2] = (Material) Resources.Load ("Blue");
+		
+		mats [3] = (Material) Resources.Load ("Green");
 	}
 	
 	// Update is called once per frame

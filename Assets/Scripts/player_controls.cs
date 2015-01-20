@@ -105,6 +105,38 @@ public class player_controls : MonoBehaviour {
 			return Input.GetAxisRaw(playerName + (thePlayer+1).ToString() + verticalAxisName);
 	}
 
+	public float getPadAxis(int thePlayer, bool horizontal)
+	{
+		if(horizontal)
+		{
+			if(Input.GetButton(playerName + (thePlayer+1).ToString() + buttonName + directions[1]))
+				return 1f;
+			else if(Input.GetButton(playerName + (thePlayer+1).ToString() + buttonName + directions[3]))
+				return -1f;
+			else
+				return 0f;
+		}
+		else
+		{
+			if(Input.GetButton(playerName + (thePlayer+1).ToString() + buttonName + directions[0]))
+				return 1f;
+			else if(Input.GetButton(playerName + (thePlayer+1).ToString() + buttonName + directions[2]))
+				return -1f;
+			else
+				return 0f;
+		}
+	}
+
+	public float getAnyAxis(int thePlayer, bool horizontal)
+	{
+		float toreturn = 0f;
+
+		toreturn = getAxis (thePlayer, horizontal);
+		if(toreturn == 0f)
+			toreturn = getPadAxis (thePlayer, horizontal);
+
+		return toreturn;
+	}
 	/*public bool getAxisAsButton(int thePlayer, bool horizontal, bool positive, int thestate = 0)
 	{
 		int a = 0;
