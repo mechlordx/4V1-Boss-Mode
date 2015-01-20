@@ -10,7 +10,7 @@ public class button_test : MonoBehaviour {
 	player_controls controlsRef;
 	float joyx;
 	float joyy;
-	float joyscale = .5f;
+	float joyscale = 0.5f;
 	// Use this for initialization
 	void Awake () {
 		joyx = joystick.transform.position.x;

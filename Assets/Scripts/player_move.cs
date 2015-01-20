@@ -40,13 +40,9 @@ public class player_move : MonoBehaviour {
 				bool turnRight = (((desiredangle - transform.eulerAngles.y) + 360f) % 360f) > 180.0f ? false : true;
 
 				if(turnRight)
-				{
 					transform.Rotate(new Vector3(0f, turnspeed, 0f));
-				}
 				else
-				{
 					transform.Rotate(new Vector3(0f, -turnspeed, 0f));
-				}
 				if(turnRight!=(((desiredangle - transform.eulerAngles.y) + 360f) % 360f) > 180.0f ? false : true)
 					transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,
 					                                         desiredangle,
