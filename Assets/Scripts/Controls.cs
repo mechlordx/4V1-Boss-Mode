@@ -2,10 +2,12 @@
 using System.Collections;
 
 public class Controls : MonoBehaviour {
-	public float movespeed = 0.1f;
+	public float movespeed = 1f;
+	public healthbars HPbars;
 
 	// Use this for initialization
 	void Start () {
+		HPbars = Camera.main.GetComponent<healthbars> ();
 	
 	}
 	
@@ -20,10 +22,17 @@ public class Controls : MonoBehaviour {
 				gameObject.transform.position+= Vector3.back*movespeed;
 			if(Input.GetKey("d"))
 				gameObject.transform.position+= Vector3.right*movespeed;
-			if(Input.GetKey ("q")){
-				//Deal damage here
-			}
+
 		}
 	
+	}
+
+	void OnCollisionStay(Collision col){
+		print ("ow");
+		if(col.gameObject.tag.Equals("Boss") == true){
+			if(Input.GetKeyDown ("q")){
+				HPbars.bossHealth -= 100;
+			}
+		}
 	}
 }
