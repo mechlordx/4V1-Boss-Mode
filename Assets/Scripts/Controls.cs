@@ -11,7 +11,7 @@ public class Controls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(gameObject.name == "P1"){
+		if(gameObject.tag == "P1"){
 			if(Input.GetKey("w"))
 				gameObject.transform.position+= Vector3.forward*movespeed;
 			if(Input.GetKey("a"))
@@ -20,6 +20,9 @@ public class Controls : MonoBehaviour {
 				gameObject.transform.position+= Vector3.back*movespeed;
 			if(Input.GetKey("d"))
 				gameObject.transform.position+= Vector3.right*movespeed;
+			if(Input.GetKey ("q")){
+				//Deal damage here
+			}
 		}
 	
 	}
