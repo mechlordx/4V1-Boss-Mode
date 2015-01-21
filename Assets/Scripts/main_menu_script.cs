@@ -48,6 +48,7 @@ public class main_menu_script : MonoBehaviour {
 			GetComponent<soundeffect>().play(2);
 		if(selectedbutton==0)
 		{
+			GameObject.Find ("GameController").GetComponent<loader>().loadScene(1);
 		}
 		else if(selectedbutton==1)
 		{

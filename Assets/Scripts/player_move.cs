@@ -30,7 +30,7 @@ public class player_move : MonoBehaviour {
 	void FixedUpdate () {
 		if(desiredangle!=-1)
 		{
-			float diff = Mathf.DeltaAngle(transform.localEulerAngles.y, desiredangle);
+			float diff = Mathf.Abs (Mathf.DeltaAngle(transform.localEulerAngles.y, desiredangle));
 			if(diff<turnbuffer)
 				transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,
 				                                         desiredangle,
