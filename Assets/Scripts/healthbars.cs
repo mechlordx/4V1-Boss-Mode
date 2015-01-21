@@ -13,6 +13,8 @@ public class healthbars : MonoBehaviour {
 	public float P3BarDisplay = 0;
 	public float P4BarDisplay = 0;
 
+	GameObject daBoss;
+
 
 	Vector2 BossPos = new Vector2(80, 40);
 	Vector2 BossSize = new Vector2(1000,20);
@@ -39,7 +41,7 @@ public class healthbars : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		daBoss = GameObject.FindGameObjectWithTag("Boss");
 	}
 	
 	// Update is called once per frame
@@ -63,6 +65,9 @@ public class healthbars : MonoBehaviour {
 		GUI.Box(new Rect(0,0, BossSize.x, BossSize.y), BossprogressBarFull);
 		GUI.EndGroup();
 		GUI.EndGroup();
+
+		if(bossHealth <= 0)
+			Destroy(daBoss);
 
 
 		//P1
