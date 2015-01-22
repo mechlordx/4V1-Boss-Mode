@@ -3,8 +3,10 @@ using System.Collections;
 
 public class player_controls : MonoBehaviour {
 	
-	public int maxPlayerCount = 5;
+	public int maxPlayerCount = 4;
 	public int buttonCount = 4;
+
+	public bool keepDebugSettings = false;
 
 	public string playerName = "Player";
 	public string buttonName = "_Button";
@@ -14,41 +16,30 @@ public class player_controls : MonoBehaviour {
 
 	int buttonsPerPlayer;
 	
-	public string[] easyNames;
+	public string[] buttonNames;
+	public string[] axisNames;
 
 	bool enforceActivePlayers = false;
 	bool[] activePlayers;
 
 	int[] lastPressed;
+
+	// 
+
+
 	// Use this for initialization
 	void Awake () {
+		Input.ResetInputAxes();
 		DontDestroyOnLoad (gameObject);
 		activePlayers = new bool[maxPlayerCount];
 		for(int x=0;x<activePlayers.Length;x++)
 			activePlayers[x] = true;
-		buttonsPerPlayer = directions.Length + buttonCount + 4;
-		easyNames = new string[buttonsPerPlayer * maxPlayerCount];
 
-		int currentButton;
-		bool currentBool;
-		string currentName;
-		int floor;
-		for(int currentPlayer=0;currentPlayer<maxPlayerCount;currentPlayer++)
+		buttonsPerPlayer = directions.Length + buttonCount;
+		if(!keepDebugSettings)
 		{
-			floor = buttonsPerPlayer * currentPlayer;
-			for(int x=0;x<directions.Length;x++)
-			{
-				currentButton = floor + x;
-				currentName = playerName + (currentPlayer+1).ToString() + buttonName + directions[x];
-				easyNames[currentButton] = currentName;
-			}
-			floor += directions.Length;
-			for(int x=0;x<buttonCount;x++)
-			{
-				currentButton = floor + x;
-				currentName = playerName + (currentPlayer+1).ToString() + buttonName + (x+1).ToString();
-				easyNames[currentButton] = currentName;
-			}
+			buttonNames = new string[buttonsPerPlayer * maxPlayerCount];
+			axisNames = new string[2 * maxPlayerCount];
 		}
 	}
 	
@@ -59,13 +50,15 @@ public class player_controls : MonoBehaviour {
 
 	public bool getButton(int thePlayer, int theButton, int thestate = 0)
 	{
-		string name = easyNames[(buttonsPerPlayer * thePlayer) + theButton + directions.Length];
+		string name = buttonNames[(buttonsPerPlayer * thePlayer) + theButton + directions.Length];
+		if(name=="")
+			return false;
 		if(thestate==1)
-			return Input.GetButtonDown(name);
+			return Input.GetKeyDown(name);
 		else if(thestate==0)
-			return Input.GetButton(name);
+			return Input.GetKey(name);
 		else if(thestate==-1)
-			return Input.GetButtonUp(name);
+			return Input.GetKeyUp(name);
 		else
 		{
 			Debug.Log ("Direction check fail, state not possible");
@@ -75,13 +68,15 @@ public class player_controls : MonoBehaviour {
 
 	public bool getDirection(int thePlayer, int theButton, int thestate = 0)
 	{
-		string name = easyNames[(buttonsPerPlayer * thePlayer) + theButton];
+		string name = buttonNames[(buttonsPerPlayer * thePlayer) + theButton];
+		if(name=="")
+			return false;
 		if(thestate==1)
-			return Input.GetButtonDown(name);
+			return Input.GetKeyDown(name);
 		else if(thestate==0)
-			return Input.GetButton(name);
+			return Input.GetKey(name);
 		else if(thestate==-1)
-			return Input.GetButtonUp(name);
+			return Input.GetKeyUp(name);
 		else
 		{
 			Debug.Log ("Direction check fail, state not possible");
@@ -92,35 +87,51 @@ public class player_controls : MonoBehaviour {
 	public float getAxis(int thePlayer, bool horizontal)
 	{
 		if(horizontal)
-			return Input.GetAxis(playerName + (thePlayer+1).ToString() + horizontalAxisName);
+		{
+			if(axisNames[thePlayer*2]=="")
+				return 0f;
+			return Input.GetAxisRaw(axisNames[thePlayer*2]);
+		}
 		else
-			return Input.GetAxis(playerName + (thePlayer+1).ToString() + verticalAxisName);
+		{
+			if(axisNames[thePlayer*2 + 1]=="")
+				return 0f;
+			return Input.GetAxisRaw(axisNames[thePlayer*2 + 1]);
+		}
 	}
 
 	public float getAxisRaw(int thePlayer, bool horizontal)
 	{
 		if(horizontal)
-			return Input.GetAxisRaw(playerName + (thePlayer+1).ToString() + horizontalAxisName);
+		{
+			if(axisNames[thePlayer*2]=="")
+				return 0f;
+			return Input.GetAxisRaw(axisNames[thePlayer*2]);
+		}
 		else
-			return Input.GetAxisRaw(playerName + (thePlayer+1).ToString() + verticalAxisName);
+		{
+			if(axisNames[thePlayer*2 + 1]=="")
+				return 0f;
+			return Input.GetAxisRaw(axisNames[thePlayer*2 + 1]);
+		}
 	}
 
 	public float getPadAxis(int thePlayer, bool horizontal)
 	{
 		if(horizontal)
 		{
-			if(Input.GetButton(playerName + (thePlayer+1).ToString() + buttonName + directions[1]))
+			if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 1]))
 				return 1f;
-			else if(Input.GetButton(playerName + (thePlayer+1).ToString() + buttonName + directions[3]))
+			   else if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 3]))
 				return -1f;
 			else
 				return 0f;
 		}
 		else
 		{
-			if(Input.GetButton(playerName + (thePlayer+1).ToString() + buttonName + directions[0]))
+			if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 0]))
 				return 1f;
-			else if(Input.GetButton(playerName + (thePlayer+1).ToString() + buttonName + directions[2]))
+			   else if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 2]))
 				return -1f;
 			else
 				return 0f;
@@ -161,7 +172,7 @@ public class player_controls : MonoBehaviour {
 	{
 		bool[] posneg = {false, false};
 		float a;
-		a = Input.GetAxisRaw (playerName + (thePlayer + 1).ToString () + horizontalAxisName);
+		a = Input.GetAxisRawRaw (playerName + (thePlayer + 1).ToString () + horizontalAxisName);
 		if(a==1f)
 			posneg[0] = true;
 		else if(a==-1f)
@@ -172,7 +183,7 @@ public class player_controls : MonoBehaviour {
 		posneg [0] = false;
 		posneg [1] = false;
 
-		a = Input.GetAxisRaw (playerName + (thePlayer + 1).ToString () + verticalAxisName);
+		a = Input.GetAxisRawRaw (playerName + (thePlayer + 1).ToString () + verticalAxisName);
 		if(a==1f)
 			posneg[0] = true;
 		else if(a==-1f)

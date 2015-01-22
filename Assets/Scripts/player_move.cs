@@ -8,6 +8,7 @@ public class player_move : MonoBehaviour {
 	public float maxforce = 20f;
 	public float turnspeed = 30f;
 	public float turnbuffer = 15f;
+	public float a;
 	float desiredangle = 0f;
 	float deadzone = .25f;
 	float hor = 0f;
@@ -64,17 +65,28 @@ public class player_move : MonoBehaviour {
 					                                         transform.localEulerAngles.z);
 			}
 		}
-		if(Vector3.Magnitude(rigidbody.velocity)<maxspeed && Vector3.Magnitude(new Vector3(hor, 0f, ver)) > deadzone)
+		float totalvelocity = Vector3.Magnitude(rigidbody.velocity-new Vector3(0f,rigidbody.velocity.y,0f))+0.07f*Vector3.Magnitude(new Vector3(hor, 0f, ver))
+			- maxspeed; // Built in variable for how much the joystick force counts as.
+		if(totalvelocity < 0
+		   && Vector3.Magnitude(new Vector3(hor, 0f, ver)) > deadzone)
 		{
 			float maxpower = 0f;
 			if(diff<90f)
 				maxpower += (maxforce * Mathf.Cos(diff * Mathf.Deg2Rad));
-			float wantedpower = ((Vector3.Magnitude(new Vector3(hor, 0f, ver))-deadzone)/(1f-deadzone)) * maxforce;
+			float rampat = 0.2f;
+			if(totalvelocity>(-maxspeed*rampat))
+			{
+				float c = Mathf.Abs (totalvelocity) / (maxspeed * rampat);
+				if(maxpower>(c*maxforce))
+					maxpower = c*maxforce;
+			}
+			//float wantedpower = ((Vector3.Magnitude(new Vector3(hor, 0f, ver))-deadzone)/(1f-deadzone)) * maxforce;
+			float wantedpower = (Vector3.Magnitude(new Vector3(hor, 0f, ver))/1f) * maxforce;
 			if(wantedpower>maxpower)
 				wantedpower = maxpower;
 
 			rigidbody.AddForce(wantedpower * new Vector3(ver, 0f, hor));
 		}
-		Debug.Log (Vector3.Magnitude (rigidbody.velocity) > maxspeed);
+		a = Vector3.Magnitude (rigidbody.velocity);
 	}
 }
