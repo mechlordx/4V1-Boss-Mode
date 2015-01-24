@@ -15,7 +15,7 @@ public class player_controls : MonoBehaviour {
 	string[] directions = {"Up", "Right", "Down", "Left"};
 
 	int buttonsPerPlayer;
-	
+	int axesPerPlayer = 2;
 	public string[] buttonNames;
 	public string[] axisNames;
 
@@ -147,6 +147,42 @@ public class player_controls : MonoBehaviour {
 			toreturn = getPadAxis (thePlayer, horizontal);
 
 		return toreturn;
+	}
+
+	public void setAxis(int thePlayer, bool horizontal)
+	{
+		Input.ResetInputAxes();
+		for(int joystick=1;joystick<5;joystick++)
+		{
+			for(int button=0;button<4;button++)
+			{
+				name = "Joystick " + joystick.ToString() + " Axis " + button.ToString();
+				if(Mathf.Abs (Input.GetAxis(name)) >= .3f)
+				{
+					int a = thePlayer*axesPerPlayer;
+					if(!horizontal)
+						a += 1;
+					axisNames[a] = name;
+					return;
+				}
+			}
+		}
+	}
+
+	public void setButton(int thePlayer, int thebutton)
+	{
+		for(int joystick=1;joystick<6;joystick++)
+		{
+			for(int button=0;button<20;button++)
+			{
+				name = "joystick " + joystick.ToString() + " button " + button.ToString();
+				if(Input.GetKeyDown(name))
+				{
+					buttonNames[thePlayer*buttonsPerPlayer + 4 + thebutton] = name;
+					return;
+				}
+			}
+		}
 	}
 	/*public bool getAxisAsButton(int thePlayer, bool horizontal, bool positive, int thestate = 0)
 	{
