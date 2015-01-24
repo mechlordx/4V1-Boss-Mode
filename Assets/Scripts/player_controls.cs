@@ -23,9 +23,10 @@ public class player_controls : MonoBehaviour {
 	bool[] activePlayers;
 
 	int[] lastPressed;
-
-	// 
-
+	
+	bool waitingforaxis = false;
+	bool waitingforbutton = false;
+	int waitingarrayindex;
 
 	// Use this for initialization
 	void Awake () {
@@ -45,7 +46,52 @@ public class player_controls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// DPad, then Buttons, then Horizontal-Pos->Neg, then Vertical-Pos->Neg
+		if(waitingforaxis)
+		{
+			for(int joystick=1;joystick<5;joystick++)
+			{
+				if(Input.GetKey(KeyCode.Escape))
+				{
+					waitingforaxis = false;
+					break;
+				}
+				for(int button=0;button<4;button++)
+				{
+					name = "Joystick " + joystick.ToString() + " Axis " + button.ToString();
+					if(Mathf.Abs (Input.GetAxis(name)) >= .3f)
+					{
+						axisNames[waitingarrayindex] = name;
+						waitingforaxis = false;
+						break;
+					}
+				}
+				if(!waitingforaxis)
+					break;
+			}
+		}
+		else if(waitingforbutton)
+		{
+			for(int joystick=1;joystick<6;joystick++)
+			{
+				if(Input.GetKey(KeyCode.Escape))
+				{
+					waitingforbutton = false;
+					break;
+				}
+				for(int button=0;button<20;button++)
+				{
+					name = "joystick " + joystick.ToString() + " button " + button.ToString();
+					if(Input.GetKeyDown(name))
+					{
+						buttonNames[waitingarrayindex] = name;
+						waitingforbutton = false;
+						break;
+					}
+				}
+				if(!waitingforbutton)
+					break;
+			}
+		}
 	}
 
 	public bool getButton(int thePlayer, int theButton, int thestate = 0)
@@ -151,38 +197,22 @@ public class player_controls : MonoBehaviour {
 
 	public void setAxis(int thePlayer, bool horizontal)
 	{
+		if(waitingforaxis || waitingforbutton)
+			return;
 		Input.ResetInputAxes();
-		for(int joystick=1;joystick<5;joystick++)
-		{
-			for(int button=0;button<4;button++)
-			{
-				name = "Joystick " + joystick.ToString() + " Axis " + button.ToString();
-				if(Mathf.Abs (Input.GetAxis(name)) >= .3f)
-				{
-					int a = thePlayer*axesPerPlayer;
-					if(!horizontal)
-						a += 1;
-					axisNames[a] = name;
-					return;
-				}
-			}
-		}
+		int a = thePlayer*axesPerPlayer;
+		if(!horizontal)
+			a += 1;
+		waitingarrayindex = a;
+		waitingforaxis = true;
 	}
 
 	public void setButton(int thePlayer, int thebutton)
 	{
-		for(int joystick=1;joystick<6;joystick++)
-		{
-			for(int button=0;button<20;button++)
-			{
-				name = "joystick " + joystick.ToString() + " button " + button.ToString();
-				if(Input.GetKeyDown(name))
-				{
-					buttonNames[thePlayer*buttonsPerPlayer + 4 + thebutton] = name;
-					return;
-				}
-			}
-		}
+		if(waitingforaxis || waitingforbutton)
+			return;
+		waitingarrayindex = thePlayer * buttonsPerPlayer + 4 + thebutton;
+		waitingforbutton = true;
 	}
 	/*public bool getAxisAsButton(int thePlayer, bool horizontal, bool positive, int thestate = 0)
 	{
