@@ -214,6 +214,15 @@ public class player_controls : MonoBehaviour {
 		waitingarrayindex = thePlayer * buttonsPerPlayer + 4 + thebutton;
 		waitingforbutton = true;
 	}
+
+	public bool isWaiting()
+	{
+		if(waitingforaxis || waitingforbutton)
+			return true;
+		else
+			return false;
+	}
+
 	/*public bool getAxisAsButton(int thePlayer, bool horizontal, bool positive, int thestate = 0)
 	{
 		int a = 0;
