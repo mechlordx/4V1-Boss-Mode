@@ -14,7 +14,8 @@ public class boss_forms : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
-
+		
+		GameObject.Find ("GameController").GetComponent<score> ().begin ();
 		for(int x=0;x<9999;x++)
 		{
 			if(Resources.Load ("BossPrefabs/" + "boss" + x.ToString()))
@@ -62,6 +63,7 @@ public class boss_forms : MonoBehaviour {
 		{
 			if(timer<=0f)
 			{
+				GameObject.Find("GameController").GetComponent<score>().unpause();
 				ticking = false;
 				GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 				foreach(GameObject player in players)
@@ -80,6 +82,7 @@ public class boss_forms : MonoBehaviour {
 			Destroy(prefabRef, 0f);
 		choice = -1;
 		timer = 10f;
+		GameObject.Find ("GameController").GetComponent<score> ().pause ();
 		ticking = true;
 		currentchoices = new int[4];
 		for(int x=0;x<currentchoices.Length;x++)
@@ -88,12 +91,13 @@ public class boss_forms : MonoBehaviour {
 		}
 	}
 
-	void choose(int choice)
+	void choose(int newchoice)
 	{
 		if(timer>3.5f)
 			timer = 3.5f;
 		if(pool.Length!=0)
-			become(choice);
+			become(newchoice);
+		choice = newchoice;
 	}
 
 	void become(int choice)

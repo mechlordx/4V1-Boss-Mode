@@ -35,6 +35,8 @@ public class player_move : MonoBehaviour {
 	}
 
 	void Update() {
+		if(transform.position.y<-10f)
+			transform.position = spawnpoint;
 		hor = controlsRef.getAnyAxis (playerNumber, false);
 		ver = controlsRef.getAnyAxis (playerNumber, true);
 		if(Vector3.Magnitude(new Vector3(hor, 0f, ver))>1f)

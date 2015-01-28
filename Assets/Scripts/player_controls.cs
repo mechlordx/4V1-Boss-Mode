@@ -18,6 +18,8 @@ public class player_controls : MonoBehaviour {
 	int axesPerPlayer = 2;
 	public string[] buttonNames;
 	public string[] axisNames;
+	public bool[] buttonSets;
+	public bool[] axisSets;
 
 	bool enforceActivePlayers = false;
 	bool[] activePlayers;
@@ -42,10 +44,17 @@ public class player_controls : MonoBehaviour {
 			buttonNames = new string[buttonsPerPlayer * maxPlayerCount];
 			axisNames = new string[2 * maxPlayerCount];
 		}
+		buttonSets = new bool[buttonNames.Length];
+		for(int x=0;x<buttonSets.Length;x++)
+			buttonSets[x] = false;
+		axisSets = new bool[axisNames.Length];
+		for(int x=0;x<axisSets.Length;x++)
+			axisSets[x] = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		string thename;
 		if(waitingforaxis)
 		{
 			for(int joystick=1;joystick<5;joystick++)
@@ -57,10 +66,10 @@ public class player_controls : MonoBehaviour {
 				}
 				for(int button=0;button<4;button++)
 				{
-					name = "Joystick " + joystick.ToString() + " Axis " + button.ToString();
-					if(Mathf.Abs (Input.GetAxis(name)) >= .3f)
+					thename = "Joystick " + joystick.ToString() + " Axis " + button.ToString();
+					if(Mathf.Abs (Input.GetAxis(thename)) >= .3f)
 					{
-						axisNames[waitingarrayindex] = name;
+						axisNames[waitingarrayindex] = thename;
 						waitingforaxis = false;
 						break;
 					}
@@ -80,10 +89,10 @@ public class player_controls : MonoBehaviour {
 				}
 				for(int button=0;button<20;button++)
 				{
-					name = "joystick " + joystick.ToString() + " button " + button.ToString();
-					if(Input.GetKeyDown(name))
+					thename = "joystick " + joystick.ToString() + " button " + button.ToString();
+					if(Input.GetKeyDown(thename))
 					{
-						buttonNames[waitingarrayindex] = name;
+						buttonNames[waitingarrayindex] = thename;
 						waitingforbutton = false;
 						break;
 					}
@@ -91,6 +100,35 @@ public class player_controls : MonoBehaviour {
 				if(!waitingforbutton)
 					break;
 			}
+		}
+		if(keepDebugSettings)
+		{
+			for(int x=0;x<buttonSets.Length;x++)
+			{
+				if(buttonSets[x])
+				{
+					buttonSets[x] = false;
+					setButton(x);
+					break;
+				}
+			}
+
+			for(int x=0;x<axisSets.Length;x++)
+			{
+				if(axisSets[x])
+				{
+					axisSets[x] = false;
+					setAxis(x);
+					break;
+				}
+			}
+
+			buttonSets = new bool[buttonNames.Length];
+			for(int x=0;x<buttonSets.Length;x++)
+				buttonSets[x] = false;
+			axisSets = new bool[axisNames.Length];
+			for(int x=0;x<axisSets.Length;x++)
+				axisSets[x] = false;
 		}
 	}
 
@@ -207,11 +245,29 @@ public class player_controls : MonoBehaviour {
 		waitingforaxis = true;
 	}
 
+	public void setAxis(int axisNumber)
+	{
+		if(waitingforaxis || waitingforbutton)
+			return;
+		Input.ResetInputAxes();
+		int a = axisNumber;
+		waitingarrayindex = a;
+		waitingforaxis = true;
+	}
+
 	public void setButton(int thePlayer, int thebutton)
 	{
 		if(waitingforaxis || waitingforbutton)
 			return;
 		waitingarrayindex = thePlayer * buttonsPerPlayer + 4 + thebutton;
+		waitingforbutton = true;
+	}
+
+	public void setButton(int thebutton)
+	{
+		if(waitingforaxis || waitingforbutton)
+			return;
+		waitingarrayindex = thebutton;
 		waitingforbutton = true;
 	}
 
