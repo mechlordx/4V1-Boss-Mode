@@ -9,6 +9,7 @@ public class loader : MonoBehaviour {
 	int argumentA, argumentB;
 	// Use this for initialization
 	void Awake () {
+		Application.targetFrameRate = 60;
 		argumentA = -1;
 		argumentB = -1;
 	}
