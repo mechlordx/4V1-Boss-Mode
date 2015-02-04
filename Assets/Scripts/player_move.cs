@@ -5,6 +5,7 @@ public class player_move : MonoBehaviour {
 
 	public int playerNumber = 0;
 	public bool nolimits = false;
+	public bool SlowDown = false;
 	public float maxspeed = 10f;
 	public float maxforce = 20f;
 	public float turnspeed = 30f;
@@ -18,10 +19,12 @@ public class player_move : MonoBehaviour {
 	float deadzone = .25f;
 	float hor = 0f;
 	float ver = 0f;
+	float Timer = 5f;
 	player_controls controlsRef;
 	bool startjump = false;
 	bool jumping = false;
 	bool isgrounded = false;
+	bool SwapHit = false;
 	int currentjumptimer = 0;
 
 	// Must make so that you can still add force in the opposite direction when 
@@ -55,6 +58,20 @@ public class player_move : MonoBehaviour {
 		}
 		if(controlsRef.getButton(playerNumber, 0, 1))
 			startjump = true;
+
+		//Drops the player's move speed for 5 seconds
+		if(SlowDown && Timer > 0)
+		{
+			maxspeed = 5f;
+			Timer -= Time.deltaTime;
+		}
+
+		if(Timer <= 0)
+		{
+			maxspeed = 10f;
+			Timer = 5f;
+		}
+
 	}
 
 	void FixedUpdate () {
@@ -188,6 +205,11 @@ public class player_move : MonoBehaviour {
 					GameObject.Find ("Ladder").GetComponent<ladder>().throwplayer(gameObject);
 			}
 		}
+		if(other.gameObject.name.Contains("slow"))
+		   HalfSpeed();
+
+		if(other.gameObject.name.Contains("Swap"))
+		   SwapHit = true;
 	}
 
 	public void deactivate(int number)
@@ -208,4 +230,11 @@ public class player_move : MonoBehaviour {
 			GetComponent<player_move>().enabled = true;
 		}
 	}
+
+	public void HalfSpeed(){
+			SlowDown = true;
+
+	}
+
+
 }
