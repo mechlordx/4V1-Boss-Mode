@@ -95,5 +95,9 @@ public class Boss4 : MonoBehaviour {
 		TempPos = a.gameObject.transform.position;
 		a.gameObject.transform.position = b.gameObject.transform.position;
 		b.gameObject.transform.position = TempPos;
+
+		pmA.SlowDown = false;
+		pmB.SlowDown = false;
+		pmC.SlowDown = false;
 	}
 }
