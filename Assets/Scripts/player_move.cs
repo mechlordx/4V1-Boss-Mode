@@ -4,14 +4,19 @@ using System.Collections;
 public class player_move : MonoBehaviour {
 
 	public int playerNumber = 0;
-	public bool nolimits = false;
-	public bool SlowDown = false;
+	bool nolimits = false;
 	public float maxspeed = 10f;
 	public float maxforce = 20f;
 	public float turnspeed = 30f;
 	public float turnbuffer = 15f;
-	public int maxjumptimer = 6;
-	public float jumpforce = 50f;
+	public float boostSeconds = 2.5f;
+	public float boostDuration = 0.5f;
+	public float boostMaxSpeed = 0f;
+	public float boostForce = 0f;
+	float boostTimer = 0f;
+	bool boosting = false;
+	//public int maxjumptimer = 6;
+	//public float jumpforce = 50f;
 	public GameObject groundsphere;
 	public float a;
 	Vector3 spawnpoint;
@@ -19,12 +24,10 @@ public class player_move : MonoBehaviour {
 	float deadzone = .25f;
 	float hor = 0f;
 	float ver = 0f;
-	float Timer = 5f;
 	player_controls controlsRef;
 	bool startjump = false;
 	bool jumping = false;
 	bool isgrounded = false;
-	bool SwapHit = false;
 	int currentjumptimer = 0;
 
 	// Must make so that you can still add force in the opposite direction when 
@@ -40,38 +43,27 @@ public class player_move : MonoBehaviour {
 	void Update() {
 		if(transform.position.y<-10f)
 			transform.position = spawnpoint;
-		hor = controlsRef.getAnyAxis (playerNumber, false);
-		ver = controlsRef.getAnyAxis (playerNumber, true);
-		if(Vector3.Magnitude(new Vector3(hor, 0f, ver))>1f)
+		if(!boosting)
 		{
-			float mag = Vector3.Magnitude(new Vector3(hor, 0f, ver));
-			hor = hor * (1f / mag);
-			ver = ver * (1f / mag);
-		}
-		if(hor == 0f & ver == 0f)
-			desiredangle = -1f;
-		else
-		{
-			desiredangle = Vector2.Angle(new Vector2(1f,0f),new Vector2(hor,ver));
-			if(Vector2.Angle(new Vector2(0f, -1f), new Vector2(hor,ver))<90f)
-				desiredangle = 360f - desiredangle;
+			hor = controlsRef.getAnyAxis (playerNumber, false);
+			ver = controlsRef.getAnyAxis (playerNumber, true);
+			if(Vector3.Magnitude(new Vector3(hor, 0f, ver))>1f)
+			{
+				float mag = Vector3.Magnitude(new Vector3(hor, 0f, ver));
+				hor = hor * (1f / mag);
+				ver = ver * (1f / mag);
+			}
+			if(hor == 0f & ver == 0f)
+				desiredangle = -1f;
+			else
+			{
+				desiredangle = Vector2.Angle(new Vector2(1f,0f),new Vector2(hor,ver));
+				if(Vector2.Angle(new Vector2(0f, -1f), new Vector2(hor,ver))<90f)
+					desiredangle = 360f - desiredangle;
+			}
 		}
 		if(controlsRef.getButton(playerNumber, 0, 1))
 			startjump = true;
-
-		//Drops the player's move speed for 5 seconds
-		if(SlowDown && Timer > 0)
-		{
-			maxspeed = 5f;
-			Timer -= Time.deltaTime;
-		}
-
-		if(Timer <= 0)
-		{
-			maxspeed = 10f;
-			Timer = 5f;
-		}
-
 	}
 
 	void FixedUpdate () {
@@ -125,8 +117,29 @@ public class player_move : MonoBehaviour {
 		}
 		a = Vector3.Magnitude (rigidbody.velocity);
 
+		if(startjump && (ver != 0f || hor != 0f))
+		{
+			if(!boosting && boostTimer<=0f)
+			{
+				boosting = true;
+				maxspeed += boostMaxSpeed;
+				maxforce += boostForce;
+				boostTimer = boostDuration;
+			}
+		}
+		boostTimer += -Time.deltaTime;
+		if(boosting)
+		{
+			if(boostTimer<=0f)
+			{
+				boosting = false;
+				maxspeed += -boostMaxSpeed;
+				maxforce += -boostForce;
+				boostTimer = boostSeconds;
+			}
+		}
 		// Jumping
-		if(jumping)
+		/*if(jumping)
 		{
 			if(currentjumptimer>0 && controlsRef.getButton(playerNumber, 0))
 			{
@@ -145,7 +158,7 @@ public class player_move : MonoBehaviour {
 			currentjumptimer = maxjumptimer + 2;
 			rigidbody.useGravity = false;
 		}
-
+		*/
 		currentjumptimer += -1;
 		startjump = false;
 	}
@@ -205,11 +218,6 @@ public class player_move : MonoBehaviour {
 					GameObject.Find ("Ladder").GetComponent<ladder>().throwplayer(gameObject);
 			}
 		}
-		if(other.gameObject.name.Contains("slow"))
-		   HalfSpeed();
-
-		if(other.gameObject.name.Contains("Swap"))
-		   SwapHit = true;
 	}
 
 	public void deactivate(int number)
@@ -230,11 +238,4 @@ public class player_move : MonoBehaviour {
 			GetComponent<player_move>().enabled = true;
 		}
 	}
-
-	public void HalfSpeed(){
-			SlowDown = true;
-
-	}
-
-
 }

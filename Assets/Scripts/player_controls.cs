@@ -32,6 +32,7 @@ public class player_controls : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		Application.targetFrameRate = 60;
 		Input.ResetInputAxes();
 		DontDestroyOnLoad (gameObject);
 		activePlayers = new bool[maxPlayerCount];
