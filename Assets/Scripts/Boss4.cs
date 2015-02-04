@@ -79,14 +79,14 @@ public class Boss4 : MonoBehaviour {
 			}
 		}
 		//Checks to see if 2 targets have been hit with the swap and switches their places
-		if(pmA.SlowDown){
-			if(pmB.SlowDown)
+		if(pmA.swap){
+			if(pmB.swap)
 				SwapPlaces(playerA, playerB);
-			else if(pmC.SlowDown)
+			else if(pmC.swap)
 				SwapPlaces(playerA, playerC);
 		}
-		else if(pmB.SlowDown)
-			if(pmC.SlowDown)
+		else if(pmB.swap)
+			if(pmC.swap)
 				SwapPlaces(playerB, playerC);
 		
 	}
@@ -96,8 +96,8 @@ public class Boss4 : MonoBehaviour {
 		a.gameObject.transform.position = b.gameObject.transform.position;
 		b.gameObject.transform.position = TempPos;
 
-		pmA.SlowDown = false;
-		pmB.SlowDown = false;
-		pmC.SlowDown = false;
+		pmA.swap = false;
+		pmB.swap = false;
+		pmC.swap = false;
 	}
 }

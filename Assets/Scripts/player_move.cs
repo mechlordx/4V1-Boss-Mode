@@ -28,6 +28,7 @@ public class player_move : MonoBehaviour {
 	bool startjump = false;
 	bool jumping = false;
 	bool isgrounded = false;
+	public bool swap = false;
 	int currentjumptimer = 0;
 
 	// Must make so that you can still add force in the opposite direction when 
@@ -205,6 +206,9 @@ public class player_move : MonoBehaviour {
 					GameObject.Find ("Ladder").GetComponent<ladder>().throwplayer(gameObject);
 			}
 		}
+
+		if(other.gameObject.name.Contains ("Swap"))
+		   swap = true;
 	}
 
 	void OnTriggerStay(Collider other)
