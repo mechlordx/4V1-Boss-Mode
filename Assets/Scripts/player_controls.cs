@@ -30,6 +30,8 @@ public class player_controls : MonoBehaviour {
 	bool waitingforbutton = false;
 	int waitingarrayindex;
 
+	int delay = 0;
+
 	// Use this for initialization
 	void Awake () {
 		Application.targetFrameRate = 60;
@@ -56,7 +58,8 @@ public class player_controls : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		string thename;
-		if(waitingforaxis)
+		delay += -1;
+		if(waitingforaxis && delay<0)
 		{
 			for(int joystick=1;joystick<5;joystick++)
 			{
@@ -68,10 +71,11 @@ public class player_controls : MonoBehaviour {
 				for(int button=0;button<4;button++)
 				{
 					thename = "Joystick " + joystick.ToString() + " Axis " + button.ToString();
-					if(Mathf.Abs (Input.GetAxis(thename)) >= .3f)
+					if(Mathf.Abs (Input.GetAxis(thename)) >= .75f)
 					{
 						axisNames[waitingarrayindex] = thename;
 						waitingforaxis = false;
+						delay = 20;
 						break;
 					}
 				}
@@ -278,6 +282,19 @@ public class player_controls : MonoBehaviour {
 			return true;
 		else
 			return false;
+	}
+
+	public bool anyButton(int thebutton, int thestate = 0)
+	{
+		if(getButton(0, thebutton, thestate))
+			return true;
+		if(getButton(1, thebutton, thestate))
+			return true;
+		if(getButton(2, thebutton, thestate))
+			return true;
+		if(getButton(3, thebutton, thestate))
+			return true;
+		return false;
 	}
 
 	/*public bool getAxisAsButton(int thePlayer, bool horizontal, bool positive, int thestate = 0)

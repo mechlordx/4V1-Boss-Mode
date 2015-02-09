@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class main_menu_script : MonoBehaviour {
+public class controls_menu_script : MonoBehaviour {
 	
 	public bool debug = true;
 	public string[] debugloadlevels;
@@ -48,20 +48,23 @@ public class main_menu_script : MonoBehaviour {
 			GetComponent<soundeffect>().play(2);
 		if(selectedbutton==0)
 		{
-			GameObject.Find ("GameController").GetComponent<loader>().loadScene(1);
+			GetComponent<set_controls>().startSet(selectedbutton);
 		}
 		else if(selectedbutton==1)
 		{
-			GameObject.Find ("GameController").GetComponent<loader>().loadScene(2);
+			GetComponent<set_controls>().startSet(selectedbutton);
 		}
 		else if(selectedbutton==2)
 		{
+			GetComponent<set_controls>().startSet(selectedbutton);
 		}
 		else if(selectedbutton==3)
 		{
+			GetComponent<set_controls>().startSet(selectedbutton);
 		}
 		else if(selectedbutton==4)
 		{
+			GameObject.Find ("GameController").GetComponent<loader>().loadScene(0);
 		}
 		else if(selectedbutton==5)
 		{

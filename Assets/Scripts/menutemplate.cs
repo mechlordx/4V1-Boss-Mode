@@ -163,7 +163,8 @@ public class menutemplate : MonoBehaviour {
 						GetComponent<soundeffect>().play(1);
 				}
 			}
-			if((Input.GetKeyDown(KeyCode.KeypadEnter))||(Input.GetKeyDown(KeyCode.Space))||(Input.GetKeyDown(KeyCode.Return)))
+			if((Input.GetKeyDown(KeyCode.KeypadEnter))||(Input.GetKeyDown(KeyCode.Space))||(Input.GetKeyDown(KeyCode.Return))
+			   ||GameObject.Find ("GameController").GetComponent<player_controls>().anyButton(0, 1))
 			{
 				enter ();
 			}
