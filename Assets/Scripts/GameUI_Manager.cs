@@ -17,7 +17,7 @@ public class GameUI_Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		SPage = GameObject.FindGameObjectWithTag("GameController").GetComponent<score> ();
+		SPage = GameObject.Find("GameController").GetComponent<score> ();
 
 	}
 	

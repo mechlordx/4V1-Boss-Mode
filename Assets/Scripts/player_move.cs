@@ -60,7 +60,7 @@ public class player_move : MonoBehaviour {
 				hor = hor * (1f / mag);
 				ver = ver * (1f / mag);
 			}
-			if(hor == 0f & ver == 0f)
+			if(Mathf.Abs(hor) < deadzone & Mathf.Abs (ver) < deadzone)
 				desiredangle = -1f;
 			else
 			{
