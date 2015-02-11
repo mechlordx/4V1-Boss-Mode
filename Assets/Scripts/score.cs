@@ -7,7 +7,7 @@ public class score : MonoBehaviour {
 	public float maxtimer = 90f;
 	bool paused = false;
 	bool started = false;
-	float[] scores;
+	public float[] scores;
 	// Use this for initialization
 	void Start () {
 	

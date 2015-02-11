@@ -6,6 +6,8 @@ public class player_move : MonoBehaviour {
 	public int playerNumber = 0;
 	bool nolimits = false;
 	public float maxspeed = 10f;
+	public float areaslowed = 2f;
+	public float truemaxspeed = 10f;
 	public float maxforce = 20f;
 	public float turnspeed = 30f;
 	public float turnbuffer = 15f;
@@ -14,6 +16,8 @@ public class player_move : MonoBehaviour {
 	public float boostMaxSpeed = 0f;
 	public float boostForce = 0f;
 	float boostTimer = 0f;
+	float Timer = 5f;
+	float MaxTimer = 5f;
 	bool boosting = false;
 	//public int maxjumptimer = 6;
 	//public float jumpforce = 50f;
@@ -29,6 +33,8 @@ public class player_move : MonoBehaviour {
 	bool jumping = false;
 	bool isgrounded = false;
 	public bool swap = false;
+	public bool slow = false;
+	public bool stun = false;
 	int currentjumptimer = 0;
 
 	// Must make so that you can still add force in the opposite direction when 
@@ -65,6 +71,28 @@ public class player_move : MonoBehaviour {
 		}
 		if(controlsRef.getButton(playerNumber, 0, 1))
 			startjump = true;
+
+		if (stun && Timer > 0f){
+			Timer -= Time.deltaTime;
+			maxspeed = 0;
+		}
+		if(stun && Timer <= 0f)
+		{
+			stun = false;
+
+			Timer = MaxTimer;
+			maxspeed = truemaxspeed;
+		}
+		if(slow && Timer > 0f && stun == false)
+		{
+			Timer -= Time.deltaTime;
+			maxspeed = 5f;
+		}
+		if(slow && Timer <= 0f && stun == false){
+			slow = false;
+			Timer = MaxTimer;
+			maxspeed = truemaxspeed;
+		}
 	}
 
 	void FixedUpdate () {
@@ -209,6 +237,16 @@ public class player_move : MonoBehaviour {
 
 		if(other.gameObject.name.Contains ("Swap"))
 		   swap = true;
+
+		if (other.gameObject.name.Contains("Stun")){
+			stun = true;
+			Timer = MaxTimer;
+		}
+		if (other.gameObject.name.Contains("slow"))
+		{
+			slow = true;
+			Timer = MaxTimer;
+		}
 	}
 
 	void OnTriggerStay(Collider other)
@@ -222,6 +260,12 @@ public class player_move : MonoBehaviour {
 					GameObject.Find ("Ladder").GetComponent<ladder>().throwplayer(gameObject);
 			}
 		}
+
+		if(other.gameObject.name.Contains("AOE")){
+			maxspeed = areaslowed;
+		}
+		else
+			maxspeed = truemaxspeed;
 	}
 
 	public void deactivate(int number)

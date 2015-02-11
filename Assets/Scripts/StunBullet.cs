@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpeedNerfBullet : MonoBehaviour {
+public class StunBullet : MonoBehaviour {
 
-	public bool Speed_Decrease = true;
+	public bool Stun= false;
 	public float speed = 40f; 
-
-
+	
+	
 	// Use this for initialization
 	void Awake () {
 		Destroy (gameObject, 10f);
@@ -19,7 +19,7 @@ public class SpeedNerfBullet : MonoBehaviour {
 		{
 			if(thing.gameObject.tag=="Player")
 			{
-				slow(thing.gameObject);
+				stun(thing.gameObject);
 				break;
 			}
 			if(thing.gameObject.tag == "wall"){
@@ -30,10 +30,10 @@ public class SpeedNerfBullet : MonoBehaviour {
 		transform.position += transform.forward * Time.deltaTime * speed;
 	}
 	
-	void slow(GameObject thing)
+	void stun(GameObject thing)
 	{
 		//thing.rigidbody.AddForce(transform.forward * force);
-		Speed_Decrease = true;
+		Stun = true;
 		Destroy (gameObject, 0f);
 	}
 	void destroy (){

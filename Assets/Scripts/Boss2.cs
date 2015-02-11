@@ -45,7 +45,7 @@ public class Boss2 : MonoBehaviour {
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 				a.transform.parent = null;
 				//a.GetComponent<bullet>().force = 30000f;
-				a.GetComponent<bullet>().speed = 23f;
+//				a.GetComponent<bullet>().speed = 23f;
 			}
 		}
 		

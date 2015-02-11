@@ -9,7 +9,9 @@ public class Boss4 : MonoBehaviour {
 	float cooldown = 0f;
 	float maxcooldown = 0.35f;
 	GameObject bullet;
-	GameObject SwapAttack;
+	GameObject slowbullet;
+	GameObject scythe;
+	GameObject slowAoe;
 	GameObject playerA;
 	GameObject playerB;
 	GameObject playerC;
@@ -25,7 +27,9 @@ public class Boss4 : MonoBehaviour {
 	void Start () {
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 		bullet = (GameObject)Resources.Load ("Prefabs/forcebullet");
-		SwapAttack = (GameObject)Resources.Load ("Prefabs/Swapbeam");
+		slowbullet = (GameObject)Resources.Load ("Prefabs/slowbullet");
+		scythe = (GameObject) Resources.Load ("Prefabs/ScytheAttack");
+		slowAoe = (GameObject) Resources.Load("Prefabs/slowAOE");
 		pNo = playerNumber.ToString();
 		iter = 0;
 		foreach(GameObject P in GameObject.FindGameObjectsWithTag("player"))
@@ -69,13 +73,25 @@ public class Boss4 : MonoBehaviour {
 			if(cooldown<0f)
 			{
 				cooldown = maxcooldown;
-				GameObject a = (GameObject) GameObject.Instantiate(SwapAttack, transform.position, Quaternion.identity);
+				GameObject a = (GameObject) GameObject.Instantiate(slowbullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 				a.transform.parent = null;
-				a.GetComponent<bullet>().force = 30000f;
-				a.GetComponent<bullet>().speed = 23f;
+				//a.GetComponent<bullet>().force = 30000f;
+				//a.GetComponent<bullet>().speed = 23f;
+			}
+		}
+		else if(controlsRef.getButton(playerNumber, 2))
+		{
+			if(cooldown<0f)
+			{
+				cooldown = maxcooldown;
+				GameObject a = (GameObject) GameObject.Instantiate(scythe, transform.position, Quaternion.identity);
+				a.transform.parent = transform;
+				a.transform.localEulerAngles = Vector3.zero;
+				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
+				a.transform.parent = null;
 			}
 		}
 		//Checks to see if 2 targets have been hit with the swap and switches their places

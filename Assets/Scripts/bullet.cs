@@ -20,6 +20,11 @@ public class bullet : MonoBehaviour {
 				boom(thing.gameObject);
 				break;
 			}
+			if(thing.gameObject.tag == "wall"){
+				destroy();
+				break;
+			}
+
 		}
 		transform.position += transform.forward * Time.deltaTime * speed;
 	}
@@ -28,5 +33,8 @@ public class bullet : MonoBehaviour {
 	{
 		thing.rigidbody.AddForce(transform.forward * force);
 		Destroy (gameObject, 0f);
+	}
+	void destroy (){
+		Destroy(gameObject);
 	}
 }
