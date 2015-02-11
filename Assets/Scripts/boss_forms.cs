@@ -46,7 +46,7 @@ public class boss_forms : MonoBehaviour {
 			for(int x=0;x<4;x++)
 			{
 				if(controlsRef.getButton(playerNumber, x))
-					choose(x);
+					choose(currentchoices[x]);
 			}
 		}
 		else if(timer>0f)
@@ -87,14 +87,14 @@ public class boss_forms : MonoBehaviour {
 		currentchoices = new int[4];
 		for(int x=0;x<currentchoices.Length;x++)
 		{
-			currentchoices[x] = Random.Range (0, pool.Length);
+			currentchoices[x] = x+3;
 		}
 	}
 
 	void choose(int newchoice)
 	{
 		if(timer>3.5f)
-			timer = 3.5f;
+			timer = 3.4f;
 		if(pool.Length!=0)
 			become(newchoice);
 		choice = newchoice;

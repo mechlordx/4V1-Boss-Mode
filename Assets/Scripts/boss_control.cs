@@ -6,15 +6,20 @@ public class boss_control : MonoBehaviour {
 	public int playerNumber = -1;
 	public float turnspeed = 30f;
 	public float turnbuffer = 15f;
+	public bool disableTurn = false;
 	float desiredangle = 0f;
 	float deadzone = .25f;
 	float hor = 0f;
 	float ver = 0f;
+	float internalTurnSpeed;
+	float internalTurnBuffer;
 	player_controls controlsRef;
 
 
 	// Use this for initiazation
 	void Awake () {
+		internalTurnSpeed = turnspeed;
+		internalTurnBuffer = turnbuffer;
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 	}
 	
@@ -28,7 +33,7 @@ public class boss_control : MonoBehaviour {
 			hor = hor * (1f / mag);
 			ver = ver * (1f / mag);
 		}
-		if(hor == 0f & ver == 0f)
+		if((hor == 0f && ver == 0f) || disableTurn)
 			desiredangle = -1f;
 		else
 		{
@@ -61,5 +66,11 @@ public class boss_control : MonoBehaviour {
 					                                    transform.eulerAngles.z);
 			}
 		}
+	}
+
+	public void resetTurns()
+	{
+		turnspeed = internalTurnSpeed;
+		turnbuffer = internalTurnBuffer;
 	}
 }

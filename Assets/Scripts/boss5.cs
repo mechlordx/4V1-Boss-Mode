@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class boss1 : MonoBehaviour {
-
+public class boss5 : MonoBehaviour {
+	
 	public int playerNumber = -1;
 	player_controls controlsRef;
 	float cooldown = 0f;
@@ -19,7 +19,7 @@ public class boss1 : MonoBehaviour {
 		if(playerNumber == -1)
 			playerNumber = transform.parent.GetComponent<boss_control> ().playerNumber;
 		cooldown += -Time.deltaTime;
-
+		
 		if(controlsRef.getButton(playerNumber, 0))
 		{
 			if(cooldown<0f)
@@ -48,8 +48,8 @@ public class boss1 : MonoBehaviour {
 		}
 		
 	}
-
+	
 	public void SwapPlaces (GameObject a, GameObject b){
-
+		
 	}
 }
