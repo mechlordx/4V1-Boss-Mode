@@ -45,7 +45,7 @@ public class boss_forms : MonoBehaviour {
 			// Let player choose
 			for(int x=0;x<4;x++)
 			{
-				if(controlsRef.getButton(playerNumber, x))
+				if(controlsRef.getButton(playerNumber, x, 1))
 					choose(currentchoices[x]);
 			}
 		}
@@ -54,7 +54,7 @@ public class boss_forms : MonoBehaviour {
 			if(choice==-1)
 			{
 				// Choose first option
-				choose(Random.Range (0, pool.Length));
+				choose(Random.Range (3, 7));
 			}
 		}
 
@@ -88,6 +88,7 @@ public class boss_forms : MonoBehaviour {
 		for(int x=0;x<currentchoices.Length;x++)
 		{
 			currentchoices[x] = x+3;
+			Debug.Log ("Current Choice " + x + " " + currentchoices[x]);
 		}
 	}
 
@@ -98,11 +99,12 @@ public class boss_forms : MonoBehaviour {
 		if(pool.Length!=0)
 			become(newchoice);
 		choice = newchoice;
+		Debug.Log (choice);
 	}
 
 	void become(int choice)
 	{
-		prefabRef = (GameObject) GameObject.Instantiate (pool [choice], transform.position, Quaternion.identity);
+		prefabRef = (GameObject) GameObject.Instantiate (pool [choice-1], transform.position, Quaternion.identity);
 		prefabRef.transform.parent = transform;
 		prefabRef.transform.localEulerAngles = Vector3.zero;
 		prefabRef.transform.localPosition = Vector3.zero;

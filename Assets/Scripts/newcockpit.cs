@@ -73,7 +73,7 @@ public class newcockpit : MonoBehaviour {
 	{
 		if(attachedPlayer==null)
 		{
-			GetComponent<boss_control>().resetTurns();
+			GameObject.Find("Boss").GetComponent<boss_control>().resetTurns();
 			attachedPlayer = newplayer;
 			attachedPlayer.SetActive(true);
 			attachedPlayer.transform.position = new Vector3(transform.position.x + 0.001f,

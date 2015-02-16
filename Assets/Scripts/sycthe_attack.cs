@@ -5,6 +5,7 @@ public class sycthe_attack : MonoBehaviour {
 
 	public float force = 15000f;
 	public float speed = 55f; 
+	public Vector3 rotat = new Vector3(0, 0, 90f);
 	// Use this for initialization
 	void Awake () {
 		Destroy (gameObject, 10f);
@@ -13,7 +14,7 @@ public class sycthe_attack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		transform.localScale = transform.localScale * 1.0005f;
+		transform.localScale = transform.localScale * 1.05f;
 		var things = Physics.OverlapSphere (transform.position, transform.localScale.x / 2f);
 		foreach(Collider thing in things)
 		{
@@ -26,7 +27,8 @@ public class sycthe_attack : MonoBehaviour {
 				destroy();
 				break;
 			}
-			
+			if(!renderer.isVisible)
+				destroy();
 		}
 		transform.position += transform.forward * Time.deltaTime * speed;
 	}
