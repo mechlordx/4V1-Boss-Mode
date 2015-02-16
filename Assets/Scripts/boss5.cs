@@ -7,22 +7,34 @@ public class boss5 : MonoBehaviour {
 	player_controls controlsRef;
 	float cooldown = 0f;
 	float maxcooldown = 0.35f;
+	float gatlingCooldown = 0.2f;
+	float laserCooldown = 0f;
+	float maxLaserCooldown = 3f;
+	int state = 0;
+
 	GameObject bullet;
+	GameObject laserBullet;
+	GameObject skylasercross;
+
 	// Use this for initialization
 	void Start () {
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 		bullet = (GameObject)Resources.Load ("Prefabs/forcebullet");
+		laserBullet = (GameObject)Resources.Load ("Prefabs/laserbullet");
+		skylasercross = (GameObject)Resources.Load ("Prefabs/skylasercross");
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		if(playerNumber == -1)
 			playerNumber = transform.parent.GetComponent<boss_control> ().playerNumber;
 		cooldown += -Time.deltaTime;
-		
-		if(controlsRef.getButton(playerNumber, 0))
+
+		if(state==0) // Normal
 		{
-			if(cooldown<0f)
+			laserCooldown += -Time.deltaTime;
+			if(cooldown<0f && controlsRef.getButton(playerNumber, 0))
 			{
 				cooldown = maxcooldown;
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
@@ -31,25 +43,34 @@ public class boss5 : MonoBehaviour {
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 				a.transform.parent = null;
 			}
-		}
-		else if(controlsRef.getButton(playerNumber, 1))
-		{
-			if(cooldown<0f)
+			else if(cooldown<0f && controlsRef.getButton(playerNumber, 1))
 			{
-				cooldown = maxcooldown;
-				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
+				cooldown = gatlingCooldown;
+				GameObject a = (GameObject) GameObject.Instantiate(laserBullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 				a.transform.parent = null;
-				a.GetComponent<bullet>().force = 30000f;
-				a.GetComponent<bullet>().speed = 23f;
+			}
+			else if(laserCooldown<0f && controlsRef.getButton(playerNumber, 2))
+			{
+				state = 1;
+				GameObject.Find ("Boss").GetComponent<boss_control>().disableTurn = true;
+				laserCooldown = maxLaserCooldown;
+				GameObject a = (GameObject) GameObject.Instantiate(skylasercross, transform.position, Quaternion.identity);
+				a.transform.parent = transform;
+				a.transform.localEulerAngles = Vector3.zero;
+				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
+				a.transform.parent = null;
 			}
 		}
-		
-	}
-	
-	public void SwapPlaces (GameObject a, GameObject b){
-		
+		else if(state==1)
+		{
+			if(!controlsRef.getButton(playerNumber, 2))
+			{
+				GameObject.Find ("skylaser").GetComponent<skylaser>().detonate();
+				state = 0;
+			}
+		}
 	}
 }

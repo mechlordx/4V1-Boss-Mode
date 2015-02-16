@@ -26,6 +26,8 @@ public class ladder : MonoBehaviour {
 				unattach();
 				locked = true;
 			}
+			else if(attachedPlayer.transform.position.y<-5f)
+				unattach();
 		}
 		else if(throwtimer==30) // Throwdown
 		{
