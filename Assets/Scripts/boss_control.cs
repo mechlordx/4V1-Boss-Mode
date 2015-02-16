@@ -8,7 +8,7 @@ public class boss_control : MonoBehaviour {
 	public float turnbuffer = 15f;
 	public bool disableTurn = false;
 	float desiredangle = 0f;
-	float deadzone = .25f;
+	float deadzone = 0.3f;
 	float hor = 0f;
 	float ver = 0f;
 	float internalTurnSpeed;
@@ -33,7 +33,7 @@ public class boss_control : MonoBehaviour {
 			hor = hor * (1f / mag);
 			ver = ver * (1f / mag);
 		}
-		if((hor == 0f && ver == 0f) || disableTurn)
+		if((Mathf.Abs(hor) < deadzone & Mathf.Abs (ver) < deadzone) || disableTurn)
 			desiredangle = -1f;
 		else
 		{
@@ -41,6 +41,8 @@ public class boss_control : MonoBehaviour {
 			if(Vector2.Angle(new Vector2(0f, -1f), new Vector2(hor,ver))<90f)
 				desiredangle = 360f - desiredangle;
 		}
+
+		Debug.Log (desiredangle);
 	}
 
 	void FixedUpdate()
