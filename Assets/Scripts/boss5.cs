@@ -59,7 +59,6 @@ public class boss5 : MonoBehaviour {
 				laserCooldown = maxLaserCooldown;
 				GameObject a = (GameObject) GameObject.Instantiate(skylasercross, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
-				a.transform.localEulerAngles = Vector3.zero;
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 				a.transform.parent = null;
 			}
@@ -68,7 +67,7 @@ public class boss5 : MonoBehaviour {
 		{
 			if(!controlsRef.getButton(playerNumber, 2))
 			{
-				GameObject.Find ("skylaser").GetComponent<skylaser>().detonate();
+				GameObject.Find ("skylasercross(Clone)").GetComponent<skylaser>().detonate();
 				state = 0;
 			}
 		}

@@ -23,6 +23,7 @@ public class ladder : MonoBehaviour {
 			attachedPlayer.transform.position += new Vector3(0f, climbspeed*Time.deltaTime, 0f);
 			if(attachedPlayer.transform.position.y>heightlimit)
 			{
+				attachedPlayer.transform.position = GameObject.Find ("Cockpit").transform.position;
 				unattach();
 				locked = true;
 			}

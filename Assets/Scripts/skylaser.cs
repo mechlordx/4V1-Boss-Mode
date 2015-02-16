@@ -3,7 +3,7 @@ using System.Collections;
 
 public class skylaser : MonoBehaviour {
 
-	float speed = 3f;
+	float speed = 0.65f;
 	float deadzone = .3f;
 	float desiredangle = -1f;
 	float hor = 0f;
@@ -42,9 +42,9 @@ public class skylaser : MonoBehaviour {
 	{
 		if(desiredangle!=-1f)
 		{
-			transform.position += new Vector3(Mathf.Cos(desiredangle * Mathf.Deg2Rad) * speed,
+			transform.position += new Vector3(Mathf.Sin(desiredangle * Mathf.Deg2Rad) * speed,
 			                                  0f,
-			                                  Mathf.Sin(desiredangle * Mathf.Deg2Rad) * speed);
+			                                  Mathf.Cos(desiredangle * Mathf.Deg2Rad) * speed);
 		}
 	}
 
