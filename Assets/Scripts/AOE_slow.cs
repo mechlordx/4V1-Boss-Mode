@@ -18,6 +18,8 @@ public class AOE_slow : MonoBehaviour {
 		{
 			timer -= Time.deltaTime;
 		}
+		else
+			timer = 10f;
 
 		if(timer <= 0)
 		{

@@ -30,7 +30,7 @@ public class Boss4 : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		transperency.a = 0.7f;
+		transperency.a = 0.5f;
 		opaque.a = 0.2f;
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 		bullet = (GameObject)Resources.Load ("Prefabs/forcebullet");
@@ -92,6 +92,8 @@ public class Boss4 : MonoBehaviour {
 				if(a == null){
 					//cooldown = maxcooldown;
 					a = (GameObject) GameObject.Instantiate(slowAoe, transform.position, Quaternion.identity);
+					if(a == null)
+						print ("Seriously, WTF is happening");
 					a.renderer.material.color = transperency;
 					a.transform.parent = transform;
 					a.transform.localEulerAngles = Vector3.zero;
@@ -100,11 +102,14 @@ public class Boss4 : MonoBehaviour {
 					//a.GetComponent<bullet>().force = 30000f;
 					//a.GetComponent<bullet>().speed = 23f;
 				}
-				else{
-					//cooldown = maxcooldown;
-					a.transform.forward = Vector3.forward;
-				}
 			}
+		}
+		else if(controlsRef.getButton(playerNumber, 1, 0)){
+			//cooldown = maxcooldown;
+			if(a != null)
+				a.transform.forward = Vector3.forward;
+			else
+				print ("hey wtf");
 		}
 		else if(controlsRef.getButton(playerNumber, 1, -1)){
 			cooldown = maxcooldown;

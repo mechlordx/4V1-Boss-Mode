@@ -6,7 +6,7 @@ public class player_move : MonoBehaviour {
 	public int playerNumber = 0;
 	bool nolimits = false;
 	public float maxspeed = 10f;
-	public float areaslowed = 2f;
+	public float areaslowed = 6f;
 	public float truemaxspeed = 10f;
 	public float maxforce = 20f;
 	public float turnspeed = 30f;
@@ -265,8 +265,13 @@ public class player_move : MonoBehaviour {
 			if(other.gameObject.GetComponent<AOE_slow> ().isOn)
 				maxspeed = areaslowed;
 		}
-		else
-			maxspeed = truemaxspeed;
+	}
+
+	void OnTriggerExit(Collider other){
+		if(other.gameObject.name.Contains("AOE")){
+			if(other.gameObject.GetComponent<AOE_slow> ().isOn)
+				maxspeed = truemaxspeed;
+		}
 	}
 
 	public void deactivate(int number)
