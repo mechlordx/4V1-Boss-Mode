@@ -41,8 +41,6 @@ public class boss_control : MonoBehaviour {
 			if(Vector2.Angle(new Vector2(0f, -1f), new Vector2(hor,ver))<90f)
 				desiredangle = 360f - desiredangle;
 		}
-
-		Debug.Log (desiredangle);
 	}
 
 	void FixedUpdate()
