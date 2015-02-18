@@ -13,9 +13,11 @@ public class sycthe_attack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(transform.localScale.y < 5)
+			transform.localScale = transform.localScale * 1.05f;
 
-		transform.localScale = transform.localScale * 1.05f;
 		var things = Physics.OverlapSphere (transform.position, transform.localScale.x / 2f);
+
 		foreach(Collider thing in things)
 		{
 			if(thing.gameObject.tag=="Player")
