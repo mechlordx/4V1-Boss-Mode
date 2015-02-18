@@ -262,7 +262,8 @@ public class player_move : MonoBehaviour {
 		}
 
 		if(other.gameObject.name.Contains("AOE")){
-			maxspeed = areaslowed;
+			if(other.gameObject.GetComponent<AOE_slow> ().isOn)
+				maxspeed = areaslowed;
 		}
 		else
 			maxspeed = truemaxspeed;

@@ -5,6 +5,8 @@ public class AOE_slow : MonoBehaviour {
 	float timer = 10f;
 	float timerReset = 10f;
 
+	public bool isOn = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -17,9 +19,11 @@ public class AOE_slow : MonoBehaviour {
 			timer -= Time.deltaTime;
 		}
 
-		if(timer >= 0)
+		if(timer <= 0)
 		{
 			Destroy(gameObject);
+			print("asdf");
+			timer = 90001;
 		}
 	}
 }

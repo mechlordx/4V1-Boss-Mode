@@ -29,8 +29,8 @@ public class Boss4 : MonoBehaviour {
 	player_move pmC;
 
 	// Use this for initialization
-	void Start () {
-		transperency.a = 0.2f;
+	void Awake () {
+		transperency.a = 0.7f;
 		opaque.a = 0.2f;
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 		bullet = (GameObject)Resources.Load ("Prefabs/forcebullet");
@@ -39,6 +39,7 @@ public class Boss4 : MonoBehaviour {
 		slowAoe = (GameObject) Resources.Load("Prefabs/slowAOE");
 		pNo = playerNumber.ToString();
 		iter = 0;
+		Debug.Log(slowAoe.name);
 		/*
 		foreach(GameObject P in GameObject.FindGameObjectsWithTag("Player"))
 		{
@@ -88,18 +89,19 @@ public class Boss4 : MonoBehaviour {
 			if(cooldown<0f)
 			{
 
-				if(a != null){
-					cooldown = maxcooldown;
+				if(a == null){
+					//cooldown = maxcooldown;
 					a = (GameObject) GameObject.Instantiate(slowAoe, transform.position, Quaternion.identity);
 					a.renderer.material.color = transperency;
 					a.transform.parent = transform;
 					a.transform.localEulerAngles = Vector3.zero;
+					//Debug.Break();
 					//a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 					//a.GetComponent<bullet>().force = 30000f;
 					//a.GetComponent<bullet>().speed = 23f;
 				}
 				else{
-					cooldown = maxcooldown;
+					//cooldown = maxcooldown;
 					a.transform.forward = Vector3.forward;
 				}
 			}
@@ -107,7 +109,8 @@ public class Boss4 : MonoBehaviour {
 		else if(controlsRef.getButton(playerNumber, 1, -1)){
 			cooldown = maxcooldown;
 			b =(GameObject) GameObject.Instantiate(slowAoe, a.transform.position, Quaternion.identity);
-			Destroy(a);
+			b.renderer.material.color = opaque;
+			//Destroy(a);
 
 		}
 		else if(controlsRef.getButton(playerNumber, 2))
