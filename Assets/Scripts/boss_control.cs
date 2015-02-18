@@ -46,7 +46,10 @@ public class boss_control : MonoBehaviour {
 	void FixedUpdate()
 	{
 		float diff = Mathf.Abs (Mathf.DeltaAngle(transform.eulerAngles.y, desiredangle));
-		if(desiredangle!=-1)
+
+		transform.Rotate (new Vector3 (0f, turnspeed * controlsRef.getAnyAxis (playerNumber, true)));
+
+		/*if(desiredangle!=-1)
 		{
 			if(diff<turnbuffer)
 				transform.eulerAngles = new Vector3(transform.eulerAngles.x,
@@ -65,7 +68,7 @@ public class boss_control : MonoBehaviour {
 					                                    desiredangle,
 					                                    transform.eulerAngles.z);
 			}
-		}
+		}*/
 	}
 
 	public void resetTurns()
