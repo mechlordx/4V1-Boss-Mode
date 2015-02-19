@@ -14,10 +14,12 @@ public class newcockpit : MonoBehaviour {
 	public float bossDam = 0.45f;
 	public float playerGain = 0.5f;
 	public float playerDam = 1f;
+	public GameObject[] players;
 	int bossNumber = -1;
 
 	// Use this for initialization
 	void Awake () {
+		players = GameObject.FindGameObjectsWithTag ("Player");
 		brawlHealth = new float[4];
 		for(int x=0;x<brawlHealth.Length;x++)
 			brawlHealth[x] = -1F;
@@ -55,12 +57,16 @@ public class newcockpit : MonoBehaviour {
 				{
 					if(brawlHealth[x]>0f)
 					{
-						attach (GameObject.Find ("Player" + (x+1).ToString()));
-						break;
+						foreach(GameObject player in players)
+						{
+							if(player.GetComponent<player_move>().playerNumber==x)
+							{
+								attach(player);
+								break;
+							}
+						}
 					}
 				}
-			
-			
 			}
 		}
 		else
@@ -95,6 +101,7 @@ public class newcockpit : MonoBehaviour {
 		Vector3 force = Vector3.zero;
 		if(attachedPlayer!=null)
 		{
+			attachedPlayer.SetActive(true);
 			attachedPlayer.collider.isTrigger = false;
 			attachedPlayer.rigidbody.useGravity = true;
 			attachedPlayer.GetComponent<player_move>().enabled = true;
@@ -116,6 +123,8 @@ public class newcockpit : MonoBehaviour {
 		{
 			if(collider.gameObject.tag=="Player")
 			{
+				if(collider.GetComponent<player_move>().enabled==false)
+					continue;
 				if(checkladder(collider))
 				{
 					GameObject.Find ("Ladder").GetComponent<ladder>().unattach();
@@ -140,7 +149,6 @@ public class newcockpit : MonoBehaviour {
 	void reset()
 	{
 		GameObject.Find ("Ladder").GetComponent<ladder>().unattach();
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		int number = attachedPlayer.GetComponent<player_move> ().playerNumber;
 		foreach(GameObject player in players)
 		{
@@ -173,6 +181,14 @@ public class newcockpit : MonoBehaviour {
 	{
 		float dam = 0f;
 		float gain = 0f;
+		bool[] alive = new bool[4];
+		for(int x=0;x<4;x++)
+			alive[x] = false;
+		for(int x=0;x<4;x++)
+		{
+			if(brawlHealth[x]>0f)
+				alive[x] = true;
+		}
 		if(thePlayer==bossNumber)
 		{
 			dam = bossDam;
@@ -193,6 +209,26 @@ public class newcockpit : MonoBehaviour {
 			}
 			else if(x!=thePlayer && brawlHealth[thePlayer]>0f)
 				brawlHealth[x] += -dam;
+		}
+
+		for(int x=0;x<4;x++)
+		{
+			if(alive[x])
+			{
+				if(brawlHealth[x]<=0f) // died
+				{
+					foreach(GameObject player in players)
+					{
+						if(player.GetComponent<player_move>().playerNumber==x)
+						{
+							Debug.Log ("fix");
+							player.rigidbody.velocity = Vector3.zero;
+							player.SetActive(true);
+							player.transform.position = new Vector3(0f, -3f, 0f);
+						}
+					}
+				}
+			}
 		}
 	}
 }
