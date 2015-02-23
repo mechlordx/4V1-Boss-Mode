@@ -14,18 +14,14 @@ public class AOE_slow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(renderer.material.color.a == 1f)
-		{
-			timer -= Time.deltaTime;
-		}
-		else
-			timer = 10f;
+
+		timer -= Time.deltaTime;
 
 		if(timer <= 0)
 		{
 			Destroy(gameObject);
-			print("asdf");
-			timer = 90001;
+
 		}
+
 	}
 }
