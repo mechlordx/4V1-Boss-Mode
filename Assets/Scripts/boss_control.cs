@@ -33,7 +33,7 @@ public class boss_control : MonoBehaviour {
 			hor = hor * (1f / mag);
 			ver = ver * (1f / mag);
 		}
-		if((Mathf.Abs(hor) < deadzone & Mathf.Abs (ver) < deadzone) || disableTurn)
+		if((Mathf.Abs(hor) < deadzone && Mathf.Abs (ver) < deadzone) || disableTurn)
 			desiredangle = -1f;
 		else
 		{
