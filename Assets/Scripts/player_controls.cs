@@ -176,18 +176,22 @@ public class player_controls : MonoBehaviour {
 
 	public float getAxis(int thePlayer, bool horizontal)
 	{
+		float toreturn;
 		if(horizontal)
 		{
 			if(axisNames[thePlayer*2]=="")
 				return 0f;
-			return Input.GetAxisRaw(axisNames[thePlayer*2]);
+			toreturn = Input.GetAxisRaw(axisNames[thePlayer*2]);
 		}
 		else
 		{
 			if(axisNames[thePlayer*2 + 1]=="")
 				return 0f;
-			return Input.GetAxisRaw(axisNames[thePlayer*2 + 1]);
+			toreturn = Input.GetAxisRaw(axisNames[thePlayer*2 + 1]);
 		}
+		if(toreturn<stickDeadZone)
+			toreturn = 0f;
+		return toreturn;
 	}
 
 	public float getAxisRaw(int thePlayer, bool horizontal)
