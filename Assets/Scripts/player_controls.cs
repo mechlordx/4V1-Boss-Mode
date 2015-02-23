@@ -12,6 +12,7 @@ public class player_controls : MonoBehaviour {
 	public string buttonName = "_Button";
 	public string horizontalAxisName = "_X-Axis";
 	public string verticalAxisName = "_Y-Axis";
+	public float stickDeadZone = 0.25f;
 	string[] directions = {"Up", "Right", "Down", "Left"};
 
 	int buttonsPerPlayer;
@@ -191,18 +192,22 @@ public class player_controls : MonoBehaviour {
 
 	public float getAxisRaw(int thePlayer, bool horizontal)
 	{
+		float toreturn;
 		if(horizontal)
 		{
 			if(axisNames[thePlayer*2]=="")
 				return 0f;
-			return Input.GetAxisRaw(axisNames[thePlayer*2]);
+			toreturn = Input.GetAxisRaw(axisNames[thePlayer*2]);
 		}
 		else
 		{
 			if(axisNames[thePlayer*2 + 1]=="")
 				return 0f;
-			return Input.GetAxisRaw(axisNames[thePlayer*2 + 1]);
+			toreturn = Input.GetAxisRaw(axisNames[thePlayer*2 + 1]);
 		}
+		if(toreturn<stickDeadZone)
+			toreturn = 0f;
+		return toreturn;
 	}
 
 	public float getPadAxis(int thePlayer, bool horizontal)
