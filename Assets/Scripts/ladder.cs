@@ -25,7 +25,7 @@ public class ladder : MonoBehaviour {
 			{
 				attachedPlayer.transform.position = GameObject.Find ("Cockpit").transform.position;
 				unattach();
-				locked = true;
+				//locked = true;
 			}
 			else if(attachedPlayer.transform.position.y<-5f)
 				unattach();
@@ -93,7 +93,7 @@ public class ladder : MonoBehaviour {
 		if(throwtimer>0)
 			return;
 		throwtimer = maxthrowtimer;
-		locked = true;
+		//locked = true;
 		thrower = newthrower;
 		thrower.transform.LookAt (attachedPlayer.transform.position);
 		thrower.transform.eulerAngles = new Vector3 (0f,

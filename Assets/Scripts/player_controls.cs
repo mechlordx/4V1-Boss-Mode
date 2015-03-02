@@ -189,7 +189,7 @@ public class player_controls : MonoBehaviour {
 				return 0f;
 			toreturn = Input.GetAxisRaw(axisNames[thePlayer*2 + 1]);
 		}
-		if(toreturn<stickDeadZone)
+		if(Mathf.Abs(toreturn)<stickDeadZone)
 			toreturn = 0f;
 		return toreturn;
 	}
@@ -209,7 +209,7 @@ public class player_controls : MonoBehaviour {
 				return 0f;
 			toreturn = Input.GetAxisRaw(axisNames[thePlayer*2 + 1]);
 		}
-		if(toreturn<stickDeadZone)
+		if(Mathf.Abs(toreturn)<stickDeadZone)
 			toreturn = 0f;
 		return toreturn;
 	}

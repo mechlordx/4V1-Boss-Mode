@@ -5,11 +5,12 @@ public class AOE_slow : MonoBehaviour {
 	float timer = 10f;
 	float timerReset = 10f;
 
+	Boss4 B4;
+
 	public bool isOn = false;
 
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
