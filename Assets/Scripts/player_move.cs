@@ -18,7 +18,23 @@ public class player_move : MonoBehaviour {
 	float boostTimer = 0f;
 	float Timer = 5f;
 	float MaxTimer = 5f;
+
 	bool boosting = false;
+
+	bool punching = false;
+	bool startPunch = false;
+	bool hasPunched = false;
+	float punchDelay = 0.1f;
+	float punchLength = 0.5f;
+	float punchingTimer = 0f;
+
+	float punchForce = 4000f;
+	int punchZones = 3;
+	float punchRadius = 0.45f;
+	float punchRadiusDecay = 0.75f;
+	float punchInitZone = 0.5f;
+	float punchExtend = 0.5f;
+
 	//public int maxjumptimer = 6;
 	//public float jumpforce = 50f;
 	public GameObject groundsphere;
@@ -50,7 +66,7 @@ public class player_move : MonoBehaviour {
 	void Update() {
 		if(transform.position.y<-10f)
 			transform.position = spawnpoint;
-		if(!boosting)
+		if(!boosting&&!punching)
 		{
 			hor = controlsRef.getAnyAxis (playerNumber, false);
 			ver = controlsRef.getAnyAxis (playerNumber, true);
@@ -71,6 +87,8 @@ public class player_move : MonoBehaviour {
 		}
 		if(controlsRef.getButton(playerNumber, 0, 1))
 			startjump = true;
+		if(controlsRef.getButton(playerNumber, 1, 1))
+			startPunch = true;
 
 		if (stun && Timer > 0f){
 			Timer -= Time.deltaTime;
@@ -146,7 +164,7 @@ public class player_move : MonoBehaviour {
 		}
 		a = Vector3.Magnitude (rigidbody.velocity);
 
-		if(startjump && (ver != 0f || hor != 0f))
+		if(startjump && (ver != 0f || hor != 0f) && !punching)
 		{
 			if(!boosting && boostTimer<=0f)
 			{
@@ -167,6 +185,39 @@ public class player_move : MonoBehaviour {
 				boostTimer = boostSeconds;
 			}
 		}
+
+		if(startPunch)
+		{
+			if(!punching)
+			{
+				punching = true;
+				hasPunched = false;
+				punchingTimer = punchLength;
+			}
+
+		}
+
+		punchingTimer += -Time.deltaTime;
+		if(punching)
+		{
+			if(hasPunched)
+			{
+				if(punchingTimer<0f)
+				{
+					punching = false;
+				}
+			}
+			else
+			{
+				if(punchingTimer<(punchLength-punchDelay))
+				{
+					hasPunched = true;
+					// Throw punch
+					throwPunch(playerNumber);
+				}
+			}
+		}
+
 		// Jumping
 		/*if(jumping)
 		{
@@ -190,6 +241,43 @@ public class player_move : MonoBehaviour {
 		*/
 		currentjumptimer += -1;
 		startjump = false;
+		startPunch = false;
+	}
+
+	void throwPunch(int myPlayerNumber)
+	{
+		int[] hitCounts = new int[4];
+		for(int x=0;x<4;x++)
+			hitCounts[x] = 0;
+
+		float curRadius = punchRadius;
+		float curDist = punchInitZone;
+
+		for(int x=0;x<punchZones;x++)
+		{
+			Collider[] hitColliders = Physics.OverlapSphere(transform.position + (transform.forward * curDist), curRadius);
+
+			foreach(Collider hit in hitColliders)
+			{
+				if(hit.gameObject.GetComponent<player_move>())
+				{
+					hitCounts[hit.gameObject.GetComponent<player_move>().playerNumber] += 1;
+				}
+			}
+
+			curRadius = curRadius * punchRadiusDecay;
+			curDist += punchExtend;
+		}
+		hitCounts [myPlayerNumber] = 0;
+
+		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		Vector3 myFoward = transform.forward;
+
+		foreach(GameObject player in players)
+		{
+			int curPlayerNumber = player.GetComponent<player_move>().playerNumber;
+			player.rigidbody.AddForce(myFoward * hitCounts[curPlayerNumber] * punchForce);
+		}
 	}
 
 	bool checkForGround()
