@@ -16,6 +16,7 @@ public class newcockpit : MonoBehaviour {
 	public float playerDam = 1f;
 	public GameObject[] players;
 	public Material[] playerMats;
+	public GameObject bossCam;
 
 	GameObject debugBrawlPopup;
 
@@ -102,6 +103,10 @@ public class newcockpit : MonoBehaviour {
 			attachedPlayer.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
 			attachedPlayer.transform.localPosition = Vector3.zero;
 			attachedPlayer.GetComponent<player_move>().enabled = false;
+
+			bossCam = GameObject.Find("camera" + (attachedPlayer.GetComponent<player_move>().playerNumber +1));
+			bossCam.transform.position += new Vector3(0,2,0);
+			bossCam.transform.rotation = Quaternion.Euler (20,0,0);
 			reset ();
 		}
 	}
@@ -117,6 +122,8 @@ public class newcockpit : MonoBehaviour {
 			attachedPlayer.GetComponent<player_move>().enabled = true;
 			attachedPlayer.transform.parent = null;
 			attachedPlayer.rigidbody.AddForce (force);
+			bossCam.transform.position -= new Vector3(0,2,0);
+			bossCam.transform.rotation = Quaternion.Euler (15,0,0);
 			attachedPlayer = null;
 		}
 	}
