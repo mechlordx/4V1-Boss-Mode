@@ -15,10 +15,20 @@ public class newcockpit : MonoBehaviour {
 	public float playerGain = 0.5f;
 	public float playerDam = 1f;
 	public GameObject[] players;
+	public Material[] playerMats;
+
+	GameObject debugBrawlPopup;
+
 	int bossNumber = -1;
 
 	// Use this for initialization
 	void Awake () {
+		playerMats = new Material[4];
+		playerMats [0] = (Material)Resources.Load ("Green");
+		playerMats [1] = (Material)Resources.Load ("Blue");
+		playerMats [2] = (Material)Resources.Load ("Yellow");
+		playerMats [3] = (Material)Resources.Load ("Orange");
+		debugBrawlPopup = (GameObject) Resources.Load("debugBrawlBox");
 		players = GameObject.FindGameObjectsWithTag ("Player");
 		brawlHealth = new float[4];
 		for(int x=0;x<brawlHealth.Length;x++)
@@ -40,7 +50,7 @@ public class newcockpit : MonoBehaviour {
 		{
 			player_controls controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 			// Apply damages and gains
-			for(int x=0;x<2;x++)
+			for(int x=0;x<1;x++)
 			{
 				for(int y=0;y<4;y++)
 				{
@@ -179,6 +189,9 @@ public class newcockpit : MonoBehaviour {
 
 	void damage(int thePlayer)
 	{
+		GameObject a = (GameObject)GameObject.Instantiate (debugBrawlPopup, transform.position, Quaternion.identity);
+		a.renderer.material = playerMats [thePlayer];
+
 		float dam = 0f;
 		float gain = 0f;
 		bool[] alive = new bool[4];

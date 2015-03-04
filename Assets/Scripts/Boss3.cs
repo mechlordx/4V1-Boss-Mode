@@ -10,7 +10,7 @@ public class Boss3 : MonoBehaviour {
 	public int playerNumber = -1;
 	player_controls controlsRef;
 	float cooldown = 0f;
-	float maxcooldown = 0.35f;
+	float maxcooldown = 0.6f;
 	float Walldist = 5;
 	GameObject b;
 

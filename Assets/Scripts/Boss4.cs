@@ -7,7 +7,7 @@ public class Boss4 : MonoBehaviour {
 	string pNo;
 	player_controls controlsRef;
 	float cooldown = 0f;
-	float maxcooldown = 0.35f;
+	float maxcooldown = 0.6f;
 	float AOEcooldown = 0f;
 	float AOEmaxcooldown = 10f;
 	float tempVec;

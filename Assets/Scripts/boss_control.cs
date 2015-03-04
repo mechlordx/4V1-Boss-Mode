@@ -4,8 +4,8 @@ using System.Collections;
 public class boss_control : MonoBehaviour {
 
 	public int playerNumber = -1;
-	public float turnspeed = 30f;
-	public float turnbuffer = 15f;
+	public float turnspeed = 17f;
+	public float turnbuffer = 9f;
 	public bool disableTurn = false;
 	float desiredangle = 0f;
 	float deadzone = 0.3f;

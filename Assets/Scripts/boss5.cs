@@ -6,7 +6,7 @@ public class boss5 : MonoBehaviour {
 	public int playerNumber = -1;
 	player_controls controlsRef;
 	float cooldown = 0f;
-	float maxcooldown = 0.35f;
+	float maxcooldown = 0.6f;
 	float gatlingCooldown = 0.2f;
 	float laserCooldown = 0f;
 	float maxLaserCooldown = 3f;
