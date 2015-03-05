@@ -119,6 +119,7 @@ public class player_move : MonoBehaviour {
 
 		if(isgrounded)
 			jumping = false;
+		/*
 		float diff = Mathf.Abs (Mathf.DeltaAngle(transform.eulerAngles.y, desiredangle));
 		if(desiredangle!=-1)
 		{
@@ -163,6 +164,10 @@ public class player_move : MonoBehaviour {
 			rigidbody.AddForce(wantedpower * new Vector3(ver, 0f, hor));
 		}
 		a = Vector3.Magnitude (rigidbody.velocity);
+*/
+		transform.Rotate (new Vector3 (0f, (turnspeed/10) * controlsRef.getAnyAxis (playerNumber, true)));
+		if(rigidbody.velocity.magnitude < maxspeed)
+			transform.Translate(Vector3.forward * controlsRef.getAnyAxis(playerNumber,false) * maxspeed * Time.deltaTime);
 
 		if(startjump && (ver != 0f || hor != 0f) && !punching)
 		{
