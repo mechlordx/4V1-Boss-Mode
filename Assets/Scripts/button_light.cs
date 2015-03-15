@@ -26,18 +26,18 @@ public class button_light : MonoBehaviour {
 	
 		if(pressedtimer>0)
 		{
-			renderer.material = mats[1];
+			GetComponent<Renderer>().material = mats[1];
 		}
 		else if(pressed)
 		{
-			renderer.material = mats[2];
+			GetComponent<Renderer>().material = mats[2];
 		}
 		else if(unpressedtimer>0)
 		{
-			renderer.material = mats[3];
+			GetComponent<Renderer>().material = mats[3];
 		}
 		else
-			renderer.material = mats[0];
+			GetComponent<Renderer>().material = mats[0];
 		unpressedtimer += -1;
 		pressedtimer += -1;
 	}

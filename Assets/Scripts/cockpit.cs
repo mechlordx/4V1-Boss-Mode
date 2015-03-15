@@ -49,7 +49,7 @@ public class cockpit : MonoBehaviour {
 		else if(throwtimer==1)
 			locked = false;
 		else if(thrower!=null)
-			thrower.rigidbody.velocity = Vector3.zero;
+			thrower.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		throwtimer += -1;
 	}
 	
@@ -58,18 +58,18 @@ public class cockpit : MonoBehaviour {
 		if(attachedPlayer==null)
 		{
 			attachedPlayer = newplayer;
-			if(attachedPlayer.rigidbody.drag!=999f)
-				drag = attachedPlayer.rigidbody.drag;
+			if(attachedPlayer.GetComponent<Rigidbody>().drag!=999f)
+				drag = attachedPlayer.GetComponent<Rigidbody>().drag;
 			attachedPlayer.transform.position = new Vector3(transform.position.x + 0.001f,
 			                                                newplayer.transform.position.y,
 			                                                transform.position.z);
-			attachedPlayer.collider.isTrigger = true;
-			attachedPlayer.rigidbody.useGravity = false;
-			attachedPlayer.rigidbody.velocity = Vector3.zero;
+			attachedPlayer.GetComponent<Collider>().isTrigger = true;
+			attachedPlayer.GetComponent<Rigidbody>().useGravity = false;
+			attachedPlayer.GetComponent<Rigidbody>().velocity = Vector3.zero;
 			attachedPlayer.transform.parent = transform;
 			attachedPlayer.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
 			attachedPlayer.transform.localPosition = Vector3.zero;
-			attachedPlayer.rigidbody.drag = 999f;
+			attachedPlayer.GetComponent<Rigidbody>().drag = 999f;
 			attachedPlayer.GetComponent<player_move>().enabled = false;
 			reset ();
 		}
@@ -86,10 +86,10 @@ public class cockpit : MonoBehaviour {
 		thrower.transform.eulerAngles = new Vector3 (0f,
 		                                             thrower.transform.eulerAngles.y,
 		                                             0f);
-		thrower.rigidbody.drag = 999f;
-		thrower.collider.isTrigger = true;
-		thrower.rigidbody.useGravity = false;
-		thrower.rigidbody.velocity = Vector3.zero;
+		thrower.GetComponent<Rigidbody>().drag = 999f;
+		thrower.GetComponent<Collider>().isTrigger = true;
+		thrower.GetComponent<Rigidbody>().useGravity = false;
+		thrower.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		thrower.transform.eulerAngles = new Vector3(0f, 0f, 0f);
 		thrower.transform.parent = transform;
 		Vector3 direction = Vector3.Normalize(new Vector3(thrower.transform.localPosition.x, 0f, thrower.transform.localPosition.z));
@@ -103,12 +103,12 @@ public class cockpit : MonoBehaviour {
 	
 	public void unattach(Vector3 force)
 	{
-		attachedPlayer.collider.isTrigger = false;
-		attachedPlayer.rigidbody.useGravity = true;
+		attachedPlayer.GetComponent<Collider>().isTrigger = false;
+		attachedPlayer.GetComponent<Rigidbody>().useGravity = true;
 		attachedPlayer.GetComponent<player_move>().enabled = true;
-		attachedPlayer.rigidbody.drag = drag;
+		attachedPlayer.GetComponent<Rigidbody>().drag = drag;
 		attachedPlayer.transform.parent = null;
-		attachedPlayer.rigidbody.AddForce (force);
+		attachedPlayer.GetComponent<Rigidbody>().AddForce (force);
 		attachedPlayer = null;
 	}
 
@@ -157,7 +157,7 @@ public class cockpit : MonoBehaviour {
 		foreach(GameObject player in players)
 		{
 			player.GetComponent<player_move>().deactivate(number);
-			player.rigidbody.velocity = Vector3.zero;
+			player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 		transform.parent.gameObject.GetComponent<boss_control> ().enabled = true;
 		transform.parent.gameObject.GetComponent<boss_control>().playerNumber = number;

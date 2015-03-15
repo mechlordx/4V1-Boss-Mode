@@ -47,7 +47,7 @@ public class ladder : MonoBehaviour {
 			Vector3 force = Vector3.Normalize(throwerpos - attachedpos);
 			force += new Vector3(0f,-force.y,0f);
 			force += new Vector3(0f, .1f, 0f);
-			attachedPlayer.rigidbody.AddForce(force * 10000f);
+			attachedPlayer.GetComponent<Rigidbody>().AddForce(force * 10000f);
 
 			unattach();
 			attach(thrower);
@@ -56,7 +56,7 @@ public class ladder : MonoBehaviour {
 		else if(throwtimer==1)
 			locked = false;
 		else if(thrower!=null)
-			thrower.rigidbody.velocity = Vector3.zero;
+			thrower.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		throwtimer += -1;
 	}
 
@@ -74,16 +74,16 @@ public class ladder : MonoBehaviour {
 		if(attachedPlayer==null)
 		{
 			attachedPlayer = newplayer;
-			if(attachedPlayer.rigidbody.drag!=999f)
-				drag = attachedPlayer.rigidbody.drag;
+			if(attachedPlayer.GetComponent<Rigidbody>().drag!=999f)
+				drag = attachedPlayer.GetComponent<Rigidbody>().drag;
 			attachedPlayer.transform.position = new Vector3(transform.position.x + 0.001f,
 			                                           newplayer.transform.position.y,
 			                                           transform.position.z);
-			attachedPlayer.collider.isTrigger = true;
-			attachedPlayer.rigidbody.useGravity = false;
-			attachedPlayer.rigidbody.velocity = Vector3.zero;
+			attachedPlayer.GetComponent<Collider>().isTrigger = true;
+			attachedPlayer.GetComponent<Rigidbody>().useGravity = false;
+			attachedPlayer.GetComponent<Rigidbody>().velocity = Vector3.zero;
 			attachedPlayer.transform.eulerAngles = new Vector3(0f, 270f, 0f);
-			attachedPlayer.rigidbody.drag = 999f;
+			attachedPlayer.GetComponent<Rigidbody>().drag = 999f;
 			attachedPlayer.GetComponent<player_move>().enabled = false;
 		}
 	}
@@ -99,7 +99,7 @@ public class ladder : MonoBehaviour {
 		thrower.transform.eulerAngles = new Vector3 (0f,
 		                                            thrower.transform.eulerAngles.y,
 		                                            0f);
-		thrower.rigidbody.drag = 999f;
+		thrower.GetComponent<Rigidbody>().drag = 999f;
 
 	}
 
@@ -107,10 +107,10 @@ public class ladder : MonoBehaviour {
 	{
 		if(attachedPlayer!=null)
 		{
-			attachedPlayer.collider.isTrigger = false;
-			attachedPlayer.rigidbody.useGravity = true;
+			attachedPlayer.GetComponent<Collider>().isTrigger = false;
+			attachedPlayer.GetComponent<Rigidbody>().useGravity = true;
 			attachedPlayer.GetComponent<player_move>().enabled = true;
-			attachedPlayer.rigidbody.drag = drag;
+			attachedPlayer.GetComponent<Rigidbody>().drag = drag;
 			attachedPlayer = null;
 		}
 	}

@@ -96,9 +96,9 @@ public class newcockpit : MonoBehaviour {
 			attachedPlayer.transform.position = new Vector3(transform.position.x + 0.001f,
 			                                                newplayer.transform.position.y,
 			                                                transform.position.z);
-			attachedPlayer.collider.isTrigger = true;
-			attachedPlayer.rigidbody.useGravity = false;
-			attachedPlayer.rigidbody.velocity = Vector3.zero;
+			attachedPlayer.GetComponent<Collider>().isTrigger = true;
+			attachedPlayer.GetComponent<Rigidbody>().useGravity = false;
+			attachedPlayer.GetComponent<Rigidbody>().velocity = Vector3.zero;
 			attachedPlayer.transform.parent = transform;
 			attachedPlayer.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
 			attachedPlayer.transform.localPosition = Vector3.zero;
@@ -117,11 +117,11 @@ public class newcockpit : MonoBehaviour {
 		if(attachedPlayer!=null)
 		{
 			attachedPlayer.SetActive(true);
-			attachedPlayer.collider.isTrigger = false;
-			attachedPlayer.rigidbody.useGravity = true;
+			attachedPlayer.GetComponent<Collider>().isTrigger = false;
+			attachedPlayer.GetComponent<Rigidbody>().useGravity = true;
 			attachedPlayer.GetComponent<player_move>().enabled = true;
 			attachedPlayer.transform.parent = null;
-			attachedPlayer.rigidbody.AddForce (force);
+			attachedPlayer.GetComponent<Rigidbody>().AddForce (force);
 			bossCam.transform.position -= new Vector3(0,2,0);
 			bossCam.transform.rotation = Quaternion.Euler (15,0,0);
 			attachedPlayer = null;
@@ -170,7 +170,7 @@ public class newcockpit : MonoBehaviour {
 		foreach(GameObject player in players)
 		{
 			player.GetComponent<player_move>().deactivate(number);
-			player.rigidbody.velocity = Vector3.zero;
+			player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 			player.SetActive(true);
 		}
 		transform.parent.gameObject.GetComponent<boss_control> ().enabled = true;
@@ -197,7 +197,7 @@ public class newcockpit : MonoBehaviour {
 	void damage(int thePlayer)
 	{
 		GameObject a = (GameObject)GameObject.Instantiate (debugBrawlPopup, transform.position, Quaternion.identity);
-		a.renderer.material = playerMats [thePlayer];
+		a.GetComponent<Renderer>().material = playerMats [thePlayer];
 
 		float dam = 0f;
 		float gain = 0f;
@@ -242,7 +242,7 @@ public class newcockpit : MonoBehaviour {
 						if(player.GetComponent<player_move>().playerNumber==x)
 						{
 							Debug.Log ("fix");
-							player.rigidbody.velocity = Vector3.zero;
+							player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 							player.SetActive(true);
 							player.transform.position = new Vector3(0f, -3f, 0f);
 						}

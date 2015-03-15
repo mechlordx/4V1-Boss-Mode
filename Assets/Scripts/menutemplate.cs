@@ -24,18 +24,18 @@ public class menutemplate : MonoBehaviour {
 		Color originalcolor;
 		foreach(GameObject button in buttons)
 		{
-			originalcolor = button.renderer.material.color;
+			originalcolor = button.GetComponent<Renderer>().material.color;
 			originalcolor.r = deselectedcolor;
 			originalcolor.g = deselectedcolor;
 			originalcolor.b = deselectedcolor;
-			button.renderer.material.color = originalcolor;
+			button.GetComponent<Renderer>().material.color = originalcolor;
 		}
 		// Light up selected button
-		originalcolor = buttons[selectedbutton].renderer.material.color;
+		originalcolor = buttons[selectedbutton].GetComponent<Renderer>().material.color;
 		originalcolor.r = 1f;
 		originalcolor.g = 1f;
 		originalcolor.b = 1f;
-		buttons[selectedbutton].renderer.material.color = originalcolor;
+		buttons[selectedbutton].GetComponent<Renderer>().material.color = originalcolor;
 		
 	}
 	
@@ -106,16 +106,16 @@ public class menutemplate : MonoBehaviour {
 				if(change)
 				{
 					Color newcolor;
-					newcolor = buttons[from].renderer.material.color;
+					newcolor = buttons[from].GetComponent<Renderer>().material.color;
 					newcolor.r = deselectedcolor;
 					newcolor.g = deselectedcolor;
 					newcolor.b = deselectedcolor;
-					buttons[from].renderer.material.color = newcolor;
-					newcolor = buttons[selectedbutton].renderer.material.color;
+					buttons[from].GetComponent<Renderer>().material.color = newcolor;
+					newcolor = buttons[selectedbutton].GetComponent<Renderer>().material.color;
 					newcolor.r = 1f;
 					newcolor.g = 1f;
 					newcolor.b = 1f;
-					buttons[selectedbutton].renderer.material.color = newcolor;
+					buttons[selectedbutton].GetComponent<Renderer>().material.color = newcolor;
 					if(buttons[selectedbutton].GetComponent<soundeffect>())
 						GetComponent<soundeffect>().play(1);
 					else if(GetComponent<soundeffect>())
@@ -146,16 +146,16 @@ public class menutemplate : MonoBehaviour {
 				else
 				{
 					Color newcolor;
-					newcolor = buttons[from].renderer.material.color;
+					newcolor = buttons[from].GetComponent<Renderer>().material.color;
 					newcolor.r = deselectedcolor;
 					newcolor.g = deselectedcolor;
 					newcolor.b = deselectedcolor;
-					buttons[from].renderer.material.color = newcolor;
-					newcolor = buttons[to].renderer.material.color;
+					buttons[from].GetComponent<Renderer>().material.color = newcolor;
+					newcolor = buttons[to].GetComponent<Renderer>().material.color;
 					newcolor.r = 1f;
 					newcolor.g = 1f;
 					newcolor.b = 1f;
-					buttons[to].renderer.material.color = newcolor;
+					buttons[to].GetComponent<Renderer>().material.color = newcolor;
 					selectedbutton = to;
 					if(buttons[selectedbutton].GetComponent<soundeffect>())
 						GetComponent<soundeffect>().play(1);

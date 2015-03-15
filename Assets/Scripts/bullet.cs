@@ -30,7 +30,7 @@ public class bullet : MonoBehaviour {
 
 	void boom(GameObject thing)
 	{
-		thing.rigidbody.AddForce(transform.forward * force);
+		thing.GetComponent<Rigidbody>().AddForce(transform.forward * force);
 		Destroy (gameObject, 0f);
 	}
 	void destroy (){

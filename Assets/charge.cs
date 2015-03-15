@@ -45,7 +45,7 @@ public class charge : MonoBehaviour {
 
 					direction = transform.position - player.transform.position;
 					direction = Vector3.Normalize(direction);
-					player.rigidbody.AddForce(direction * force);
+					player.GetComponent<Rigidbody>().AddForce(direction * force);
 				}
 			}
 		}

@@ -17,7 +17,7 @@ public class untrigger : MonoBehaviour {
 			timer += -Time.deltaTime;
 			if(timer<0f)
 			{
-				target.collider.isTrigger = false;
+				target.GetComponent<Collider>().isTrigger = false;
 				Destroy (gameObject, 0f);
 			}
 		}

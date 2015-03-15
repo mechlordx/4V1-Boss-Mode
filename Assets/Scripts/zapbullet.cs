@@ -31,7 +31,7 @@ public class zapbullet : MonoBehaviour {
 	
 	void boom(GameObject thing)
 	{
-		thing.rigidbody.AddForce(transform.forward * force);
+		thing.GetComponent<Rigidbody>().AddForce(transform.forward * force);
 		if(GameObject.Find ("electriccharge(Clone)"))
 			Destroy (GameObject.Find ("electriccharge(Clone)"), 0f);
 		GameObject a = (GameObject)GameObject.Instantiate (Resources.Load ("Prefabs/electriccharge"), transform.position, Quaternion.identity);

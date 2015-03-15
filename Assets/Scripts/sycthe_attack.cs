@@ -29,7 +29,7 @@ public class sycthe_attack : MonoBehaviour {
 				destroy();
 				break;
 			}
-			if(!renderer.isVisible)
+			if(!GetComponent<Renderer>().isVisible)
 				destroy();
 		}
 		transform.position += transform.forward * Time.deltaTime * speed;
@@ -37,7 +37,7 @@ public class sycthe_attack : MonoBehaviour {
 	
 	void boom(GameObject thing)
 	{
-		thing.rigidbody.AddForce(transform.forward * force);
+		thing.GetComponent<Rigidbody>().AddForce(transform.forward * force);
 		Destroy (gameObject, 0f);
 	}
 	void destroy (){

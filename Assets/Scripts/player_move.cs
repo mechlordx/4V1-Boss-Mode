@@ -166,7 +166,7 @@ public class player_move : MonoBehaviour {
 		a = Vector3.Magnitude (rigidbody.velocity);
 */
 		transform.Rotate (new Vector3 (0f, (turnspeed/10) * controlsRef.getAnyAxis (playerNumber, true)));
-		if(rigidbody.velocity.magnitude < maxspeed)
+		if(GetComponent<Rigidbody>().velocity.magnitude < maxspeed)
 			transform.Translate(Vector3.forward * controlsRef.getAnyAxis(playerNumber,false) * maxspeed * Time.deltaTime);
 
 		if(startjump && (ver != 0f || hor != 0f) && !punching)
@@ -281,7 +281,7 @@ public class player_move : MonoBehaviour {
 		foreach(GameObject player in players)
 		{
 			int curPlayerNumber = player.GetComponent<player_move>().playerNumber;
-			player.rigidbody.AddForce(myFoward * hitCounts[curPlayerNumber] * punchForce);
+			player.GetComponent<Rigidbody>().AddForce(myFoward * hitCounts[curPlayerNumber] * punchForce);
 		}
 	}
 
