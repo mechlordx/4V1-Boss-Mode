@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class main_menu_script : MonoBehaviour {
-	
+public class game_menu_script : MonoBehaviour {
+
+	public int playerSelector = -1;
 	public bool debug = true;
 	public string[] debugloadlevels;
 	public bool wait = false;
@@ -36,6 +37,7 @@ public class main_menu_script : MonoBehaviour {
 		originalcolor.g = 1f;
 		originalcolor.b = 1f;
 		buttons[selectedbutton].GetComponent<Renderer>().material.color = originalcolor;
+		
 	}
 	
 	void enter()
@@ -47,11 +49,10 @@ public class main_menu_script : MonoBehaviour {
 			GetComponent<soundeffect>().play(2);
 		if(selectedbutton==0)
 		{
-			GameObject.Find ("GameController").GetComponent<loader>().loadScene(4);
+			GameObject.Find ("GameController").GetComponent<loader>().loadScene(1);
 		}
 		else if(selectedbutton==1)
 		{
-			GameObject.Find ("GameController").GetComponent<loader>().loadScene(2);
 		}
 		else if(selectedbutton==2)
 		{
@@ -165,7 +166,7 @@ public class main_menu_script : MonoBehaviour {
 				}
 			}
 			if((Input.GetKeyDown(KeyCode.KeypadEnter))||(Input.GetKeyDown(KeyCode.Space))||(Input.GetKeyDown(KeyCode.Return))
-			   ||GameObject.Find ("GameController").GetComponent<player_controls>().anyButton(0, 1))
+			   ||GameObject.Find ("GameController").GetComponent<player_controls>().getButton(playerSelector, 0, 1))
 			{
 				enter ();
 			}
