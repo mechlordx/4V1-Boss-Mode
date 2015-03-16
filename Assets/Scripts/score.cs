@@ -31,7 +31,7 @@ public class score : MonoBehaviour {
 					           + " Player 3: " + scores[2]
 					           + " Player 4: " + scores[3]);
 					started = false;
-					GameObject.Find ("GameController").GetComponent<loader>().loadScene(0);
+					GameObject.Find ("GameController").GetComponent<loader>().loadScene(6);//changed from 0 to 6 for my score screen
 				}
 			}
 		}
