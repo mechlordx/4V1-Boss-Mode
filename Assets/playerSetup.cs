@@ -11,11 +11,17 @@ public class playerSetup : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		controlsRef = GameObject.Find ("Game Controller").GetComponent<player_controls> ();
+		DontDestroyOnLoad (gameObject);
+		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(!Application.isLoadingLevel && Application.loadedLevelName=="game_menu")
+		{
+			GameObject.Find ("menu object").GetComponent<game_menu_script>().playerSelector = readyMatrix;
+			Destroy (gameObject);
+		}
 		allReady = true;
 		readyPlayers = 0;
 		readyMatrix = new bool[4];
@@ -35,17 +41,18 @@ public class playerSetup : MonoBehaviour {
 
 		if(allReady && readyPlayers > 1)
 		{
-			readyBanner.GetComponent<Renderer>().enabled = true;
+			if(readyBanner!=null)
+				readyBanner.GetComponent<Renderer>().enabled = true;
 			for(int x=0;x<readyMatrix.Length;x++)
 			{
 				if(readyMatrix[x])
 				{
 					if(controlsRef.getButton(x, 0, 1))
-						GameObject.Find ("Game Controller").GetComponent<loader>().loadScene(3);
+						GameObject.Find ("GameController").GetComponent<loader>().loadScene(3);
 				}
 			}
 		}
-		else
+		else if(readyBanner!=null)
 			readyBanner.GetComponent<Renderer>().enabled = false;
 	}
 }

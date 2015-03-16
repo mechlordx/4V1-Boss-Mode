@@ -3,7 +3,7 @@ using System.Collections;
 
 public class game_menu_script : MonoBehaviour {
 
-	public int playerSelector = -1;
+	public bool[] playerSelector;
 	public bool debug = true;
 	public string[] debugloadlevels;
 	public bool wait = false;
@@ -166,7 +166,10 @@ public class game_menu_script : MonoBehaviour {
 				}
 			}
 			if((Input.GetKeyDown(KeyCode.KeypadEnter))||(Input.GetKeyDown(KeyCode.Space))||(Input.GetKeyDown(KeyCode.Return))
-			   ||GameObject.Find ("GameController").GetComponent<player_controls>().getButton(playerSelector, 0, 1))
+			   || (GameObject.Find ("GameController").GetComponent<player_controls>().getButton(0, 0, 1) && playerSelector[0])
+			   || (GameObject.Find ("GameController").GetComponent<player_controls>().getButton(1, 0, 1) && playerSelector[1])
+			   || (GameObject.Find ("GameController").GetComponent<player_controls>().getButton(2, 0, 1) && playerSelector[2])
+			   || (GameObject.Find ("GameController").GetComponent<player_controls>().getButton(3, 0, 1) && playerSelector[3]))
 			{
 				enter ();
 			}

@@ -45,11 +45,11 @@ public class playerReady : MonoBehaviour {
 		// Diplay icons
 		if(ready)
 		{
-			var newcolor = GetComponent<Renderer>().material.color;
+			var newcolor = icon.GetComponent<Renderer>().material.color;
 			newcolor.r = selectedcolor;
 			newcolor.g = selectedcolor;
 			newcolor.b = selectedcolor;
-			GetComponent<Renderer>().material.color = newcolor;
+			icon.GetComponent<Renderer>().material.color = newcolor;
 
 			if(readyUp)
 				settext ("Unready: B");
@@ -58,11 +58,11 @@ public class playerReady : MonoBehaviour {
 		}
 		else
 		{
-			var newcolor = GetComponent<Renderer>().material.color;
+			var newcolor = icon.GetComponent<Renderer>().material.color;
 			newcolor.r = deselectedcolor;
 			newcolor.g = deselectedcolor;
 			newcolor.b = deselectedcolor;
-			GetComponent<Renderer>().material.color = newcolor;
+			icon.GetComponent<Renderer>().material.color = newcolor;
 
 			settext ("Drop-In: Y");
 		}
