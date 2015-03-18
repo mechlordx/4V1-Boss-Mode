@@ -119,7 +119,8 @@ public class player_move : MonoBehaviour {
 
 		if(isgrounded)
 			jumping = false;
-		/*
+		/**
+//Old way of movement
 		float diff = Mathf.Abs (Mathf.DeltaAngle(transform.eulerAngles.y, desiredangle));
 		if(desiredangle!=-1)
 		{
@@ -129,19 +130,19 @@ public class player_move : MonoBehaviour {
 				                                         transform.eulerAngles.z);
 			else
 			{
-				bool turnRight = (((desiredangle - transform.eulerAngles.y) + 360f) % 360f) > 180.0f ? false : true;
+				bool turnRight = (((desiredangle) + 360f) % 360f) > 180.0f ? false : true;
 
 				if(turnRight)
 					transform.Rotate(new Vector3(0f, turnspeed, 0f));
 				else
 					transform.Rotate(new Vector3(0f, -turnspeed, 0f));
-				if(turnRight!=(((desiredangle - transform.eulerAngles.y) + 360f) % 360f) > 180.0f ? false : true)
+				if(turnRight!=(((desiredangle) + 360f) % 360f) > 180.0f ? false : true)
 					transform.eulerAngles = new Vector3(transform.eulerAngles.x,
 					                                         desiredangle,
 					                                         transform.eulerAngles.z);
 			}
 		}
-		float totalvelocity = Vector3.Magnitude(rigidbody.velocity-new Vector3(0f,rigidbody.velocity.y,0f))+0.07f*Vector3.Magnitude(new Vector3(hor, 0f, ver))
+		float totalvelocity = Vector3.Magnitude(GetComponent<Rigidbody>().velocity-new Vector3(0f,GetComponent<Rigidbody> ().velocity.y,0f))+0.07f*Vector3.Magnitude(new Vector3(hor, 0f, ver))
 			- maxspeed; // Built in variable for how much the joystick force counts as.
 		if((totalvelocity < 0
 		   && Vector3.Magnitude(new Vector3(hor, 0f, ver)) > deadzone) || nolimits)
@@ -161,13 +162,17 @@ public class player_move : MonoBehaviour {
 			if(wantedpower>maxpower)
 				wantedpower = maxpower;
 
-			rigidbody.AddForce(wantedpower * new Vector3(ver, 0f, hor));
+			GetComponent<Rigidbody>().AddForce(wantedpower * new Vector3(ver, 0f, hor));
 		}
-		a = Vector3.Magnitude (rigidbody.velocity);
-*/
+		a = Vector3.Magnitude (GetComponent<Rigidbody> ().velocity);
+/**/
+		/**/
+//rotate & move forward and back
 		transform.Rotate (new Vector3 (0f, (turnspeed/10) * controlsRef.getAnyAxis (playerNumber, true)));
 		if(GetComponent<Rigidbody>().velocity.magnitude < maxspeed)
 			transform.Translate(Vector3.forward * controlsRef.getAnyAxis(playerNumber,false) * maxspeed * Time.deltaTime);
+/**/
+
 
 		if(startjump && (ver != 0f || hor != 0f) && !punching)
 		{
