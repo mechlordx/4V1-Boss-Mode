@@ -34,7 +34,13 @@ public class set_controls : MonoBehaviour {
 					controlsref.setAxis(player, false);
 					display ("Player " + (player+1).ToString() + ": " + "\n" + "Tilt vertical joystick");
 				}
-				else if(currentcontrol==6)
+				else if(currentcontrol>5 && currentcontrol<10)
+				{
+					string dir = GameObject.Find ("GameController").GetComponent<player_controls>().directions[currentcontrol-6];
+					controlsref.setButton(player, (currentcontrol - 4 - 6));
+					display ("Player " + (player+1).ToString() + ": " + "\n" + "Press " + dir);
+				}
+				else if(currentcontrol==10)
 				{
 					currentcontrol = -1;
 					string[] buttons = controlsref.buttonNames;

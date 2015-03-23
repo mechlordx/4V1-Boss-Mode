@@ -13,7 +13,7 @@ public class player_controls : MonoBehaviour {
 	public string horizontalAxisName = "_X-Axis";
 	public string verticalAxisName = "_Y-Axis";
 	public float stickDeadZone = 0.25f;
-	string[] directions = {"Up", "Right", "Down", "Left"};
+	public string[] directions = {"Up", "Right", "Down", "Left"};
 
 	int buttonsPerPlayer;
 	int axesPerPlayer = 2;
@@ -32,6 +32,11 @@ public class player_controls : MonoBehaviour {
 	int waitingarrayindex;
 
 	int delay = 0;
+
+	string[] keyboardKeys = {"a", "b", "c", "d" , "e", "f", "g", "h", "i", "j",
+		"k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+		"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "up", "right", "down", "left",
+		"[", "]", ";", "'", ",", ".", "/", "=", "-"};
 
 	// Use this for initialization
 	void Awake () {
@@ -64,7 +69,7 @@ public class player_controls : MonoBehaviour {
 		{
 			for(int joystick=1;joystick<5;joystick++)
 			{
-				if(Input.GetKey(KeyCode.Escape))
+				if(Input.GetKeyDown(KeyCode.Escape))
 				{
 					waitingforaxis = false;
 					break;
@@ -88,7 +93,7 @@ public class player_controls : MonoBehaviour {
 		{
 			for(int joystick=1;joystick<6;joystick++)
 			{
-				if(Input.GetKey(KeyCode.Escape))
+				if(Input.GetKeyDown(KeyCode.Escape))
 				{
 					waitingforbutton = false;
 					break;
@@ -105,6 +110,18 @@ public class player_controls : MonoBehaviour {
 				}
 				if(!waitingforbutton)
 					break;
+			}
+			if(waitingforbutton)
+			{
+				foreach(string possibleKey in keyboardKeys)
+				{
+					if(Input.GetKeyDown(possibleKey))
+					{
+						buttonNames[waitingarrayindex] = possibleKey;
+						waitingforbutton = false;
+						break;
+					}
+				}
 			}
 		}
 		if(keepDebugSettings)
