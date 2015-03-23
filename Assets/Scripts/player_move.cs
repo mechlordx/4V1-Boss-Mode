@@ -4,6 +4,7 @@ using System.Collections;
 public class player_move : MonoBehaviour {
 
 	public int playerNumber = 0;
+	public GameObject theCamera;
 	bool nolimits = false;
 	public float maxspeed = 10f;
 	public float areaslowed = 6f;
@@ -90,6 +91,13 @@ public class player_move : MonoBehaviour {
 		if(controlsRef.getButton(playerNumber, 1, 1))
 			startPunch = true;
 
+		if(desiredangle!=-1f)
+		{
+			desiredangle += theCamera.transform.eulerAngles.y;
+			if(desiredangle<0f)
+				desiredangle += 360f;
+		}
+
 		if (stun && Timer > 0f){
 			Timer -= Time.deltaTime;
 			maxspeed = 0;
@@ -119,7 +127,7 @@ public class player_move : MonoBehaviour {
 
 		if(isgrounded)
 			jumping = false;
-		/**
+
 //Old way of movement
 		float diff = Mathf.Abs (Mathf.DeltaAngle(transform.eulerAngles.y, desiredangle));
 		if(desiredangle!=-1)
@@ -145,7 +153,7 @@ public class player_move : MonoBehaviour {
 		float totalvelocity = Vector3.Magnitude(GetComponent<Rigidbody>().velocity-new Vector3(0f,GetComponent<Rigidbody> ().velocity.y,0f))+0.07f*Vector3.Magnitude(new Vector3(hor, 0f, ver))
 			- maxspeed; // Built in variable for how much the joystick force counts as.
 		if((totalvelocity < 0
-		   && Vector3.Magnitude(new Vector3(hor, 0f, ver)) > deadzone) || nolimits)
+		   && desiredangle!=-1f) || nolimits)
 		{
 			float maxpower = 0f;
 			if(diff<90f)
@@ -162,16 +170,20 @@ public class player_move : MonoBehaviour {
 			if(wantedpower>maxpower)
 				wantedpower = maxpower;
 
-			GetComponent<Rigidbody>().AddForce(wantedpower * new Vector3(ver, 0f, hor));
+			GetComponent<Rigidbody>().AddForce(wantedpower * 
+			                                   new Vector3(
+				Mathf.Sin (desiredangle * Mathf.Deg2Rad),
+				0f,
+				Mathf.Cos (desiredangle * Mathf.Deg2Rad)));
 		}
 		a = Vector3.Magnitude (GetComponent<Rigidbody> ().velocity);
-/**/
 		/**/
 //rotate & move forward and back
-		transform.Rotate (new Vector3 (0f, (turnspeed/10) * controlsRef.getAnyAxis (playerNumber, true)));
+		/*transform.Rotate (new Vector3 (0f, (turnspeed/10) * controlsRef.getAnyAxis (playerNumber, true)));
 		if(GetComponent<Rigidbody>().velocity.magnitude < maxspeed)
 			transform.Translate(Vector3.forward * controlsRef.getAnyAxis(playerNumber,false) * maxspeed * Time.deltaTime);
-/**/
+		*/
+		/**/
 
 
 		if(startjump && (ver != 0f || hor != 0f) && !punching)

@@ -17,6 +17,9 @@ public class cheatCode : MonoBehaviour {
 			currentCode = "";
 		currentCode += Input.inputString;
 		if(currentCode==code)
+		{
 			GetComponent<loader>().loadScene(1);
+			currentCode = "no";
+		}
 	}
 }
