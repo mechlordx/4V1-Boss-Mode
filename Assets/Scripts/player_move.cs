@@ -62,6 +62,11 @@ public class player_move : MonoBehaviour {
 	void Awake () {
 		spawnpoint = transform.position;
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
+		if(!GameObject.Find ("GameController").GetComponent<readyMatrix>().readyMat[playerNumber])
+		{
+			GameObject.Destroy(theCamera, 0f);
+			GameObject.Destroy(gameObject, 0f);
+		}
 	}
 
 	void Update() {
@@ -138,7 +143,7 @@ public class player_move : MonoBehaviour {
 				                                         transform.eulerAngles.z);
 			else
 			{
-				bool turnRight = (((desiredangle) + 360f) % 360f) > 180.0f ? false : true;
+				bool turnRight = (((desiredangle) + 360f) % 360f) < 180.0f ? false : true;
 
 				if(turnRight)
 					transform.Rotate(new Vector3(0f, turnspeed, 0f));
