@@ -8,6 +8,7 @@ public class ladder : MonoBehaviour {
 	public float heightlimit;
 	public bool locked = false;
 	GameObject thrower;
+	GameObject attachedCamera;
 	int throwtimer = 0;
 	int maxthrowtimer = 60;
 	float drag;
