@@ -28,7 +28,7 @@ public class cameraFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-
+		//If not the boss follow the player, if is boss become a child to the playerfor ease of following
 		if(CP.attachedPlayer == null || CP.attachedPlayer != playerFollow){
 			if(CP.attachedPlayer == null ||(playerFollow.transform.position.x != CP.attachedPlayer.transform.position.x && playerFollow.transform.position.z != CP.attachedPlayer.transform.position.z)){
 				if(transform.parent != null)
@@ -50,14 +50,28 @@ public class cameraFollow : MonoBehaviour {
 		/**/
 		else{
 
-
 			if(transform.parent == null){
 				transform.parent = playerFollow.transform;
-				transform.position = new Vector3(0, 15, -10);
-				transform.rotation = Quaternion.Euler(45, 0, 0);
+				transform.position = new Vector3(playerFollow.transform.position.x, playerFollow.transform.position.y + 15,playerFollow.transform.position.z -10);
+				//transform.rotation = Quaternion.Euler(45, 0, 0);
+				//transform.rotation = Quaternion.Euler(playerFollow.transform.rotation.x + 45, playerFollow.transform.rotation.y,playerFollow.transform.rotation.z);
 			}
 
+			if(CP.camReset){
+				//transform.parent = playerFollow.transform;
+				//transform.position = new Vector3(0, 15, -10);
+				CP.camReset = false;
+			}
 
+			if(transform.rotation.eulerAngles.x <= 44 || transform.rotation.x >= 46)
+				transform.rotation = Quaternion.Euler(45,(Mathf.Abs(GameObject.Find("Boss").transform.rotation.y)),transform.rotation.eulerAngles.z);
+			/*
+			if((transform.rotation.eulerAngles.y <= 359 && transform.rotation.y >= 1) || transform.rotation.eulerAngles.y <= -1)
+				transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0,transform.rotation.eulerAngles.z);
+			if((transform.rotation.eulerAngles.z <= 359 && transform.rotation.z >= 1) || transform.rotation.eulerAngles.z <= -1)
+				transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y,0);
+				*/
+				
 		}
 		/**/
 	}

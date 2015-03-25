@@ -7,6 +7,7 @@ public class newcockpit : MonoBehaviour {
 	public float jumpInHeight;
 	public float cockpitheight;
 	public bool locked = false;
+	public bool camReset = false;
 	public float[] brawlHealth;
 	public float startBrawlHealth = 10f;
 	public float maxBrawlHealth = 15f;
@@ -90,6 +91,7 @@ public class newcockpit : MonoBehaviour {
 	{
 		if(attachedPlayer==null)
 		{
+			camReset = true;
 			GameObject.Find("Boss").GetComponent<boss_control>().resetTurns();
 			attachedPlayer = newplayer;
 			attachedPlayer.SetActive(true);
@@ -125,6 +127,7 @@ public class newcockpit : MonoBehaviour {
 			bossCam.transform.position -= new Vector3(0,2,0);
 			bossCam.transform.rotation = Quaternion.Euler (15,0,0);
 			attachedPlayer = null;
+			GameObject.Find("Boss").transform.rotation = Quaternion.identity;
 		}
 	}
 	
