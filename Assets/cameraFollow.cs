@@ -52,7 +52,7 @@ public class cameraFollow : MonoBehaviour {
 
 			if(transform.parent == null){
 				transform.parent = playerFollow.transform;
-				transform.position = new Vector3(playerFollow.transform.position.x, playerFollow.transform.position.y + 15,playerFollow.transform.position.z -10);
+				transform.localPosition = new Vector3(0, 15, -10);
 				//transform.rotation = Quaternion.Euler(45, 0, 0);
 				//transform.rotation = Quaternion.Euler(playerFollow.transform.rotation.x + 45, playerFollow.transform.rotation.y,playerFollow.transform.rotation.z);
 			}
@@ -64,7 +64,7 @@ public class cameraFollow : MonoBehaviour {
 			}
 
 			if(transform.rotation.eulerAngles.x <= 44 || transform.rotation.x >= 46)
-				transform.rotation = Quaternion.Euler(45,(Mathf.Abs(GameObject.Find("Boss").transform.rotation.y)),transform.rotation.eulerAngles.z);
+				transform.localRotation = Quaternion.Euler(45,0,0);
 			/*
 			if((transform.rotation.eulerAngles.y <= 359 && transform.rotation.y >= 1) || transform.rotation.eulerAngles.y <= -1)
 				transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0,transform.rotation.eulerAngles.z);
