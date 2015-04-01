@@ -100,7 +100,7 @@ public class player_move : MonoBehaviour {
 		if(controlsRef.getButton(playerNumber, 1, 1))
 			startPunch = true;
 
-		if(desiredangle!=-1f && !boosting)
+		if(desiredangle!=-1f && !boosting && !punching)
 		{
 			desiredangle += theCamera.transform.eulerAngles.y;
 			if(desiredangle<0f)
