@@ -76,4 +76,9 @@ public class boss_control : MonoBehaviour {
 		turnspeed = internalTurnSpeed;
 		turnbuffer = internalTurnBuffer;
 	}
+
+	public void applyDebuff(int type)
+	{
+
+	}
 }

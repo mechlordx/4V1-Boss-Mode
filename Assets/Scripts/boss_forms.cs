@@ -46,7 +46,11 @@ public class boss_forms : MonoBehaviour {
 			for(int x=0;x<4;x++)
 			{
 				if(controlsRef.getButton(playerNumber, x, 1))
-					choose(currentchoices[x]);
+				{
+					if(GameObject.Find ("Player" + (playerNumber+1).ToString())
+					   .GetComponent<player_move>().containsPickup(x))
+						choose(currentchoices[x]);
+				}
 			}
 		}
 		else if(timer>0f)
@@ -54,7 +58,7 @@ public class boss_forms : MonoBehaviour {
 			if(choice==-1)
 			{
 				// Choose first option
-				choose(Random.Range (3, 7));
+				choose(1);
 			}
 		}
 

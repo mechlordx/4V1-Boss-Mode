@@ -23,8 +23,8 @@ public class Pickup_Controller : MonoBehaviour {
 			gameObject.GetComponent<Renderer>().material.color = Color.red;
 		if(PickupType == 2)
 			gameObject.GetComponent<Renderer>().material.color = Color.black;
-		if(PickupType == 1)
-			gameObject.GetComponent<Renderer>().material.color = Color.red;
+		if(PickupType == 3)
+			gameObject.GetComponent<Renderer>().material.color = Color.blue;
 	}
 	
 	// Update is called once per frame
@@ -36,6 +36,10 @@ public class Pickup_Controller : MonoBehaviour {
 		if(col.gameObject.tag == "Player"){
 			PM = col.GetComponent<player_move>();
 			PM.curPickups.Add(PickupType);
+			boss_control BC = BF.gameObject.GetComponent<boss_control>();
+
+			BC.applyDebuff(PickupType);
+
 			Destroy(gameObject);
 		}
 	}

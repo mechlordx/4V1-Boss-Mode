@@ -99,7 +99,7 @@ public class player_move : MonoBehaviour {
 		if(controlsRef.getButton(playerNumber, 1, 1))
 			startPunch = true;
 
-		if(desiredangle!=-1f)
+		if(desiredangle!=-1f && !boosting)
 		{
 			desiredangle += theCamera.transform.eulerAngles.y;
 			if(desiredangle<0f)
@@ -417,5 +417,19 @@ public class player_move : MonoBehaviour {
 		{	
 			GetComponent<player_move>().enabled = true;
 		}
+	}
+
+	public bool containsPickup(int x)
+	{
+		bool toReturn = false;
+		foreach(int a in curPickups)
+		{
+			if(a==x)
+			{
+				toReturn = true;
+				break;
+			}
+		}
+		return toReturn;
 	}
 }
