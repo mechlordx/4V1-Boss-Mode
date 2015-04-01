@@ -172,9 +172,12 @@ public class newcockpit : MonoBehaviour {
 		int number = attachedPlayer.GetComponent<player_move> ().playerNumber;
 		foreach(GameObject player in players)
 		{
-			player.GetComponent<player_move>().deactivate(number);
-			player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-			player.SetActive(true);
+			if(player!=null)
+			{
+				player.GetComponent<player_move>().deactivate(number);
+				player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+				player.SetActive(true);
+			}
 		}
 		transform.parent.gameObject.GetComponent<boss_control> ().enabled = true;
 		transform.parent.gameObject.GetComponent<boss_control>().playerNumber = number;

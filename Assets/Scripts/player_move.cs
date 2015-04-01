@@ -65,7 +65,8 @@ public class player_move : MonoBehaviour {
 	void Awake () {
 		spawnpoint = transform.position;
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
-		if(!GameObject.Find ("GameController").GetComponent<readyMatrix>().readyMat[playerNumber])
+		if(!GameObject.Find ("GameController").GetComponent<readyMatrix>().readyMat[playerNumber]
+		   && !GameObject.Find ("GameController").GetComponent<cheatCode>().activated)
 		{
 			GameObject.Destroy(theCamera, 0f);
 			GameObject.Destroy(gameObject, 0f);
