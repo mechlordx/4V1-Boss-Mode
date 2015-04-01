@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class player_move : MonoBehaviour {
 
 	public int playerNumber = 0;
@@ -54,6 +54,9 @@ public class player_move : MonoBehaviour {
 	public bool stun = false;
 	int currentjumptimer = 0;
 
+
+	public bool hasPickup = false;
+	public List<int> curPickups = new List<int>();
 	// Must make so that you can still add force in the opposite direction when 
 	// over the maxspeed
 	// Make different forces for different level of maxspeed
@@ -286,9 +289,18 @@ public class player_move : MonoBehaviour {
 
 			foreach(Collider hit in hitColliders)
 			{
+
 				if(hit.gameObject.GetComponent<player_move>())
 				{
-					hitCounts[hit.gameObject.GetComponent<player_move>().playerNumber] += 1;
+					player_move hitMove = hit.gameObject.GetComponent<player_move>();
+					hitCounts[hitMove.playerNumber] += 1;
+					//Drops the first pickup that was picked up if the player is punched
+					if(hitMove.curPickups.Count > 0)
+					{
+						GameObject temp = (GameObject)Instantiate (Resources.Load("Prefabs/Pickup " + hitMove.curPickups[0]));
+						temp.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 5, hit.transform.position.z);
+						hitMove.curPickups.Remove(0);
+					}
 				}
 			}
 

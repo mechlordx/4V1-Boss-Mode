@@ -38,6 +38,7 @@ public class player_controls : MonoBehaviour {
 		"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "up", "right", "down", "left",
 		"[", "]", ";", "'", ",", ".", "/", "=", "-"};
 
+
 	// Use this for initialization
 	void Awake () {
 		Application.targetFrameRate = 60;
