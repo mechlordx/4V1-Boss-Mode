@@ -7,6 +7,9 @@ public class boss_control : MonoBehaviour {
 	public float turnspeed = 17f;
 	public float turnbuffer = 9f;
 	public bool disableTurn = false;
+	public float cooldownFactor = 1f;
+	public float projectileFactor = 1f;
+	public float forceFactor = 1f;
 	float desiredangle = 0f;
 	float deadzone = 0.3f;
 	float hor = 0f;
@@ -75,10 +78,29 @@ public class boss_control : MonoBehaviour {
 	{
 		turnspeed = internalTurnSpeed;
 		turnbuffer = internalTurnBuffer;
+		projectileFactor = 1f;
+		forceFactor = 1f;
+		cooldownFactor = 1f;
 	}
 
 	public void applyDebuff(int type)
 	{
-
+		if(type==0)
+		{
+			turnspeed = turnspeed*0.9f;
+			turnbuffer = turnbuffer*0.9f;
+		}
+		else if(type==1)
+		{
+			cooldownFactor = cooldownFactor*0.9f;
+		}
+		else if(type==2)
+		{
+			projectileFactor = projectileFactor*0.9f;
+		}
+		else if(type==3)
+		{
+			forceFactor = forceFactor*0.89f;
+		}
 	}
 }

@@ -7,8 +7,10 @@ public class zapbullet : MonoBehaviour {
 	public float speed = 40f;
 
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+		boss_control bossRef = GameObject.Find ("Boss").GetComponent<boss_control> ();
+		force = force * bossRef.forceFactor;
+		speed = speed * bossRef.projectileFactor;
 	}
 	
 	// Update is called once per frame

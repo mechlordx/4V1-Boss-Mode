@@ -8,6 +8,9 @@ public class bullet : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		Destroy (gameObject, 10f);
+		boss_control bossRef = GameObject.Find ("Boss").GetComponent<boss_control> ();
+		force = force * bossRef.forceFactor;
+		speed = speed * bossRef.projectileFactor;
 	}
 	
 	// Update is called once per frame

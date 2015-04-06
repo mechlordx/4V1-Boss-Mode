@@ -67,12 +67,12 @@ public class Boss4 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		float timeFactor = transform.parent.gameObject.GetComponent<boss_control> ().cooldownFactor;
 		if(playerNumber == -1)
 			playerNumber = transform.parent.GetComponent<boss_control> ().playerNumber;
-		cooldown += -Time.deltaTime;
+		cooldown += -(Time.deltaTime*timeFactor);
 
-		AOEcooldown -= Time.deltaTime;
+		AOEcooldown -= (Time.deltaTime*timeFactor);
 
 		//getbutton states 1 = down, -1 = up, 0 = getkey
 		 

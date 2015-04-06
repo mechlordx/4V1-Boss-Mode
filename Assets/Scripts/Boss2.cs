@@ -18,9 +18,10 @@ public class Boss2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		float timeFactor = transform.parent.gameObject.GetComponent<boss_control> ().cooldownFactor;
 		if(playerNumber == -1)
 			playerNumber = transform.parent.GetComponent<boss_control> ().playerNumber;
-		cooldown += -Time.deltaTime;
+		cooldown += -(Time.deltaTime*timeFactor);
 		
 		if(controlsRef.getButton(playerNumber, 0))
 		{
