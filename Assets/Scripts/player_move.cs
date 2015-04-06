@@ -54,7 +54,7 @@ public class player_move : MonoBehaviour {
 	public bool stun = false;
 	int currentjumptimer = 0;
 
-
+	
 	public bool hasPickup = false;
 	public List<int> curPickups = new List<int>();
 	// Must make so that you can still add force in the opposite direction when 
@@ -63,6 +63,7 @@ public class player_move : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+
 		spawnpoint = transform.position;
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 		if(!GameObject.Find ("GameController").GetComponent<readyMatrix>().readyMat[playerNumber]
@@ -74,8 +75,10 @@ public class player_move : MonoBehaviour {
 	}
 
 	void Update() {
-		if(transform.position.y<-10f)
+		if(transform.position.y<-10f){
 			transform.position = spawnpoint;
+			curPickups.Clear();
+		}
 		if(!boosting&&!punching)
 		{
 			hor = controlsRef.getAnyAxis (playerNumber, false);
@@ -290,17 +293,20 @@ public class player_move : MonoBehaviour {
 
 			foreach(Collider hit in hitColliders)
 			{
-
-				if(hit.gameObject.GetComponent<player_move>())
+				player_move hitMove = hit.gameObject.GetComponent<player_move>();
+				if(hit.gameObject.GetComponent<player_move>() && hitMove.playerNumber != playerNumber)
 				{
-					player_move hitMove = hit.gameObject.GetComponent<player_move>();
+
 					hitCounts[hitMove.playerNumber] += 1;
 					//Drops the first pickup that was picked up if the player is punched
 					if(hitMove.curPickups.Count > 0)
 					{
 						GameObject temp = (GameObject)Instantiate (Resources.Load("Prefabs/Pickup " + hitMove.curPickups[0]));
-						temp.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 5, hit.transform.position.z);
-						hitMove.curPickups.Remove(0);
+						temp.GetComponent<Pickup_Controller>().canPickup = false;
+						temp.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 0.5f, hit.transform.position.z);
+						print ("Player " + hitMove.playerNumber + " pickup count: " + curPickups.Count + " predrop");
+						hitMove.curPickups.RemoveAt(0);
+						print ("Player " + hitMove.playerNumber + " pickup count: " + curPickups.Count+ " postdrop");
 					}
 				}
 			}

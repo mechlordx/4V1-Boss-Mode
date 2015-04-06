@@ -17,14 +17,21 @@ public class Pickup_Dropper : MonoBehaviour {
 	void Update () {
 		if(timer <= 0)
 			{
-				Pos = new Vector3(Random.Range(-14,14), 1, Random.Range(-14,14));
-				
-			if((Mathf.Abs(Vector3.Distance(Pos,GameObject.Find ("Player1").transform.position))<=5) ||(Mathf.Abs(Vector3.Distance(Pos,GameObject.Find ("Player2").transform.position))<=5) ||(Mathf.Abs(Vector3.Distance(Pos,GameObject.Find ("Player3").transform.position))<=5) ||(Mathf.Abs(Vector3.Distance(Pos,GameObject.Find ("Player4").transform.position))<=5) || (Mathf.Abs(Vector3.Distance(Pos,GameObject.Find ("Boss").transform.position))<=5))
-				return;
+				Pos = new Vector3(Random.Range(-14,14), 0.5f, Random.Range(-14,14));
 
+				foreach(GameObject players in GameObject.FindGameObjectsWithTag("Player"))
+				{
+					if((Mathf.Abs(Vector3.Distance(Pos,players.transform.position))<=5))
+				 	  return;
+				}
+				if(Mathf.Abs(Vector3.Distance(Pos,GameObject.Find ("Boss").transform.position))<=5)
+					return;
+				
 				PickupType = Random.Range(1,5);
 				GameObject temp = (GameObject)Instantiate(Resources.Load ("Prefabs/Pickup " + PickupType));
-				
+				temp.GetComponent<Pickup_Controller>().PickupType = PickupType;
+				temp.transform.position = Pos;
+
 				timer = Random.Range (5, 30);
 			}
 		else
