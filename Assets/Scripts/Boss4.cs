@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 public class Boss4 : MonoBehaviour {
+	public AudioSource AS;
+
 	int iter = 0;
 	public int playerNumber = -1;
 	string pNo;
@@ -35,6 +37,7 @@ public class Boss4 : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		AS = GameObject.Find ("GameController").GetComponent<AudioSource> ();
 		transperency.a = 0.5f;
 		opaque.a = 0.2f;
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
@@ -80,7 +83,7 @@ public class Boss4 : MonoBehaviour {
 		{
 			if(cooldown<0f)
 			{
-
+				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
 				cooldown = maxcooldown;
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
@@ -118,6 +121,7 @@ public class Boss4 : MonoBehaviour {
 	
 		else if(controlsRef.getButton(playerNumber, 1, -1)){
 			if(AOEcooldown<0f){
+				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[10], 1f);
 				GameObject.Instantiate(slowAoe, a.transform.position, Quaternion.identity);
 				Destroy(a);
 				AOEcooldown = AOEmaxcooldown;
@@ -127,6 +131,7 @@ public class Boss4 : MonoBehaviour {
 		{
 			if(cooldown<0f)
 			{
+				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[5], 1f);
 				cooldown = maxcooldown;
 				GameObject a = (GameObject) GameObject.Instantiate(scythe, transform.position, Quaternion.identity);
 				a.transform.parent = transform;

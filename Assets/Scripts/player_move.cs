@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 public class player_move : MonoBehaviour {
+	public AudioSource AS;
 
 	public int playerNumber = 0;
 	public GameObject theCamera;
@@ -64,6 +65,7 @@ public class player_move : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 
+		AS = GameObject.Find ("GameController").GetComponent<AudioSource> ();
 		spawnpoint = transform.position;
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 		if(!GameObject.Find ("GameController").GetComponent<readyMatrix>().readyMat[playerNumber]
@@ -280,6 +282,7 @@ public class player_move : MonoBehaviour {
 
 	void throwPunch(int myPlayerNumber)
 	{
+		AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[1], 1f);
 		int[] hitCounts = new int[4];
 		for(int x=0;x<4;x++)
 			hitCounts[x] = 0;

@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class boss5 : MonoBehaviour {
-	
+	public AudioSource AS;
+
 	public int playerNumber = -1;
 	player_controls controlsRef;
 	float cooldown = 0f;
@@ -18,6 +19,7 @@ public class boss5 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		AS = GameObject.Find ("GameController").GetComponent<AudioSource> ();
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 		bullet = (GameObject)Resources.Load ("Prefabs/forcebullet");
 		laserBullet = (GameObject)Resources.Load ("Prefabs/laserbullet");
@@ -37,6 +39,7 @@ public class boss5 : MonoBehaviour {
 			laserCooldown += -(Time.deltaTime*timeFactor);
 			if(cooldown<0f && controlsRef.getButton(playerNumber, 0))
 			{
+				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[4], 1f);
 				cooldown = maxcooldown;
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
@@ -46,6 +49,7 @@ public class boss5 : MonoBehaviour {
 			}
 			else if(cooldown<0f && controlsRef.getButton(playerNumber, 1))
 			{
+				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
 				cooldown = gatlingCooldown;
 				GameObject a = (GameObject) GameObject.Instantiate(laserBullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
@@ -55,6 +59,7 @@ public class boss5 : MonoBehaviour {
 			}
 			else if(laserCooldown<0f && controlsRef.getButton(playerNumber, 2))
 			{
+				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[2], 1f);
 				state = 1;
 				GameObject.Find ("Boss").GetComponent<boss_control>().disableTurn = true;
 				laserCooldown = maxLaserCooldown;

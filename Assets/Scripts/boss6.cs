@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class boss6 : MonoBehaviour {
-	
+	public AudioSource AS;
+
 	public int playerNumber = -1;
 	player_controls controlsRef;
 	float cooldown = 0f;
@@ -20,6 +21,7 @@ public class boss6 : MonoBehaviour {
 	GameObject zapbullet;
 	// Use this for initialization
 	void Start () {
+		AS = GameObject.Find ("GameController").GetComponent<AudioSource> ();
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 		bullet = (GameObject)Resources.Load ("Prefabs/forcebullet");
 		zapbullet = (GameObject)Resources.Load ("Prefabs/zapbullet");
@@ -39,6 +41,7 @@ public class boss6 : MonoBehaviour {
 			{
 				if(cooldown<0f)
 				{
+					AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
 					cooldown = maxcooldown;
 					GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 					a.transform.parent = transform;
@@ -51,6 +54,7 @@ public class boss6 : MonoBehaviour {
 			{
 				if(zapCooldown<0f)
 				{
+					AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[6], 1f);
 					if(GameObject.Find ("electriccharge(Clone)"))
 						Destroy (GameObject.Find ("electriccharge(Clone)"), 0f);
 					zapCooldown = maxZapCooldown;
