@@ -14,4 +14,15 @@ public class readyMatrix : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public int playerCount()
+	{
+		int a = 0;
+		for(int x=0;x<readyMat.Length;x++)
+		{
+			if(readyMat[x])
+				a+=1;
+		}
+		return a;
+	}
 }

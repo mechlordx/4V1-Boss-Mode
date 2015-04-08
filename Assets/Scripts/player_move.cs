@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 public class player_move : MonoBehaviour {
@@ -61,9 +61,27 @@ public class player_move : MonoBehaviour {
 	// Must make so that you can still add force in the opposite direction when 
 	// over the maxspeed
 	// Make different forces for different level of maxspeed
-
+	public GameObject[] arrows;
 	// Use this for initialization
 	void Awake () {
+		int playerCount = GameObject.Find ("GameController").GetComponent<readyMatrix> ().playerCount ();
+		arrows = new GameObject[playerCount - 1];
+		int count = 0;
+		GameObject arrowRef = (GameObject) Resources.Load ("Prefabs/playerArrow");
+		foreach(GameObject a in GameObject.FindGameObjectsWithTag("Player"))
+		{
+			if((a.name!=name)&&(a.name.Contains("Player"))&&(count<arrows.Length))
+			{
+				if(GameObject.Find ("GameController").GetComponent<readyMatrix>().readyMat[a.GetComponent<player_move>().playerNumber])
+				{
+					arrows[count] = (GameObject) GameObject.Instantiate(arrowRef, transform.position, Quaternion.identity);
+					arrows[count].transform.parent = transform;
+					arrows[count].transform.localPosition = Vector3.zero;
+					arrows[count].GetComponent<playerPointer>().otherPlayer = a;
+					count++;
+				}
+			}
+		}
 
 		AS = GameObject.Find ("GameController").GetComponent<AudioSource> ();
 		spawnpoint = transform.position;
