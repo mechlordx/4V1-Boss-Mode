@@ -33,25 +33,25 @@ public class cameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(controlsRef.getButton(playerNumber, 3, 1))
-		{
-			setPositionBasedOn(playerFollow.transform.position + playerFollow.transform.forward*10f);
-			desiredRelPos = transform.position - playerFollow.transform.position;
-			mode = 1;
-		}
-		if(controlsRef.getButton(playerNumber, 2, 1))
-		{
-			if(mode==0)
-			{
-				mode = 1;
-				desiredRelPos = transform.position - playerFollow.transform.position;
-			}
-			else if(mode==1)
-				mode = 0;
-		}
 		//If not the boss follow the player, if is boss become a child to the playerfor ease of following
 		if(CP.attachedPlayer == null || CP.attachedPlayer != playerFollow){
 			if(CP.attachedPlayer == null ||(playerFollow.transform.position.x != CP.attachedPlayer.transform.position.x && playerFollow.transform.position.z != CP.attachedPlayer.transform.position.z)){
+				if(controlsRef.getButton(playerNumber, 3, 1))
+				{
+					setPositionBasedOn(playerFollow.transform.position + playerFollow.transform.forward*10f);
+					desiredRelPos = transform.position - playerFollow.transform.position;
+					mode = 1;
+				}
+				if(controlsRef.getButton(playerNumber, 2, 1))
+				{
+					if(mode==0)
+					{
+						mode = 1;
+						desiredRelPos = transform.position - playerFollow.transform.position;
+					}
+					else if(mode==1)
+						mode = 0;
+				}
 				if(transform.parent != null)
 					transform.parent = null;
 				if(mode==0)
