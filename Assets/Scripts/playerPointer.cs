@@ -33,7 +33,7 @@ public class playerPointer : MonoBehaviour {
 			if(bossPlayer.GetComponent<player_move>().playerNumber==myPlayer)
 				newAlpha = 0f;
 		}
-		Debug.Log (newAlpha);
+		//Debug.Log (newAlpha);
 		Renderer[] children = GetComponentsInChildren<Renderer>();
 		foreach(Renderer child in children)
 		{
