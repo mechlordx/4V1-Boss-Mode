@@ -7,10 +7,12 @@ public class boss5 : MonoBehaviour {
 	public int playerNumber = -1;
 	player_controls controlsRef;
 	float cooldown = 0f;
-	float maxcooldown = 0.6f;
-	float gatlingCooldown = 0.2f;
-	float laserCooldown = 0f;
-	float maxLaserCooldown = 3f;
+	float maxcooldown = 0.6f; // cooldown stat
+	float cooldown2 = 0f;
+	float maxcooldown2 = 0.2f; // cooldown stat
+	float cooldown3 = 0f;
+	float maxcooldown3 = 3f; // cooldown stat
+	float internalCooldown = 0f;
 	int state = 0;
 
 	GameObject bullet;
@@ -33,36 +35,41 @@ public class boss5 : MonoBehaviour {
 		if(playerNumber == -1)
 			playerNumber = transform.parent.GetComponent<boss_control> ().playerNumber;
 		cooldown += -(Time.deltaTime*timeFactor);
+		cooldown2 += -(Time.deltaTime * timeFactor);
+		cooldown3 += -(Time.deltaTime * timeFactor);
 
 		if(state==0) // Normal
 		{
-			laserCooldown += -(Time.deltaTime*timeFactor);
+			cooldown3 += -(Time.deltaTime*timeFactor);
 			if(cooldown<0f && controlsRef.getButton(playerNumber, 0))
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[4], 1f);
 				cooldown = maxcooldown;
+				internalCooldown = 0.35f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 				a.transform.parent = null;
 			}
-			else if(cooldown<0f && controlsRef.getButton(playerNumber, 1))
+			else if(cooldown2<0f && controlsRef.getButton(playerNumber, 1) && internalCooldown<0f)
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
-				cooldown = gatlingCooldown;
+				cooldown2 = maxcooldown2;
+				internalCooldown = 0.35f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(laserBullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 				a.transform.parent = null;
 			}
-			else if(laserCooldown<0f && controlsRef.getButton(playerNumber, 2))
+			else if(cooldown3<0f && controlsRef.getButton(playerNumber, 2) && internalCooldown<0f)
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[2], 1f);
 				state = 1;
 				GameObject.Find ("Boss").GetComponent<boss_control>().disableTurn = true;
-				laserCooldown = maxLaserCooldown;
+				cooldown3 = maxcooldown3;
+				internalCooldown = 0.35f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(skylasercross, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);

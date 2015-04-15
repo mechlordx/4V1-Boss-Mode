@@ -9,9 +9,12 @@ public class Boss4 : MonoBehaviour {
 	string pNo;
 	player_controls controlsRef;
 	float cooldown = 0f;
-	float maxcooldown = 0.6f;
+	float maxcooldown = 0.6f; // cooldown stat
 	float AOEcooldown = 0f;
-	float AOEmaxcooldown = 10f;
+	float AOEmaxcooldown = 10f; // cooldown stat
+	float cooldown2 = 0f;
+	float maxcooldown2 = 0.6f; // cooldown stat
+	float internalCooldown = 0f;
 	float tempVec;
 
 	GameObject bullet;
@@ -74,17 +77,18 @@ public class Boss4 : MonoBehaviour {
 		if(playerNumber == -1)
 			playerNumber = transform.parent.GetComponent<boss_control> ().playerNumber;
 		cooldown += -(Time.deltaTime*timeFactor);
-
+		cooldown2 += -(Time.deltaTime * timeFactor);
 		AOEcooldown -= (Time.deltaTime*timeFactor);
 
 		//getbutton states 1 = down, -1 = up, 0 = getkey
 		 
 		if(controlsRef.getButton(playerNumber, 0))
 		{
-			if(cooldown<0f)
+			if(cooldown<0f && internalCooldown<0f)
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
 				cooldown = maxcooldown;
+				internalCooldown = 0.35f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
@@ -99,7 +103,7 @@ public class Boss4 : MonoBehaviour {
 		else if(controlsRef.getButton(playerNumber, 1 , 0))
 		{
 			if(a == null){
-				if(AOEcooldown<0f){
+				if(AOEcooldown<0f && internalCooldown<0f){
 					a = (GameObject) GameObject.Instantiate(AoeGhost, transform.position, transform.rotation);
 					a.transform.position = new Vector3(transform.position.x,0.5f, transform.position.z);
 					//a.renderer.material.color = transperency;
@@ -110,7 +114,7 @@ public class Boss4 : MonoBehaviour {
 			}
 
 			else{
-				if(AOEcooldown<0f){
+				if(AOEcooldown<0f && internalCooldown<0f){
 					a.transform.position = new Vector3(a.transform.position.x, 0.5f, a.transform.position.z);
 					AOEmoveVec = a.transform.position;
 					AOEmoveVec += transform.forward;
@@ -120,19 +124,21 @@ public class Boss4 : MonoBehaviour {
 		}
 	
 		else if(controlsRef.getButton(playerNumber, 1, -1)){
-			if(AOEcooldown<0f){
+			if(AOEcooldown<0f && internalCooldown<0f){
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[10], 1f);
 				GameObject.Instantiate(slowAoe, a.transform.position, Quaternion.identity);
 				Destroy(a);
 				AOEcooldown = AOEmaxcooldown;
+				internalCooldown = 0.35f; // cooldown stat
 			}
 		}
 		else if(controlsRef.getButton(playerNumber, 2))
 		{
-			if(cooldown<0f)
+			if(cooldown2<0f && internalCooldown<0f)
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[5], 1f);
-				cooldown = maxcooldown;
+				cooldown2 = maxcooldown2;
+				internalCooldown = 0.35f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(scythe, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = (Vector3.zero + new Vector3(0, 0, 90f));

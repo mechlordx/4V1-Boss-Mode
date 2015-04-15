@@ -7,9 +7,10 @@ public class boss6 : MonoBehaviour {
 	public int playerNumber = -1;
 	player_controls controlsRef;
 	float cooldown = 0f;
-	float maxcooldown = 0.6f;
+	float maxcooldown = 0.6f; // cooldown stat
 	float zapCooldown = 0f;
-	float maxZapCooldown = 4f;
+	float maxZapCooldown = 4f; // cooldown stat
+	float internalCooldown = 0f;
 	int storeCurve = 0;
 	int maxStoreCurve = 19;
 	int state = 0;
@@ -34,15 +35,16 @@ public class boss6 : MonoBehaviour {
 			playerNumber = transform.parent.GetComponent<boss_control> ().playerNumber;
 		cooldown += -(Time.deltaTime*timeFactor);
 		zapCooldown += -(Time.deltaTime*timeFactor);
-
+		internalCooldown += -Time.deltaTime;
 		if(state==0)
 		{
 			if(controlsRef.getButton(playerNumber, 0))
 			{
-				if(cooldown<0f)
+				if(cooldown<0f && internalCooldown<0f)
 				{
 					AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
 					cooldown = maxcooldown;
+					internalCooldown = 0.35f; // cooldown stat
 					GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 					a.transform.parent = transform;
 					a.transform.localEulerAngles = Vector3.zero;
@@ -52,12 +54,13 @@ public class boss6 : MonoBehaviour {
 			}
 			else if(controlsRef.getButton(playerNumber, 1))
 			{
-				if(zapCooldown<0f)
+				if(zapCooldown<0f && internalCooldown<0f)
 				{
 					AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[6], 1f);
 					if(GameObject.Find ("electriccharge(Clone)"))
 						Destroy (GameObject.Find ("electriccharge(Clone)"), 0f);
 					zapCooldown = maxZapCooldown;
+					internalCooldown = 0.35f; // cooldown stat
 					GameObject a = (GameObject) GameObject.Instantiate(zapbullet, transform.position, Quaternion.identity);
 					a.transform.parent = transform;
 					a.transform.localEulerAngles = Vector3.zero;
@@ -65,8 +68,9 @@ public class boss6 : MonoBehaviour {
 					a.transform.parent = null;
 				}
 			}
-			else if(controlsRef.getButton(playerNumber, 2))
+			else if(controlsRef.getButton(playerNumber, 2) && internalCooldown<0f)
 			{
+				internalCooldown = 0.35f; // cooldown stat // not really
 				state = 1;
 				storeCurve = 1;
 				timepassed = 0f;
@@ -103,6 +107,6 @@ public class boss6 : MonoBehaviour {
 	}
 	
 	public void SwapPlaces (GameObject a, GameObject b){
-		
+			
 	}
 }

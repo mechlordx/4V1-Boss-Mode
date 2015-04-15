@@ -85,20 +85,20 @@ public class boss_control : MonoBehaviour {
 
 	public void applyDebuff(int type)
 	{
-		if(type==0)
+		if(type==1)
 		{
 			turnspeed = turnspeed*0.9f;
 			turnbuffer = turnbuffer*0.9f;
 		}
-		else if(type==1)
+		else if(type==2)
 		{
 			cooldownFactor = cooldownFactor*0.9f;
 		}
-		else if(type==2)
+		else if(type==3)
 		{
 			projectileFactor = projectileFactor*0.9f;
 		}
-		else if(type==3)
+		else if(type==4)
 		{
 			forceFactor = forceFactor*0.89f;
 		}

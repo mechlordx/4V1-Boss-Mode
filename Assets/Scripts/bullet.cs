@@ -12,7 +12,14 @@ public class bullet : MonoBehaviour {
 		force = force * bossRef.forceFactor;
 		speed = speed * bossRef.projectileFactor;
 	}
-	
+
+	public void redo()
+	{
+		boss_control bossRef = GameObject.Find ("Boss").GetComponent<boss_control> ();
+		force = force * bossRef.forceFactor;
+		speed = speed * bossRef.projectileFactor;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		var things = Physics.OverlapSphere (transform.position, transform.localScale.x / 2f);

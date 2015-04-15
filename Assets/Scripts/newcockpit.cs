@@ -23,6 +23,8 @@ public class newcockpit : MonoBehaviour {
 
 	int bossNumber = -1;
 
+	int winner = -1;
+
 	// Use this for initialization
 	void Awake () {
 		playerMats = new Material[4];
@@ -64,15 +66,15 @@ public class newcockpit : MonoBehaviour {
 			// If someone won
 			if(!brawling())
 			{
-				unattach();
 				for(int x=0;x<brawlHealth.Length;x++)
 				{
 					if(brawlHealth[x]>0f)
 					{
 						foreach(GameObject player in players)
 						{
-							if(player.GetComponent<player_move>().playerNumber==x)
+							if(player.GetComponent<player_move>().playerNumber==x && player.GetComponent<player_move>().playerNumber!=attachedPlayer.GetComponent<player_move>().playerNumber)
 							{
+								unattach();
 								attach(player);
 								break;
 							}

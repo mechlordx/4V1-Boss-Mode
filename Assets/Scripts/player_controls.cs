@@ -72,6 +72,7 @@ public class player_controls : MonoBehaviour {
 			{
 				if(Input.GetKeyDown(KeyCode.Escape))
 				{
+					axisNames[waitingarrayindex] = "";
 					waitingforaxis = false;
 					break;
 				}
@@ -96,6 +97,7 @@ public class player_controls : MonoBehaviour {
 			{
 				if(Input.GetKeyDown(KeyCode.Escape))
 				{
+					buttonNames[waitingarrayindex] = "";
 					waitingforbutton = false;
 					break;
 				}
@@ -236,21 +238,31 @@ public class player_controls : MonoBehaviour {
 	{
 		if(horizontal)
 		{
-			if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 1]))
-				return 1f;
-			   else if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 3]))
-				return -1f;
-			else
-				return 0f;
+			if(buttonNames[(buttonsPerPlayer * thePlayer) + 1]!="")
+			{
+				if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 1]))
+					return 1f;
+			}
+			if (buttonNames[(buttonsPerPlayer * thePlayer) + 3]!="")
+			{
+				if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 3]))
+					return -1f;
+			}
+			return 0f;
 		}
 		else
 		{
-			if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 0]))
-				return 1f;
-			   else if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 2]))
-				return -1f;
-			else
-				return 0f;
+			if(buttonNames[(buttonsPerPlayer * thePlayer) + 0]!="")
+			{
+				if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 0]))
+					return 1f;
+			}
+			if (buttonNames[(buttonsPerPlayer * thePlayer) + 2]!="")
+			{
+				if(Input.GetKey(buttonNames[(buttonsPerPlayer * thePlayer) + 2]))
+					return -1f;
+			}
+			return 0f;
 		}
 	}
 

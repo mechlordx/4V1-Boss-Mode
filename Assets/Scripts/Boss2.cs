@@ -6,7 +6,9 @@ public class Boss2 : MonoBehaviour {
 	public int playerNumber = -1;
 	player_controls controlsRef;
 	float cooldown = 0f;
+	float cooldown2 = 0f;
 	float maxcooldown = 0.35f;
+	float maxcooldown2 = 1f;
 	GameObject bullet;
 	GameObject bullet2;
 	// Use this for initialization
@@ -22,7 +24,8 @@ public class Boss2 : MonoBehaviour {
 		if(playerNumber == -1)
 			playerNumber = transform.parent.GetComponent<boss_control> ().playerNumber;
 		cooldown += -(Time.deltaTime*timeFactor);
-		
+		cooldown2 += -(Time.deltaTime * timeFactor);
+
 		if(controlsRef.getButton(playerNumber, 0))
 		{
 			if(cooldown<0f)
@@ -37,9 +40,9 @@ public class Boss2 : MonoBehaviour {
 		}
 		else if(controlsRef.getButton(playerNumber, 1))
 		{
-			if(cooldown<0f)
+			if(cooldown2<0f)
 			{
-				cooldown = maxcooldown;
+				cooldown2 = maxcooldown2;
 				GameObject a = (GameObject) GameObject.Instantiate(bullet2, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
