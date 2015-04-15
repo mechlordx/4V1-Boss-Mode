@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 public class player_move : MonoBehaviour {
-	public AudioSource AS;
+	AudioSource AS;
+	Pickup_Dropper PD;
 
 	public int playerNumber = 0;
 	public GameObject theCamera;
@@ -64,6 +65,7 @@ public class player_move : MonoBehaviour {
 	public GameObject[] arrows;
 	// Use this for initialization
 	void Awake () {
+		PD = GameObject.Find("Boss").GetComponent<Pickup_Dropper>();
 		int playerCount = GameObject.Find ("GameController").GetComponent<readyMatrix> ().playerCount ();
 		arrows = new GameObject[playerCount - 1];
 		int count = 0;
@@ -323,6 +325,7 @@ public class player_move : MonoBehaviour {
 					if(hitMove.curPickups.Count > 0)
 					{
 						GameObject temp = (GameObject)Instantiate (Resources.Load("Prefabs/Pickup " + hitMove.curPickups[0]));
+						PD.PickupsOnGround++;
 						temp.GetComponent<Pickup_Controller>().canPickup = false;
 						temp.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 0.5f, hit.transform.position.z);
 						print ("Player " + hitMove.playerNumber + " pickup count: " + curPickups.Count + " predrop");

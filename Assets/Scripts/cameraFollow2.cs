@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class cameraFollow2 : MonoBehaviour {
+	newcockpit CP;
 
 	public GameObject player;
 	GameObject boss;
@@ -25,6 +26,7 @@ public class cameraFollow2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		CP = GameObject.FindGameObjectWithTag("cockpit").GetComponent<newcockpit> ();
 		if(player==null)
 			player = GetComponent<cameraFollow>().playerFollow;
 		boss = GameObject.Find ("Boss");
@@ -38,7 +40,17 @@ public class cameraFollow2 : MonoBehaviour {
 	void Update () {
 		playerPos = player.transform.position;
 		bossPos = boss.transform.position;
-		dif = playerPos - bossPos;
+
+		if(CP.attachedPlayer == player){
+			mode = 1;
+			dif = new Vector3(1,0,1);
+		}
+		else if (CP.attachedPlayer != player && mode != 2){
+			mode = 0;
+			dif = playerPos - bossPos;
+		}
+		else
+			dif = new Vector3(1,0,1);
 
 		if(mode!=lastMode)
 			lerping = true;
@@ -86,11 +98,11 @@ public class cameraFollow2 : MonoBehaviour {
 		}
 		else if(mode==1) // Boss
 		{
-			return new Vector3(0f, 0f, 0f); // Find good numbers for this
+			return new Vector3(45f, 10f, 15f); // Find good numbers for this
 		}
 		else if(mode==2) // Should probably have a mode for brawling
 		{
-			return new Vector3(0f, 0f, 0f);
+			return new Vector3(45f, 10f, 15f);
 		}
 		return Vector3.zero;
 	}
@@ -103,9 +115,22 @@ public class cameraFollow2 : MonoBehaviour {
 	void findPos(float myAngle, float myDistance, float myHeight)
 	{
 		dif.y = 0f;
-		transform.position = Vector3.Normalize (dif) * myDistance;
-		transform.LookAt (new Vector3 (bossPos.x, 0f, bossPos.z));
-		transform.position += new Vector3 (0f, myHeight, 0f);
-		transform.eulerAngles = new Vector3(myAngle, transform.eulerAngles.y, transform.eulerAngles.z);
+
+		if(mode == 1 || mode == 2){
+			transform.position = new Vector3(Mathf.Sin((boss.transform.eulerAngles.y * Mathf.PI /180)), 0f,Mathf.Cos((boss.transform.eulerAngles.y * Mathf.PI /180))) * -1 * myDistance;
+			Debug.Log ("Boss Angle:" + boss.transform.eulerAngles.y + " CamXdist: " + Mathf.Cos((boss.transform.eulerAngles.y * Mathf.PI /180)) * myDistance + " CamZdist: " + Mathf.Sin((boss.transform.eulerAngles.y * Mathf.PI /180)) * myDistance);
+			transform.LookAt (new Vector3 (bossPos.x, 0f, bossPos.z));
+			transform.position += new Vector3 (0f, myHeight, 0f);
+			transform.eulerAngles = new Vector3(myAngle, transform.eulerAngles.y, transform.eulerAngles.z);
+
+
+		}
+		else{
+			transform.position = Vector3.Normalize(dif) * myDistance;
+			transform.LookAt (new Vector3 (bossPos.x, 0f, bossPos.z));
+			transform.position += new Vector3 (0f, myHeight, 0f);
+			transform.eulerAngles = new Vector3(myAngle, transform.eulerAngles.y, transform.eulerAngles.z);
+		}
+
 	}
 }

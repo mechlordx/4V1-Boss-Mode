@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class newcockpit : MonoBehaviour {
+	cameraFollow2 CF;
 
 	public GameObject attachedPlayer;
 	public float jumpInHeight;
@@ -85,7 +86,12 @@ public class newcockpit : MonoBehaviour {
 		}
 		else
 		{
-
+			foreach(GameObject player in players){
+				if(player != attachedPlayer){
+					CF = player.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
+					CF.mode = 0;
+				}
+			}
 		}
 	}
 	
@@ -97,6 +103,8 @@ public class newcockpit : MonoBehaviour {
 			GameObject.Find("Boss").GetComponent<boss_control>().resetTurns();
 			attachedPlayer = newplayer;
 			attachedPlayer.SetActive(true);
+			CF = newplayer.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
+			CF.mode = 1;
 			attachedPlayer.transform.position = new Vector3(transform.position.x + 0.001f,
 			                                                newplayer.transform.position.y,
 			                                                transform.position.z);
@@ -120,6 +128,8 @@ public class newcockpit : MonoBehaviour {
 		Vector3 force = Vector3.zero;
 		if(attachedPlayer!=null)
 		{
+			CF = attachedPlayer.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
+			CF.mode = 0;
 			attachedPlayer.SetActive(true);
 			attachedPlayer.GetComponent<Collider>().isTrigger = false;
 			attachedPlayer.GetComponent<Rigidbody>().useGravity = true;
@@ -145,6 +155,8 @@ public class newcockpit : MonoBehaviour {
 		{
 			if(collider.gameObject.tag=="Player")
 			{
+				CF = collider.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
+				CF.mode = 2;
 				if(collider.GetComponent<player_move>().enabled==false)
 					continue;
 				if(checkladder(collider))
@@ -179,6 +191,10 @@ public class newcockpit : MonoBehaviour {
 				player.GetComponent<player_move>().deactivate(number);
 				player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 				player.SetActive(true);
+				if(player != attachedPlayer){
+					CF = player.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
+					CF.mode = 0;
+				}
 			}
 		}
 		transform.parent.gameObject.GetComponent<boss_control> ().enabled = true;

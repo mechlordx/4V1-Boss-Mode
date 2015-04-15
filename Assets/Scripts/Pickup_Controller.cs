@@ -5,6 +5,7 @@ public class Pickup_Controller : MonoBehaviour {
 	newcockpit NC;
 	boss_forms BF;
 	player_move PM;
+	Pickup_Dropper PD;
 
 	public GameObject HoldingPlayer;
 
@@ -16,6 +17,7 @@ public class Pickup_Controller : MonoBehaviour {
 	public bool canPickup = true;
 	// Use this for initialization
 	void Awake () {
+		PD = GameObject.Find("Boss").GetComponent<Pickup_Dropper>();
 		BF = GameObject.Find ("Boss").GetComponent<boss_forms>();
 		NC = GameObject.Find ("Cockpit").GetComponent<newcockpit>();
 
@@ -60,7 +62,7 @@ public class Pickup_Controller : MonoBehaviour {
 			boss_control BC = BF.gameObject.GetComponent<boss_control>();
 
 			BC.applyDebuff(PickupType);
-
+			PD.PickupsOnGround--;
 			Destroy(gameObject);
 		}
 	}
