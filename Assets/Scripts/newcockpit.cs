@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class newcockpit : MonoBehaviour {
-	cameraFollow2 CF;
-
+	
 	public GameObject attachedPlayer;
 	public float jumpInHeight;
 	public float cockpitheight;
@@ -19,13 +18,13 @@ public class newcockpit : MonoBehaviour {
 	public GameObject[] players;
 	public Material[] playerMats;
 	public GameObject bossCam;
-
+	
 	GameObject debugBrawlPopup;
-
+	
 	int bossNumber = -1;
-
+	
 	int winner = -1;
-
+	
 	// Use this for initialization
 	void Awake () {
 		playerMats = new Material[4];
@@ -37,7 +36,7 @@ public class newcockpit : MonoBehaviour {
 		players = GameObject.FindGameObjectsWithTag ("Player");
 		brawlHealth = new float[4];
 		for(int x=0;x<brawlHealth.Length;x++)
-			brawlHealth[x] = -1F;
+			brawlHealth[x] = -1f;
 	}
 	
 	// Update is called once per frame
@@ -63,7 +62,7 @@ public class newcockpit : MonoBehaviour {
 						damage(y);
 				}
 			}
-
+			
 			// If someone won
 			if(!brawling())
 			{
@@ -73,12 +72,26 @@ public class newcockpit : MonoBehaviour {
 					{
 						foreach(GameObject player in players)
 						{
-							if(player.GetComponent<player_move>().playerNumber==x && player.GetComponent<player_move>().playerNumber!=attachedPlayer.GetComponent<player_move>().playerNumber)
+							if(player!=null)
 							{
-								unattach();
-								attach(player);
-								break;
+								if(player.GetComponent<player_move>().playerNumber==x && player.GetComponent<player_move>().playerNumber!=attachedPlayer.GetComponent<player_move>().playerNumber)
+								{
+									unattach();
+									attach(player);
+									break;
+								}
 							}
+						}
+					}
+				}
+				for(int x=0;x<brawlHealth.Length;x++)
+				{
+					brawlHealth[x] = -1f;
+					if(attachedPlayer!=null)
+					{
+						if(x==bossNumber)
+						{
+							brawlHealth[x] = startBrawlHealth;
 						}
 					}
 				}
@@ -86,12 +99,7 @@ public class newcockpit : MonoBehaviour {
 		}
 		else
 		{
-			foreach(GameObject player in players){
-				if(player != attachedPlayer){
-					CF = player.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
-					CF.mode = 0;
-				}
-			}
+			
 		}
 	}
 	
@@ -103,8 +111,6 @@ public class newcockpit : MonoBehaviour {
 			GameObject.Find("Boss").GetComponent<boss_control>().resetTurns();
 			attachedPlayer = newplayer;
 			attachedPlayer.SetActive(true);
-			CF = newplayer.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
-			CF.mode = 1;
 			attachedPlayer.transform.position = new Vector3(transform.position.x + 0.001f,
 			                                                newplayer.transform.position.y,
 			                                                transform.position.z);
@@ -115,7 +121,7 @@ public class newcockpit : MonoBehaviour {
 			attachedPlayer.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
 			attachedPlayer.transform.localPosition = Vector3.zero;
 			attachedPlayer.GetComponent<player_move>().enabled = false;
-
+			
 			bossCam = GameObject.Find("camera" + (attachedPlayer.GetComponent<player_move>().playerNumber +1));
 			bossCam.transform.position += new Vector3(0,2,0);
 			bossCam.transform.rotation = Quaternion.Euler (20,0,0);
@@ -128,8 +134,6 @@ public class newcockpit : MonoBehaviour {
 		Vector3 force = Vector3.zero;
 		if(attachedPlayer!=null)
 		{
-			CF = attachedPlayer.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
-			CF.mode = 0;
 			attachedPlayer.SetActive(true);
 			attachedPlayer.GetComponent<Collider>().isTrigger = false;
 			attachedPlayer.GetComponent<Rigidbody>().useGravity = true;
@@ -155,8 +159,6 @@ public class newcockpit : MonoBehaviour {
 		{
 			if(collider.gameObject.tag=="Player")
 			{
-				CF = collider.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
-				CF.mode = 2;
 				if(collider.GetComponent<player_move>().enabled==false)
 					continue;
 				if(checkladder(collider))
@@ -169,7 +171,7 @@ public class newcockpit : MonoBehaviour {
 				}
 				else
 				{
-					if(brawlHealth[collider.gameObject.GetComponent<player_move>().playerNumber]==-1)
+					if(brawlHealth[collider.gameObject.GetComponent<player_move>().playerNumber]==-1f)
 					{
 						collider.gameObject.SetActive(false);
 						collider.gameObject.transform.position = transform.position;
@@ -191,10 +193,6 @@ public class newcockpit : MonoBehaviour {
 				player.GetComponent<player_move>().deactivate(number);
 				player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 				player.SetActive(true);
-				if(player != attachedPlayer){
-					CF = player.GetComponent<player_move>().theCamera.GetComponent<cameraFollow2>();
-					CF.mode = 0;
-				}
 			}
 		}
 		transform.parent.gameObject.GetComponent<boss_control> ().enabled = true;
@@ -204,7 +202,7 @@ public class newcockpit : MonoBehaviour {
 			brawlHealth[x] = -1f;
 		brawlHealth [attachedPlayer.GetComponent<player_move> ().playerNumber] = startBrawlHealth;
 	}
-
+	
 	bool brawling()
 	{
 		int numberOfPlayers = 0;
@@ -217,12 +215,12 @@ public class newcockpit : MonoBehaviour {
 			return true;
 		return false;
 	}
-
+	
 	void damage(int thePlayer)
 	{
 		GameObject a = (GameObject)GameObject.Instantiate (debugBrawlPopup, transform.position, Quaternion.identity);
 		a.GetComponent<Renderer>().material = playerMats [thePlayer];
-
+		
 		float dam = 0f;
 		float gain = 0f;
 		bool[] alive = new bool[4];
@@ -254,7 +252,7 @@ public class newcockpit : MonoBehaviour {
 			else if(x!=thePlayer && brawlHealth[thePlayer]>0f)
 				brawlHealth[x] += -dam;
 		}
-
+		
 		for(int x=0;x<4;x++)
 		{
 			if(alive[x])
@@ -263,12 +261,15 @@ public class newcockpit : MonoBehaviour {
 				{
 					foreach(GameObject player in players)
 					{
-						if(player.GetComponent<player_move>().playerNumber==x)
+						if(player!=null)
 						{
-							Debug.Log ("fix");
-							player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-							player.SetActive(true);
-							player.transform.position = new Vector3(0f, -3f, 0f);
+							if(player.GetComponent<player_move>().playerNumber==x)
+							{
+								Debug.Log ("fix");
+								player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+								player.SetActive(true);
+								player.transform.position = new Vector3(0f, -3f, 0f);
+							}
 						}
 					}
 				}

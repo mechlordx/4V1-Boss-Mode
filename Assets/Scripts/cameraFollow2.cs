@@ -26,7 +26,7 @@ public class cameraFollow2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		CP = GameObject.FindGameObjectWithTag("cockpit").GetComponent<newcockpit> ();
+		CP = GameObject.Find("Cockpit").GetComponent<newcockpit> ();
 		if(player==null)
 			player = GetComponent<cameraFollow>().playerFollow;
 		boss = GameObject.Find ("Boss");
@@ -41,7 +41,7 @@ public class cameraFollow2 : MonoBehaviour {
 		playerPos = player.transform.position;
 		bossPos = boss.transform.position;
 
-		if(CP.attachedPlayer == player){
+		if(CP.attachedPlayer == player || (playerPos.x==0f && playerPos.z==0f)){
 			mode = 1;
 			dif = new Vector3(1,0,1);
 		}
