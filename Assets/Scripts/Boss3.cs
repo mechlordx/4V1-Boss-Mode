@@ -14,7 +14,7 @@ public class Boss3 : MonoBehaviour {
 	float cooldown = 0f;
 	float cooldown2 = 0f;
 	float cooldown3 = 0f;
-	float maxcooldown = 0.35f; // cooldown stat
+	float maxcooldown = 0.45f; // cooldown stat
 	float maxcooldown2 = 0.6f; // cooldown stat
 	float maxcooldown3 = 0.6f; // cooldown stat
 	float Walldist = 6f;
@@ -46,7 +46,7 @@ public class Boss3 : MonoBehaviour {
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
 				cooldown = maxcooldown;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
@@ -61,7 +61,7 @@ public class Boss3 : MonoBehaviour {
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[8], 1f);
 				cooldown2 = maxcooldown2;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 
 				GameObject a = (GameObject) GameObject.Instantiate(Wall, (transform.forward * Walldist), Quaternion.identity);
 				//a.transform.parent = transform;
@@ -86,7 +86,7 @@ public class Boss3 : MonoBehaviour {
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[9], 1f);
 				cooldown3 = maxcooldown3;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(StunAttack, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;

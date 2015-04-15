@@ -4,8 +4,8 @@ using System.Collections;
 public class charge : MonoBehaviour {
 
 	float radius = 30f;
-	float maxpull = 6000f;
-	float minpull = 300f;
+	float maxpull = 240f;
+	float minpull = 40f;
 	float timeleft = 10f;
 	int myplayernumber;
 	// Use this for initialization

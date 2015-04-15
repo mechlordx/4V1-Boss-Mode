@@ -48,7 +48,7 @@ public class Boss4 : MonoBehaviour {
 		slowbullet = (GameObject)Resources.Load ("Prefabs/slowbullet");
 		scythe = (GameObject) Resources.Load ("Prefabs/SyctheAttack");
 		slowAoe = (GameObject) Resources.Load("Prefabs/slowAOE");
-		AoeGhost = (GameObject) Resources.Load ("Prefabs/AOEghost");
+		AoeGhost = (GameObject) Resources.Load ("Prefabs/slowAOE");
 		pNo = playerNumber.ToString();
 		iter = 0;
 		/*
@@ -79,6 +79,7 @@ public class Boss4 : MonoBehaviour {
 		cooldown += -(Time.deltaTime*timeFactor);
 		cooldown2 += -(Time.deltaTime * timeFactor);
 		AOEcooldown -= (Time.deltaTime*timeFactor);
+		internalCooldown += -Time.deltaTime;
 
 		//getbutton states 1 = down, -1 = up, 0 = getkey
 		 
@@ -88,7 +89,7 @@ public class Boss4 : MonoBehaviour {
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
 				cooldown = maxcooldown;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
@@ -129,7 +130,7 @@ public class Boss4 : MonoBehaviour {
 				GameObject.Instantiate(slowAoe, a.transform.position, Quaternion.identity);
 				Destroy(a);
 				AOEcooldown = AOEmaxcooldown;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 			}
 		}
 		else if(controlsRef.getButton(playerNumber, 2))
@@ -138,7 +139,7 @@ public class Boss4 : MonoBehaviour {
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[5], 1f);
 				cooldown2 = maxcooldown2;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(scythe, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = (Vector3.zero + new Vector3(0, 0, 90f));

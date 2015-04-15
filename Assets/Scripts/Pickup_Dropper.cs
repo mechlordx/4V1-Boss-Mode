@@ -38,7 +38,7 @@ public class Pickup_Dropper : MonoBehaviour {
 				temp.GetComponent<Pickup_Controller>().PickupType = PickupType;
 				temp.transform.position = Pos;
 
-				iterator = sPage.timer - Random.Range (5, 30);
+				iterator = sPage.timer - 15f;
 			}
 	}
 }

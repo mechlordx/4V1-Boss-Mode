@@ -44,7 +44,7 @@ public class boss6 : MonoBehaviour {
 				{
 					AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
 					cooldown = maxcooldown;
-					internalCooldown = 0.35f; // cooldown stat
+					internalCooldown = 0.45f; // cooldown stat
 					GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 					a.transform.parent = transform;
 					a.transform.localEulerAngles = Vector3.zero;
@@ -60,7 +60,7 @@ public class boss6 : MonoBehaviour {
 					if(GameObject.Find ("electriccharge(Clone)"))
 						Destroy (GameObject.Find ("electriccharge(Clone)"), 0f);
 					zapCooldown = maxZapCooldown;
-					internalCooldown = 0.35f; // cooldown stat
+					internalCooldown = 0.45f; // cooldown stat
 					GameObject a = (GameObject) GameObject.Instantiate(zapbullet, transform.position, Quaternion.identity);
 					a.transform.parent = transform;
 					a.transform.localEulerAngles = Vector3.zero;
@@ -70,7 +70,7 @@ public class boss6 : MonoBehaviour {
 			}
 			else if(controlsRef.getButton(playerNumber, 2) && internalCooldown<0f)
 			{
-				internalCooldown = 0.35f; // cooldown stat // not really
+				internalCooldown = 0.45f; // cooldown stat // not really
 				state = 1;
 				storeCurve = 1;
 				timepassed = 0f;

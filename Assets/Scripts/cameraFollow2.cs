@@ -118,7 +118,7 @@ public class cameraFollow2 : MonoBehaviour {
 
 		if(mode == 1 || mode == 2){
 			transform.position = new Vector3(Mathf.Sin((boss.transform.eulerAngles.y * Mathf.PI /180)), 0f,Mathf.Cos((boss.transform.eulerAngles.y * Mathf.PI /180))) * -1 * myDistance;
-			Debug.Log ("Boss Angle:" + boss.transform.eulerAngles.y + " CamXdist: " + Mathf.Cos((boss.transform.eulerAngles.y * Mathf.PI /180)) * myDistance + " CamZdist: " + Mathf.Sin((boss.transform.eulerAngles.y * Mathf.PI /180)) * myDistance);
+			//Debug.Log ("Boss Angle:" + boss.transform.eulerAngles.y + " CamXdist: " + Mathf.Cos((boss.transform.eulerAngles.y * Mathf.PI /180)) * myDistance + " CamZdist: " + Mathf.Sin((boss.transform.eulerAngles.y * Mathf.PI /180)) * myDistance);
 			transform.LookAt (new Vector3 (bossPos.x, 0f, bossPos.z));
 			transform.position += new Vector3 (0f, myHeight, 0f);
 			transform.eulerAngles = new Vector3(myAngle, transform.eulerAngles.y, transform.eulerAngles.z);

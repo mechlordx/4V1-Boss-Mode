@@ -3,7 +3,7 @@ using System.Collections;
 
 public class zapbullet : MonoBehaviour {
 
-	public float force = 300f;
+	public float force = 30f;
 	public float speed = 40f;
 
 	// Use this for initialization
@@ -40,6 +40,7 @@ public class zapbullet : MonoBehaviour {
 		a.GetComponent<charge> ().startfollow (thing);
 		Destroy (gameObject, 0f);
 	}
+
 	void destroy (){
 		Destroy(gameObject);
 	}

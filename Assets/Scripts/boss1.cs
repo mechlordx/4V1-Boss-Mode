@@ -7,7 +7,7 @@ public class boss1 : MonoBehaviour {
 	player_controls controlsRef;
 	float cooldown = 0f;
 	float cooldown2 = 0f;
-	float maxcooldown = 0.35f; // cooldown stat
+	float maxcooldown = 0.45f; // cooldown stat
 	float maxcooldown2 = 1f; // cooldown stat
 	float internalCooldown = 0f;
 	GameObject bullet;
@@ -31,7 +31,7 @@ public class boss1 : MonoBehaviour {
 			if(cooldown<0f && internalCooldown<0f)
 			{
 				cooldown = maxcooldown;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
@@ -44,7 +44,7 @@ public class boss1 : MonoBehaviour {
 			if(cooldown2<0f && internalCooldown<0f)
 			{
 				cooldown2 = maxcooldown2;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;

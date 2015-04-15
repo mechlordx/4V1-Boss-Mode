@@ -48,7 +48,7 @@ public class boss_forms : MonoBehaviour {
 				if(controlsRef.getButton(playerNumber, x, 1))
 				{
 					if(GameObject.Find ("Player" + (playerNumber+1).ToString())
-					   .GetComponent<player_move>().containsPickup(x))
+					   .GetComponent<player_move>().containsPickup(x+1))
 						choose(currentchoices[x]);
 				}
 			}

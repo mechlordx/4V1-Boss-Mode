@@ -9,7 +9,7 @@ public class boss5 : MonoBehaviour {
 	float cooldown = 0f;
 	float maxcooldown = 0.6f; // cooldown stat
 	float cooldown2 = 0f;
-	float maxcooldown2 = 0.2f; // cooldown stat
+	float maxcooldown2 = 0.1f; // cooldown stat
 	float cooldown3 = 0f;
 	float maxcooldown3 = 3f; // cooldown stat
 	float internalCooldown = 0f;
@@ -37,6 +37,7 @@ public class boss5 : MonoBehaviour {
 		cooldown += -(Time.deltaTime*timeFactor);
 		cooldown2 += -(Time.deltaTime * timeFactor);
 		cooldown3 += -(Time.deltaTime * timeFactor);
+		internalCooldown += -Time.deltaTime;
 
 		if(state==0) // Normal
 		{
@@ -45,7 +46,7 @@ public class boss5 : MonoBehaviour {
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[4], 1f);
 				cooldown = maxcooldown;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
@@ -56,7 +57,7 @@ public class boss5 : MonoBehaviour {
 			{
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[3], 1f);
 				cooldown2 = maxcooldown2;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.1f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(laserBullet, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localEulerAngles = Vector3.zero;
@@ -69,7 +70,7 @@ public class boss5 : MonoBehaviour {
 				state = 1;
 				GameObject.Find ("Boss").GetComponent<boss_control>().disableTurn = true;
 				cooldown3 = maxcooldown3;
-				internalCooldown = 0.35f; // cooldown stat
+				internalCooldown = 0.45f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(skylasercross, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
