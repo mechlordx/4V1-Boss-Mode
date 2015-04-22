@@ -21,7 +21,7 @@ public class player_move : MonoBehaviour {
 	float boostTimer = 0f;
 	float Timer = 5f;
 	float MaxTimer = 5f;
-
+	float SlowTimer = 0.1f;
 	bool boosting = false;
 
 	bool punching = false;
@@ -143,10 +143,10 @@ public class player_move : MonoBehaviour {
 			Timer = MaxTimer;
 			maxspeed = truemaxspeed;
 		}
-		if(slow && Timer > 0f && stun == false)
+		if(slow && Timer > 0f && !stun)
 		{
 			Timer -= Time.deltaTime;
-			maxspeed = 5f;
+			maxspeed = areaslowed;
 		}
 		if(slow && Timer <= 0f && stun == false){
 			slow = false;
@@ -403,7 +403,7 @@ public class player_move : MonoBehaviour {
 		if (other.gameObject.name.Contains("slow"))
 		{
 			slow = true;
-			Timer = MaxTimer;
+			Timer = SlowTimer;
 		}
 	}
 
@@ -420,7 +420,8 @@ public class player_move : MonoBehaviour {
 		}
 
 		if(other.gameObject.name.Contains("AOE")){
-				maxspeed = areaslowed;
+			slow = true;
+			Timer = SlowTimer;
 		}
 	}
 
