@@ -10,8 +10,11 @@ public class StunBullet : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		Destroy (gameObject, 10f);
-		boss_control bossRef = GameObject.Find ("Boss").GetComponent<boss_control> ();
-		speed = speed * bossRef.projectileFactor;
+		if(GameObject.Find ("Boss"))
+		{
+			boss_control bossRef = GameObject.Find ("Boss").GetComponent<boss_control> ();
+			speed = speed * bossRef.projectileFactor;
+		}
 	}
 	
 	// Update is called once per frame

@@ -30,6 +30,9 @@ public class Pickup_Controller : MonoBehaviour {
 			gameObject.GetComponent<Renderer>().material.color = Color.black;
 		if(PickupType == 4)
 			gameObject.GetComponent<Renderer>().material.color = Color.green;
+		Color a = gameObject.GetComponent<Renderer>().material.color;
+		a.a = 190;
+		gameObject.GetComponent<Renderer>().material.color = a;
 
 		GameObject particles = (GameObject) Resources.Load ("Prefabs/pickupParticle");
 		particles = (GameObject)GameObject.Instantiate (particles, transform.position, Quaternion.identity);
