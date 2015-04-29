@@ -25,11 +25,11 @@ public class Pickup_Controller : MonoBehaviour {
 		if(PickupType == 1)
 			gameObject.GetComponent<Renderer>().material.color = Color.blue;
 		if(PickupType == 2)
-			gameObject.GetComponent<Renderer>().material.color = Color.red;
+			gameObject.GetComponent<Renderer>().material.color = Color.magenta;
 		if(PickupType == 3)
-			gameObject.GetComponent<Renderer>().material.color = Color.black;
-		if(PickupType == 4)
 			gameObject.GetComponent<Renderer>().material.color = Color.green;
+		if(PickupType == 4)
+			gameObject.GetComponent<Renderer>().material.color = new Vector4(0.9f,0.58f,0.12f);
 		Color a = gameObject.GetComponent<Renderer>().material.color;
 		a.a = 190;
 		gameObject.GetComponent<Renderer>().material.color = a;

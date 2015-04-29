@@ -145,6 +145,8 @@ public class newcockpit : MonoBehaviour {
 			attachedPlayer = null;
 			//GameObject.Find("Boss").transform.rotation = Quaternion.identity;
 		}
+		foreach(GameObject wall in GameObject.FindGameObjectsWithTag("wall"))
+			Destroy(wall);
 	}
 	
 	bool checkladder(Collider collider)
@@ -268,7 +270,7 @@ public class newcockpit : MonoBehaviour {
 								Debug.Log ("fix");
 								player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 								player.SetActive(true);
-								player.transform.position = new Vector3(0f, -3f, 0f);
+								player.transform.position = new Vector3(1f, -3f, 1f);
 							}
 						}
 					}

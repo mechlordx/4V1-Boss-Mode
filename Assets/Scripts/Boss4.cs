@@ -106,7 +106,7 @@ public class Boss4 : MonoBehaviour {
 			if(a == null){
 				if(AOEcooldown<0f && internalCooldown<0f){
 					a = (GameObject) GameObject.Instantiate(AoeGhost, transform.position, transform.rotation);
-					a.transform.position = new Vector3(transform.position.x,0.5f, transform.position.z);
+					a.transform.position = new Vector3(transform.position.x,0.55f, transform.position.z);
 					//a.renderer.material.color = transperency;
 					a.transform.parent = transform;
 					a.transform.localEulerAngles = Vector3.zero;
@@ -116,7 +116,7 @@ public class Boss4 : MonoBehaviour {
 
 			else{
 				if(AOEcooldown<0f && internalCooldown<0f){
-					a.transform.position = new Vector3(a.transform.position.x, 0.5f, a.transform.position.z);
+					a.transform.position = new Vector3(a.transform.position.x, 0.55f, a.transform.position.z);
 					AOEmoveVec = a.transform.position;
 					AOEmoveVec += transform.forward;
 					a.transform.position = AOEmoveVec;
