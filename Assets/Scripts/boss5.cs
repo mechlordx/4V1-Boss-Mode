@@ -3,7 +3,8 @@ using System.Collections;
 
 public class boss5 : MonoBehaviour {
 	public AudioSource AS;
-
+	cameraFollow2 CF;
+	boss_control BC;
 	public int playerNumber = -1;
 	player_controls controlsRef;
 	float cooldown = 0f;
@@ -75,6 +76,11 @@ public class boss5 : MonoBehaviour {
 				a.transform.parent = transform;
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 				a.transform.parent = null;
+
+				int camnum =(playerNumber+1);
+				//Debug.Log("camera"+ camnum );
+				GameObject b = GameObject.Find ("camera"+ camnum);
+				b.GetComponent<cameraFollow2>().sky = true;
 			}
 		}
 		else if(state==1)
@@ -82,6 +88,10 @@ public class boss5 : MonoBehaviour {
 			if(!controlsRef.getButton(playerNumber, 2))
 			{
 				GameObject.Find ("skylasercross(Clone)").GetComponent<skylaser>().detonate();
+				int camnum =(playerNumber+1);
+				//Debug.Log("camera"+ camnum);
+				GameObject b = GameObject.Find ("camera"+ camnum);
+				b.GetComponent<cameraFollow2>().sky = false;
 				state = 0;
 			}
 		}

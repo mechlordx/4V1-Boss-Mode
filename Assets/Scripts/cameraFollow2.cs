@@ -13,6 +13,7 @@ public class cameraFollow2 : MonoBehaviour {
 	float curDistance;
 	float curHeight;
 
+	public bool sky = false;
 	bool lerping = false;
 	float lerpFactor = 0.05f;
 	float lerpPower = 0.05f;
@@ -41,7 +42,12 @@ public class cameraFollow2 : MonoBehaviour {
 		playerPos = player.transform.position;
 		bossPos = boss.transform.position;
 
-		if(CP.attachedPlayer == player || (playerPos.x==0f && playerPos.z==0f)){
+		if(CP.attachedPlayer == player && sky){
+			mode = 3;
+			dif = new Vector3(0,0,-1);
+		}
+
+		else if(CP.attachedPlayer == player || (playerPos.x==0f && playerPos.z==0f)){
 			mode = 1;
 			dif = new Vector3(1,0,1);
 		}
@@ -98,11 +104,15 @@ public class cameraFollow2 : MonoBehaviour {
 		}
 		else if(mode==1) // Boss
 		{
-			return new Vector3(45f, 10f, 15f); // Find good numbers for this
+			return new Vector3(45f, 10f, 15f); 
 		}
 		else if(mode==2) // Should probably have a mode for brawling
 		{
 			return new Vector3(45f, 10f, 15f);
+		}
+		else if(mode==3) // Skylazer
+		{
+			return new Vector3(70f, 18f, 38f);
 		}
 		return Vector3.zero;
 	}
@@ -124,6 +134,12 @@ public class cameraFollow2 : MonoBehaviour {
 			transform.eulerAngles = new Vector3(myAngle, transform.eulerAngles.y, transform.eulerAngles.z);
 
 
+		}
+		else if (mode == 0){
+			transform.position = Vector3.Normalize(dif) * myDistance;
+			transform.LookAt (new Vector3 (bossPos.x, 0f, bossPos.z));
+			transform.position += new Vector3 (0f, myHeight, 0f);
+			transform.eulerAngles = new Vector3(myAngle, transform.eulerAngles.y, transform.eulerAngles.z);
 		}
 		else{
 			transform.position = Vector3.Normalize(dif) * myDistance;
