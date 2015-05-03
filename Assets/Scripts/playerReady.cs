@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class playerReady : MonoBehaviour {
 
@@ -15,6 +16,9 @@ public class playerReady : MonoBehaviour {
 	player_controls controlsRef;
 	game_menu_script menuRef;
 
+	public Image uiIcon;
+	public Sprite playerNeut;
+	public Sprite playerSelect;
 
 	// Use this for initialization
 	void Awake () {
@@ -45,6 +49,8 @@ public class playerReady : MonoBehaviour {
 		// Diplay icons
 		if(ready)
 		{
+			uiIcon.GetComponent<Image>().sprite = playerSelect;
+
 			var newcolor = icon.GetComponent<Renderer>().material.color;
 			newcolor.r = selectedcolor;
 			newcolor.g = selectedcolor;
@@ -58,6 +64,7 @@ public class playerReady : MonoBehaviour {
 		}
 		else
 		{
+			uiIcon.GetComponent<Image>().sprite = playerNeut;
 			var newcolor = icon.GetComponent<Renderer>().material.color;
 			newcolor.r = deselectedcolor;
 			newcolor.g = deselectedcolor;

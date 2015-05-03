@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class playerSetup : MonoBehaviour {
 
@@ -9,6 +10,9 @@ public class playerSetup : MonoBehaviour {
 	player_controls controlsRef;
 	bool[] readyMatrix;
 
+	public Image readyImage;
+	public Sprite neutral;
+	public Sprite ready;
 	// Use this for initialization
 	void Awake () {
 		DontDestroyOnLoad (gameObject);
@@ -43,6 +47,10 @@ public class playerSetup : MonoBehaviour {
 		{
 			if(readyBanner!=null)
 				readyBanner.GetComponent<Renderer>().enabled = true;
+
+			if(readyImage.sprite == neutral)
+				readyImage.sprite = ready;
+
 			for(int x=0;x<readyMatrix.Length;x++)
 			{
 				if(readyMatrix[x])
@@ -55,7 +63,10 @@ public class playerSetup : MonoBehaviour {
 				}
 			}
 		}
-		else if(readyBanner!=null)
+		else if(readyBanner!=null){
 			readyBanner.GetComponent<Renderer>().enabled = false;
+			if(readyImage.sprite == ready)
+				readyImage.sprite = neutral;
+		}
 	}
 }
