@@ -100,8 +100,13 @@ public class player_move : MonoBehaviour {
 	}
 
 	void Update() {
+		if(animator.GetFloat("SpawnTrigger")>0.97f)
+			animator.SetBool("Spawning", false);
+
 		if(transform.position.y<-10f){
 			transform.position = spawnpoint;
+			animator.SetTrigger("Spawn");
+			animator.SetBool("Spawning", true);
 			curPickups.Clear();
 		}
 		if(!boosting&&!punching)
@@ -128,12 +133,17 @@ public class player_move : MonoBehaviour {
 		if(controlsRef.getButton(playerNumber, 1, 1))
 			startPunch = true;
 
-		if(desiredangle!=-1f && !boosting && !punching)
+		if(desiredangle!=-1f)
 		{
-			desiredangle += theCamera.transform.eulerAngles.y;
-			if(desiredangle<0f)
-				desiredangle += 360f;
+			animator.SetBool("Running", true);
+			if(!boosting && !punching)
+			{
+				desiredangle += theCamera.transform.eulerAngles.y;
+				if(desiredangle<0f)
+					desiredangle += 360f;
+			}
 		}
+		else animator.SetBool("Running", false);
 
 		if (stun && Timer > 0f){
 			Timer -= Time.deltaTime;
@@ -227,6 +237,9 @@ public class player_move : MonoBehaviour {
 		{
 			if(!boosting && boostTimer<=0f)
 			{
+				animator.SetTrigger("Dash");
+				animator.SetBool("Dashing", true);
+				animator.SetBool("Spawning", false);
 				boosting = true;
 				maxspeed += boostMaxSpeed;
 				maxforce += boostForce;
@@ -238,6 +251,7 @@ public class player_move : MonoBehaviour {
 		{
 			if(boostTimer<=0f)
 			{
+				animator.SetBool("Dashing", false);
 				boosting = false;
 				maxspeed += -boostMaxSpeed;
 				maxforce += -boostForce;
@@ -249,6 +263,9 @@ public class player_move : MonoBehaviour {
 		{
 			if(!punching)
 			{
+				animator.SetTrigger("Punch");
+				animator.SetBool("Punching", true);
+				animator.SetBool("Spawning", false);
 				punching = true;
 				hasPunched = false;
 				punchingTimer = punchLength;
@@ -261,14 +278,15 @@ public class player_move : MonoBehaviour {
 		{
 			if(hasPunched)
 			{
-				if(punchingTimer<0f)
+				if(animator.GetFloat("PunchingTrigger")>0.95f)
 				{
 					punching = false;
+					animator.SetBool("Punching", false);
 				}
 			}
 			else
 			{
-				if(punchingTimer<(punchLength-punchDelay))
+				if(animator.GetFloat("PunchingTrigger")>0.54f)
 				{
 					hasPunched = true;
 					// Throw punch
@@ -451,6 +469,7 @@ public class player_move : MonoBehaviour {
 		if(number!=playerNumber)
 		{	
 			GetComponent<player_move>().enabled = true;
+			animator.SetTrigger("Spawn");
 		}
 	}
 

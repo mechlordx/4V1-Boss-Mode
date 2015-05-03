@@ -74,6 +74,7 @@ public class ladder : MonoBehaviour {
 	{
 		if(attachedPlayer==null)
 		{
+			newplayer.GetComponent<player_move>().animationModel.GetComponent<Animator>().SetTrigger("Rising");
 			attachedPlayer = newplayer;
 			if(attachedPlayer.GetComponent<Rigidbody>().drag!=999f)
 				drag = attachedPlayer.GetComponent<Rigidbody>().drag;
