@@ -1,0 +1,1126 @@
+fileFormatVersion: 2
+guid: 83c2d4afb5e890d41af1b6ba37ea85f0
+timeCreated: 1430611768
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: chest
+    100004: cloth
+    100006: end_cloth
+    100008: end_cloth 1
+    100010: head
+    100012: head_cloth
+    100014: left_ankle
+    100016: Left_Elbow
+    100018: left_hip
+    100020: left_knee
+    100022: LEft_Shoulder
+    100024: mid_cloth
+    100026: neck
+    100028: none
+    100030: pelvis
+    100032: right_ankle
+    100034: Right_Elbow
+    100036: right_hip
+    100038: right_knee
+    100040: Right_shoulder
+    100042: robot
+    100044: tip
+    100046: tip 1
+    100048: tip 2
+    100050: tip 3
+    100052: tip 4
+    100054: tip 5
+    100056: torso
+    400000: //RootNode
+    400002: chest
+    400004: cloth
+    400006: end_cloth
+    400008: end_cloth 1
+    400010: head
+    400012: head_cloth
+    400014: left_ankle
+    400016: Left_Elbow
+    400018: left_hip
+    400020: left_knee
+    400022: LEft_Shoulder
+    400024: mid_cloth
+    400026: neck
+    400028: none
+    400030: pelvis
+    400032: right_ankle
+    400034: Right_Elbow
+    400036: right_hip
+    400038: right_knee
+    400040: Right_shoulder
+    400042: robot
+    400044: tip
+    400046: tip 1
+    400048: tip 2
+    400050: tip 3
+    400052: tip 4
+    400054: tip 5
+    400056: torso
+    4300000: robot
+    7400000: Idle
+    7400002: Spawn
+    7400004: Run
+    7400006: Dash
+    7400008: Punch
+    7400010: Rising
+    7400012: Floating Idle
+    7400014: Mega Attack 1
+    7400016: Mega Attack 2
+    7400018: Mega Attack 3
+    7400020: Mega Attack 4
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: robot
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 48
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Spawn
+      takeName: Take 001
+      firstFrame: 51
+      lastFrame: 75
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: SpawnTrigger
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          - time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          preInfinity: 2
+          postInfinity: 2
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 126
+      lastFrame: 150
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Dash
+      takeName: Take 001
+      firstFrame: 160
+      lastFrame: 191
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: DashingTrigger
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          - time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          preInfinity: 2
+          postInfinity: 2
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Punch
+      takeName: Take 001
+      firstFrame: 195
+      lastFrame: 219
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: PunchingTrigger
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          - time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          preInfinity: 2
+          postInfinity: 2
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Rising
+      takeName: Take 001
+      firstFrame: 223
+      lastFrame: 247
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: RisingTrigger
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          - time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          preInfinity: 2
+          postInfinity: 2
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Floating Idle
+      takeName: Take 001
+      firstFrame: 251
+      lastFrame: 299
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Mega Attack 1
+      takeName: Take 001
+      firstFrame: 303
+      lastFrame: 335
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Mega Attack 2
+      takeName: Take 001
+      firstFrame: 339
+      lastFrame: 377
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Mega Attack 3
+      takeName: Take 001
+      firstFrame: 380
+      lastFrame: 404
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Mega Attack 4
+      takeName: Take 001
+      firstFrame: 408
+      lastFrame: 432
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/left_hip
+        weight: 1
+      - path: pelvis/left_hip/left_knee
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle
+        weight: 1
+      - path: pelvis/left_hip/left_knee/left_ankle/tip
+        weight: 1
+      - path: pelvis/right_hip
+        weight: 1
+      - path: pelvis/right_hip/right_knee
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle
+        weight: 1
+      - path: pelvis/right_hip/right_knee/right_ankle/tip 1
+        weight: 1
+      - path: pelvis/torso
+        weight: 1
+      - path: pelvis/torso/chest
+        weight: 1
+      - path: pelvis/torso/chest/none
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/cloth/mid_cloth/end_cloth/tip 4
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/LEft_Shoulder/Left_Elbow/tip 2
+        weight: 1
+      - path: pelvis/torso/chest/none/neck
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1
+        weight: 1
+      - path: pelvis/torso/chest/none/neck/head/head_cloth/end_cloth 1/tip 5
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow
+        weight: 1
+      - path: pelvis/torso/chest/none/Right_shoulder/Right_Elbow/tip 3
+        weight: 1
+      - path: robot
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

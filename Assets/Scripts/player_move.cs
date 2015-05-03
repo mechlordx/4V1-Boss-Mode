@@ -56,6 +56,7 @@ public class player_move : MonoBehaviour {
 	public bool slow = false;
 	public bool stun = false;
 	int currentjumptimer = 0;
+	Animator animator;
 
 	
 	public bool hasPickup = false;
@@ -66,6 +67,7 @@ public class player_move : MonoBehaviour {
 	public GameObject[] arrows;
 	// Use this for initialization
 	void Awake () {
+		animator = animationModel.GetComponent<Animator> ();
 		PD = GameObject.Find("Boss").GetComponent<Pickup_Dropper>();
 		int playerCount = GameObject.Find ("GameController").GetComponent<readyMatrix> ().playerCount ();
 		arrows = new GameObject[playerCount - 1];
