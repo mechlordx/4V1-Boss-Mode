@@ -5,6 +5,7 @@ public class player_move : MonoBehaviour {
 	AudioSource AS;
 	Pickup_Dropper PD;
 
+	public GameObject animationModel;
 	public int playerNumber = 0;
 	public GameObject theCamera;
 	bool nolimits = false;
