@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class main_menu_script : MonoBehaviour {
 	
 	public bool debug = true;
@@ -12,6 +12,13 @@ public class main_menu_script : MonoBehaviour {
 	public int[] selectmatrix;
 	public bool linear = true;
 	public float deselectedcolor;
+	public Image[] UIbuttons;
+	public Sprite selectedBattle;
+	public Sprite neutralBattle;
+	public Sprite selectedControls;
+	public Sprite neutralControls;
+	public Sprite selectedQuit;
+	public Sprite neutralQuit;
 	int maxbutton;
 	/* The soundeffect script can be placed on the button or menu object.
 	 * The priority is the button's soundeffect over the menu object's.
@@ -36,6 +43,15 @@ public class main_menu_script : MonoBehaviour {
 		originalcolor.g = 1f;
 		originalcolor.b = 1f;
 		buttons[selectedbutton].GetComponent<Renderer>().material.color = originalcolor;
+
+		//Change UI image for selected buttond
+		if(UIbuttons[selectedbutton].GetComponent<Image>().sprite == neutralBattle)
+			UIbuttons[selectedbutton].GetComponent<Image>().sprite = selectedBattle;
+		else if(UIbuttons[selectedbutton].GetComponent<Image>().sprite == neutralControls)
+			UIbuttons[selectedbutton].GetComponent<Image>().sprite = selectedControls;
+		else if(UIbuttons[selectedbutton].GetComponent<Image>().sprite == neutralQuit)
+			UIbuttons[selectedbutton].GetComponent<Image>().sprite = selectedQuit;
+
 	}
 	
 	void enter()
@@ -121,6 +137,21 @@ public class main_menu_script : MonoBehaviour {
 						GetComponent<soundeffect>().play(1);
 					else if(GetComponent<soundeffect>())
 						GetComponent<soundeffect>().play(1);
+
+					//Change UI image for selected buttond
+					if(UIbuttons[selectedbutton].GetComponent<Image>().sprite == neutralBattle)
+						UIbuttons[selectedbutton].GetComponent<Image>().sprite = selectedBattle;
+					else if(UIbuttons[selectedbutton].GetComponent<Image>().sprite == neutralControls)
+						UIbuttons[selectedbutton].GetComponent<Image>().sprite = selectedControls;
+					else if(UIbuttons[selectedbutton].GetComponent<Image>().sprite == neutralQuit)
+						UIbuttons[selectedbutton].GetComponent<Image>().sprite = selectedQuit;
+
+					if(UIbuttons[from].GetComponent<Image>().sprite == selectedBattle)
+						UIbuttons[from].GetComponent<Image>().sprite = neutralBattle;
+					else if(UIbuttons[from].GetComponent<Image>().sprite == selectedControls)
+						UIbuttons[from].GetComponent<Image>().sprite = neutralControls;
+					else if(UIbuttons[from].GetComponent<Image>().sprite == selectedQuit)
+						UIbuttons[from].GetComponent<Image>().sprite = neutralQuit;
 				}
 			}
 			else
