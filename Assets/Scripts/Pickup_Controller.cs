@@ -59,7 +59,7 @@ public class Pickup_Controller : MonoBehaviour {
 
 	void OnTriggerEnter (Collider col) {
 		if(col.gameObject.tag == "Player"){
-			print("YOU GOT ME");
+			//print("YOU GOT ME");
 			PM = col.GetComponent<player_move>();
 			PM.curPickups.Add(PickupType);
 			boss_control BC = BF.gameObject.GetComponent<boss_control>();

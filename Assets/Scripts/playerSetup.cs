@@ -58,7 +58,7 @@ public class playerSetup : MonoBehaviour {
 					if(controlsRef.getButton(x, 0, 1))
 					{
 						GameObject.Find ("GameController").GetComponent<readyMatrix>().readyMat = readyMatrix;
-						GameObject.Find ("GameController").GetComponent<loader>().loadScene(3);
+						GameObject.Find ("GameController").GetComponent<loader>().loadScene(1);
 					}
 				}
 			}
