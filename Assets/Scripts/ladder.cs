@@ -4,6 +4,7 @@ using System.Collections;
 public class ladder : MonoBehaviour {
 
 	public GameObject attachedPlayer;
+	public GameObject LadderLook;
 	public float climbspeed;
 	public float heightlimit;
 	public bool locked = false;
@@ -12,18 +13,24 @@ public class ladder : MonoBehaviour {
 	int throwtimer = 0;
 	int maxthrowtimer = 60;
 	float drag;
+	Vector3 InitPos;
 	// Use this for initialization
 	void Start () {
-	
+		LadderLook = GameObject.FindGameObjectWithTag("ladderlook");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(attachedPlayer!=null && throwtimer<0)
 		{
-			attachedPlayer.transform.position += new Vector3(0f, climbspeed*Time.deltaTime, 0f);
-			if(attachedPlayer.transform.position.y>heightlimit)
+			InitPos = attachedPlayer.transform.position;
+			//attachedPlayer.transform.position += new Vector3(0f, climbspeed*Time.deltaTime, 0f);
+			attachedPlayer.transform.position= Vector3.MoveTowards(attachedPlayer.transform.position, LadderLook.transform.position, climbspeed*Time.deltaTime);
+			attachedPlayer.transform.LookAt(new Vector3(0,attachedPlayer.transform.position.y,0));
+			Mathf.Abs(Vector3.Distance(attachedPlayer.transform.position, InitPos));
+			if(attachedPlayer.transform.position == LadderLook.transform.position)
 			{
+				Debug.Log("asdklfjsd;lkf");
 				attachedPlayer.transform.position = GameObject.Find ("Cockpit").transform.position;
 				unattach();
 				//locked = true;

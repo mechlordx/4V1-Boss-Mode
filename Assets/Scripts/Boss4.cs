@@ -46,6 +46,7 @@ public class Boss4 : MonoBehaviour {
 		controlsRef = GameObject.Find ("GameController").GetComponent<player_controls>();
 		bullet = (GameObject)Resources.Load ("Prefabs/forcebullet");
 		slowbullet = (GameObject)Resources.Load ("Prefabs/slowbullet");
+		//scythe = (GameObject) Resources.Load ("Prefabs/projectile");
 		scythe = (GameObject) Resources.Load ("Prefabs/SyctheAttack");
 		slowAoe = (GameObject) Resources.Load("Prefabs/slowAOE");
 		AoeGhost = (GameObject) Resources.Load ("Prefabs/slowAOE");
@@ -137,12 +138,14 @@ public class Boss4 : MonoBehaviour {
 		{
 			if(cooldown2<0f && internalCooldown<0f)
 			{
+				//scythe.transform.localEulerAngles = Vector3.zero + new Vector3(180,0,0);
 				AS.PlayOneShot(GameObject.Find("GameController").GetComponent<SoundController>().SFX[5], 1f);
 				cooldown2 = maxcooldown2;
 				internalCooldown = 0.45f; // cooldown stat
 				GameObject a = (GameObject) GameObject.Instantiate(scythe, transform.position, Quaternion.identity);
 				a.transform.parent = transform;
-				a.transform.localEulerAngles = (Vector3.zero + new Vector3(0, 0, 90f));
+				a.transform.localEulerAngles = Vector3.zero + new Vector3(0,0,90);
+				//a.transform.localEulerAngles = Vector3.zero;
 				a.transform.localPosition = Vector3.zero + new Vector3(0f, 1f, 0f);
 				a.transform.parent = null;
 			}
